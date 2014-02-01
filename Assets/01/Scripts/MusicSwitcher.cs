@@ -9,7 +9,7 @@ public class MusicSwitcher : MonoBehaviour {
 
     public void Start() {
         current = intro;
-        intro.timeSamples = 305000;
+        //intro.timeSamples = 305000;
     }
     public void Update() {
         //Debug.Log("Samples: " + current.timeSamples
