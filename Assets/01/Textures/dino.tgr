@@ -1,0 +1,17 @@
+#NTEVersion 6
+#BeginNodes 3
+475 248
+engine.graphics.synthesis.texture.PatternCellular
+ExportName "" Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 3 0.0 0.0 0.0 1.0 0.0 0.0 0.4 0.2 1.0 0.5636701 0.2 0.6 0.0 1.0 0.99999994 Cell_Type 4 Distance_ 0 PointGen 2 Seed 0 Intensity 1.0 Jitter 0.0 NumPoints 200 RandColor false Periodic true endparameters
+593 434
+engine.graphics.synthesis.texture.FilterNormalMap
+ExportName "" Strength 1.0 endparameters
+445 436
+engine.graphics.synthesis.texture.FilterColorize
+ExportName "" Gray_to_Color_Mapping 2 0.0 0.0 0.0 1.0 0.0 1.0 1.0 1.0 1.0 0.25603864 endparameters
+#EndNodes
+#BeginConnections 2
+0 1 0
+0 2 0
+#EndConnections
+glpreview 0 1 2 2 Object 0 Spec._Power 20.0 POM_Strength 0.25 Ambient 0.5 TexScale_U 1 TexScale_V 1 CamRotX 37.0 CamRotY 317.0 CamDist 2.5 endglpreview
