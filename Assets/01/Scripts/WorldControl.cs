@@ -11,6 +11,7 @@ public class WorldControl : MonoBehaviour {
     private WorldState state;
 
     private Vector3 normalGravity, spaceGravity;
+    private GameWorld currentSelection;
 
     public void Start() {
         state = GetComponent<WorldState>();
@@ -19,9 +20,30 @@ public class WorldControl : MonoBehaviour {
     }
 
     public void Update() {
+        HandleMenuToggle();
+        HandleMenuInput();
+    }
+
+    private void HandleMenuToggle() {
         if (Input.GetButtonDown("Fire2")) {
-            showingMenu = true;
-            needsCentered = true;
+            if(!showingMenu) {
+                showingMenu = true;
+                needsCentered = true;
+            } else {
+                showingMenu = false;
+                if(!needsCentered) {
+                    HandleUpdateWorld(currentSelection);
+                    //if(Input.GetAxisRaw("Horizontal") == -1) {
+                    //    HandleUpdateWorld(GameWorld.race);
+                    //} else if(Input.GetAxisRaw("Horizontal") == 1) {
+                    //    HandleUpdateWorld(GameWorld.dino);
+                    //} else if(Input.GetAxisRaw("Vertical") == -1) {
+                    //    HandleUpdateWorld(GameWorld.space);
+                    //} else if(Input.GetAxisRaw("Vertical") == 1) {
+                    //    HandleUpdateWorld(GameWorld.human);
+                    //}
+                }
+            }
         }
         if (showingMenu) {
             if (needsCentered
@@ -30,19 +52,19 @@ public class WorldControl : MonoBehaviour {
                         needsCentered = false;
             }
         }
-        if (Input.GetButtonUp("Fire2")) {
-            showingMenu = false;
-            if (!needsCentered) {
-                if (Input.GetAxisRaw("Horizontal") == -1) {
-                    HandleUpdateWorld(GameWorld.race);
-                } else if (Input.GetAxisRaw("Horizontal") == 1) {
-                    HandleUpdateWorld(GameWorld.dino);
-                } else if (Input.GetAxisRaw("Vertical") == -1) {
-                    HandleUpdateWorld(GameWorld.space);
-                } else if (Input.GetAxisRaw("Vertical") == 1) {
-                    HandleUpdateWorld(GameWorld.human);
-                }
-            }
+    }
+    private void HandleMenuInput() {
+        if(!showingMenu || needsCentered) {
+            return;
+        }
+        if(Input.GetAxisRaw("Horizontal") == -1) {
+            currentSelection = GameWorld.race;
+        } else if (Input.GetAxisRaw("Horizontal") == 1) {
+            currentSelection = GameWorld.dino;
+        } else if(Input.GetAxisRaw("Vertical") == -1) {
+            currentSelection = GameWorld.space;
+        } else if(Input.GetAxisRaw("Vertical") == 1) {
+            currentSelection = GameWorld.human;
         }
     }
 
@@ -87,28 +109,30 @@ public class WorldControl : MonoBehaviour {
 
         Texture2D tex;
 
-        if (!needsCentered && Input.GetAxisRaw("Horizontal") == -1) {
+        if (currentSelection == GameWorld.race) {
             tex = buttonLight;
         } else {
             tex = buttonDark;
         }
         GUI.DrawTexture(raceRect, tex);
         GUI.Label(raceRect, "Race");
-        if (!needsCentered && Input.GetAxisRaw("Horizontal") == 1) {
+        if (currentSelection == GameWorld.dino) {
             tex = buttonLight;
         } else {
             tex = buttonDark;
         }
         GUI.DrawTexture(dinoRect, tex);
         GUI.Label(dinoRect, "Dino");
-        if (!needsCentered && Input.GetAxisRaw("Vertical") == -1) {
+
+        if (currentSelection == GameWorld.space) {
             tex = buttonLight;
         } else {
             tex = buttonDark;
         }
         GUI.DrawTexture(spaceRect, tex);
         GUI.Label(spaceRect, "Space");
-        if (!needsCentered && Input.GetAxisRaw("Vertical") == 1) {
+
+        if (currentSelection==GameWorld.human) {
             tex = buttonLight;
         } else {
             tex = buttonDark;
