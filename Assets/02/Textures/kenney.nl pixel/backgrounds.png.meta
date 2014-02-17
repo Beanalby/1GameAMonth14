@@ -48,8 +48,8 @@ TextureImporter:
         y: 126
         width: 231
         height: 63
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
     - name: bg_green
       rect:
         serializedVersion: 2
@@ -57,8 +57,8 @@ TextureImporter:
         y: 63
         width: 231
         height: 63
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
     - name: bg_rock
       rect:
         serializedVersion: 2
@@ -66,7 +66,7 @@ TextureImporter:
         y: 0
         width: 231
         height: 63
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
   spritePackingTag: 
   userData: 

@@ -4,10 +4,12 @@ using System.Collections;
 public class FlippyPlayer : MonoBehaviour {
 
     float xSpeed = 3;
-    private float jumpSpeed = 6f;
+    private float jumpSpeed = 8.5f;
+    private float gravity = 2f;
 
     // Use this for initialization
     void Start () {
+        rigidbody2D.gravityScale = gravity;
         rigidbody2D.velocity = new Vector2(xSpeed, 0);
     }
     
