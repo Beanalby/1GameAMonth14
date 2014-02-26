@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FlippyPlayer : MonoBehaviour {
 
+    public AudioClip jumpSound;
+
     float xSpeed = 3;
     private float jumpSpeed = 8.5f;
     private float gravity = 2f;
@@ -16,6 +18,7 @@ public class FlippyPlayer : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if(Input.GetButtonDown("Jump")) {
+            AudioSource.PlayClipAtPoint(jumpSound, transform.position);
             rigidbody2D.velocity = new Vector2(xSpeed, jumpSpeed);
         }
     }
