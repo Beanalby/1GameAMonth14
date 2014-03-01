@@ -15,6 +15,7 @@ public class FlippyPlayer : MonoBehaviour {
 
     private float deathStart = -1f;
     private Camera cam;
+    private FlippyMusic music;
 
     public bool IsPlaying {
         get { return deathStart == -1f; }
@@ -27,6 +28,7 @@ public class FlippyPlayer : MonoBehaviour {
         rigidbody2D.gravityScale = gravity;
         rigidbody2D.velocity = new Vector2(xSpeed, 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
+        music = GameObject.FindObjectOfType<FlippyMusic>();
     }
     
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class FlippyPlayer : MonoBehaviour {
             collider2D.enabled = false;
             rigidbody2D.velocity = new Vector3(-4, 10, 0);
             AudioSource.PlayClipAtPoint(dieSound, cam.transform.position);
+            music.PlayerDied();
         }
     }
 }
