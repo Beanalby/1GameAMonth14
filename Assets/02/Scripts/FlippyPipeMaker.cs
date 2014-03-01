@@ -7,7 +7,7 @@ public class FlippyPipeMaker : MonoBehaviour {
     private float spaceX = 7;
     private float rangeY = 3.5f;
 
-    private float nextPipe = 22;
+    private float nextPipe = 12;
     private float spawnPipeRange = 15;
 
     private GameObject player;
