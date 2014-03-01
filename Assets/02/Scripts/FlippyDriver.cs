@@ -9,6 +9,7 @@ public class FlippyDriver : MonoBehaviour {
     private int score = 0;
 
     private const int STAGE_WIDTH = FlippyBackgroundMover.BackgroundWidth * 2;
+    private float restartDelay = 1f;
     private int numStages = 3;
     private int stage = 0;
     public int Stage {
@@ -17,11 +18,13 @@ public class FlippyDriver : MonoBehaviour {
     public int NextStage {
         get { return (stage+1) % numStages; }
     }
-    private int nextTransition = STAGE_WIDTH - FlippyBackgroundMover.BackgroundWidth / 2;
+    private int nextTransition = STAGE_WIDTH;
     public int NextTransition {
         get { return nextTransition; }
     }
-
+    public float StageProgress {
+        get { return (player.transform.position.x - (nextTransition - STAGE_WIDTH)) / STAGE_WIDTH; }
+    }
     GUIStyle scoreLabelPlaying, scoreLabelEnd, scoreValuePlaying, scoreValueEnd,
         retryButton;
     FlippyPlayer player;
@@ -57,6 +60,11 @@ public class FlippyDriver : MonoBehaviour {
         if(player.transform.position.x > nextTransition) {
             stage = (stage + 1) % numStages;
             nextTransition += STAGE_WIDTH;
+        }
+        if(!player.IsPlaying
+                && (Time.time - player.DeathStart > restartDelay)
+                && Input.GetButtonDown("Jump")) {
+            Application.LoadLevel(Application.loadedLevel);
         }
     }
 
@@ -102,14 +110,16 @@ public class FlippyDriver : MonoBehaviour {
             Texture2D tex;
             Vector3 pos = Input.mousePosition;
             pos.y = Screen.height - pos.y;
-            if(restartRect.Contains(pos)) {
-                tex = buttonHighlightBg;
-            } else {
-                tex = buttonBg;
-            }
-            GUI.DrawTexture(restartRect, tex);
-            if(GUI.Button(restartRect, "PLAY AGAIN", retryButton)) {
-                Application.LoadLevel(Application.loadedLevel);
+            if(Time.time - player.DeathStart > restartDelay) {
+                if(restartRect.Contains(pos)) {
+                    tex = buttonHighlightBg;
+                } else {
+                    tex = buttonBg;
+                }
+                GUI.DrawTexture(restartRect, tex);
+                if(GUI.Button(restartRect, "PLAY AGAIN", retryButton)) {
+                    Application.LoadLevel(Application.loadedLevel);
+                }
             }
         }
     }

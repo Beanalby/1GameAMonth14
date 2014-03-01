@@ -21,12 +21,13 @@ public class FlippyBackgroundMover : MonoBehaviour {
         bgCurrent = (GameObject.Instantiate(bgPrefab[driver.Stage]) as GameObject).transform;
         bgCurrent.name = bgPrefab[driver.Stage].name;
         bgCurrent.transform.parent = transform;
-        bgCurrent.transform.position = new Vector2(player.position.x + 1, 0);
+        bgCurrent.transform.position = new Vector2(-BackgroundWidth / 2, 0);
 
         // bgOther will get placed ahead of bgCurrent in a second
         bgOther = (GameObject.Instantiate(bgPrefab[driver.Stage]) as GameObject).transform;
         bgOther.name = bgPrefab[driver.Stage].name;
         bgOther.transform.parent = transform;
+        bgOther.transform.position = new Vector2(BackgroundWidth / 2, 0);
     }
 
     public void Update() {

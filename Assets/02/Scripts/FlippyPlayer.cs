@@ -8,12 +8,14 @@ public class FlippyPlayer : MonoBehaviour {
     public AudioClip jumpSound, dieSound;
 
     float xSpeed = 3;
-    //float xSpeed = 9; +++ zoom!
     private float jumpSpeed = 8.5f;
     private float gravity = 2f;
-    //private float gravity = 0f;  +++ disabled!
 
     private float deathStart = -1f;
+    public float DeathStart {
+        get { return deathStart; }
+    }
+
     private Camera cam;
     private FlippyMusic music;
 
@@ -23,7 +25,12 @@ public class FlippyPlayer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //collider2D.enabled = false; // +++ disabled!
+        bool debug = false;
+        if(debug) {
+            collider2D.enabled = false;
+            xSpeed = 9;
+            gravity = 0f;
+        }
         cam = Camera.main;
         rigidbody2D.gravityScale = gravity;
         rigidbody2D.velocity = new Vector2(xSpeed, 0);
