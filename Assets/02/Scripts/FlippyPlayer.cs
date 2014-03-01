@@ -29,14 +29,14 @@ public class FlippyPlayer : MonoBehaviour {
         rigidbody2D.velocity = new Vector2(xSpeed, 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
         music = GameObject.FindObjectOfType<FlippyMusic>();
+        Jump();
     }
     
     // Update is called once per frame
     void Update () {
         if(IsPlaying) {
             if(Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0)) {
-                AudioSource.PlayClipAtPoint(jumpSound, cam.transform.position);
-                rigidbody2D.velocity = new Vector2(xSpeed, jumpSpeed);
+                Jump();
             }
             // adjust the rotation based on velocity
             float v = rigidbody2D.velocity.y;
@@ -44,6 +44,11 @@ public class FlippyPlayer : MonoBehaviour {
             float angle = Mathf.Lerp(360, 0, v / (VELOCITY_MAX_ANGLE * 2));
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
+    }
+
+    private void Jump() {
+        AudioSource.PlayClipAtPoint(jumpSound, cam.transform.position);
+        rigidbody2D.velocity = new Vector2(xSpeed, jumpSpeed);
     }
 
     public void OnCollisionEnter2D(Collision2D col) {
