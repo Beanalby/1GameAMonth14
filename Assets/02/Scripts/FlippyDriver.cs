@@ -93,7 +93,6 @@ public class FlippyDriver : MonoBehaviour {
         scoreRect.xMax -= padding;
         scoreRect.yMin += padding;
         scoreRect.yMax -= padding;
-        GUI.Box(scoreRect, "");
         GUI.Label(scoreRect, "Score: ", scoreLabel);
         GUI.Label(scoreRect, score.ToString(), scoreValue);
 
