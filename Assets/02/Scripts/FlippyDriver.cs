@@ -7,6 +7,21 @@ public class FlippyDriver : MonoBehaviour {
     public GUISkin skin;
     public Texture2D scoreBg, buttonBg, buttonHighlightBg;
     private int score = 0;
+
+    private const int STAGE_WIDTH = FlippyBackgroundMover.BackgroundWidth * 2;
+    private int numStages = 3;
+    private int stage = 0;
+    public int Stage {
+        get { return stage; }
+    }
+    public int NextStage {
+        get { return (stage+1) % numStages; }
+    }
+    private int nextTransition = STAGE_WIDTH - FlippyBackgroundMover.BackgroundWidth / 2;
+    public int NextTransition {
+        get { return nextTransition; }
+    }
+
     GUIStyle scoreLabelPlaying, scoreLabelEnd, scoreValuePlaying, scoreValueEnd,
         retryButton;
     FlippyPlayer player;
@@ -38,6 +53,10 @@ public class FlippyDriver : MonoBehaviour {
     public void Update() {
         if(Input.GetKeyDown(KeyCode.D)) {
             PipePassed(null);
+        }
+        if(player.transform.position.x > nextTransition) {
+            stage = (stage + 1) % numStages;
+            nextTransition += STAGE_WIDTH;
         }
     }
 

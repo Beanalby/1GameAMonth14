@@ -8,8 +8,10 @@ public class FlippyPlayer : MonoBehaviour {
     public AudioClip jumpSound, dieSound;
 
     float xSpeed = 3;
+    //float xSpeed = 9; +++ zoom!
     private float jumpSpeed = 8.5f;
     private float gravity = 2f;
+    //private float gravity = 0f;  +++ disabled!
 
     private float deathStart = -1f;
     private Camera cam;
@@ -20,6 +22,7 @@ public class FlippyPlayer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //collider2D.enabled = false; // +++ disabled!
         cam = Camera.main;
         rigidbody2D.gravityScale = gravity;
         rigidbody2D.velocity = new Vector2(xSpeed, 0);

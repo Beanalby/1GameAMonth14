@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.1212406, y: 9.06064224, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -38,7 +38,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff8708f9eb3c484795a50edfb31eaf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipePrefab: {fileID: 0}
+  pipePrefab:
+  - {fileID: 100002, guid: 8a134ae4017c73747bd11070f9d28f8c, type: 2}
+  - {fileID: 100002, guid: 8d1f12807093d0c48895d2fc82f845ea, type: 2}
+  - {fileID: 100002, guid: 041240ffb42f94d44aacd11c6885666e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
