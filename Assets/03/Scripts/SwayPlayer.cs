@@ -5,7 +5,8 @@ public class SwayPlayer : MonoBehaviour {
 
     private float swingAccel = .5f;
     private float minAccel = .05f;
-    private float maxVelocity = 5f;
+    private float maxVelocityBase = 5f;
+    private float maxVelocityScale = 1f;
 
     private float minLen = 1.5f;
     private float maxLen = 5f;
@@ -61,15 +62,16 @@ public class SwayPlayer : MonoBehaviour {
     }
 
     private void HandleSwing() {
-        // Don't let input affect the rope's speed unless it's taunt
-        //Vector3 src = transform.position
-        //    + new Vector3(joint.anchor.x, joint.anchor.y, 0);
-        //Vector3 dest = joint.connectedBody.transform.position
-        //    + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
+        Vector3 src = transform.position
+            + new Vector3(joint.anchor.x, joint.anchor.y, 0);
+        Vector3 dest = joint.connectedBody.transform.position
+            + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
 
-        //if (joint.distance * .99f >= (dest - src).magnitude) {
-        //    return;
-        //}
+        // Don't let input affect the rope's speed unless it's taunt
+        if (joint.distance * .99f >= (dest - src).magnitude) {
+            return;
+        }
+
         Vector2 delta = (swingAccel * Time.deltaTime) * rigidbody2D.velocity;
         Vector2 before = delta;
         if (delta.magnitude == 0) {
@@ -77,6 +79,9 @@ public class SwayPlayer : MonoBehaviour {
         } else if (delta.magnitude < minAccel) {
             delta *= (minAccel / delta.magnitude);
         }
+
+        // max speed scales upwards as the distance increases
+        float maxVelocity = maxVelocityBase + maxVelocityScale * (joint.distance - minLen);
         if (Input.GetAxisRaw("Horizontal") == 1) {
             if (rigidbody2D.velocity.x < 0) {
                 rigidbody2D.velocity -= delta;
