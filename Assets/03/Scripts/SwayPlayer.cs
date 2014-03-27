@@ -3,102 +3,68 @@ using System.Collections;
 
 public class SwayPlayer : MonoBehaviour {
 
-    private float swingAccel = .5f;
-    private float minAccel = .05f;
-    private float maxVelocityBase = 5f;
-    private float maxVelocityScale = 1f;
+    private float moveSpeed = 10f;
 
-    private float minLen = 1.5f;
-    private float maxLen = 5f;
-    private float lenSpeed = 1f;
-    private float lenThreshold = .5f;
+    private const float groundDist = .02f;
+    private int groundMask;
+    private BoxCollider2D box;
+    private SwayPlayerSwing swing;
+    private float groundOffV=0, groundOffH=0;
 
-    private DistanceJoint2D joint;
-
-    public void Start() {
-        joint = GetComponent<DistanceJoint2D>();
-    }
-
-	// Update is called once per frame
-	void Update () {
-        if(Input.GetKeyDown(KeyCode.X)) {
-            transform.position = new Vector3(0, transform.position.y, 0);
-            rigidbody2D.velocity = new Vector2(.1f, 0);
-            joint.distance = 2f;
+    private bool isGrounded {
+        get {
+            Vector2 basePos = new Vector2(transform.position.x,
+                transform.position.y) + box.center;
+            Vector2 posR = basePos + new Vector2(groundOffH, -groundOffV);
+            Vector2 posL = basePos + new Vector2(-groundOffH, -groundOffV);
+            return Physics2D.Raycast(posR, -Vector2.up, groundDist, groundMask)
+                || Physics2D.Raycast(posL, -Vector2.up, groundDist, groundMask);
         }
-        if(Input.GetKeyDown(KeyCode.C)) {
-            joint.distance = 3f;
-        }
-        if(Input.GetKeyDown(KeyCode.V)) {
-            joint.distance = 4f;
-        }
-        HandleSwing();
-        HandleLengthen();
     }
     
-    private void HandleLengthen() {
-        Vector3 us = transform.position
-            + new Vector3(joint.anchor.x, joint.anchor.y, 0);
-        Vector3 jointBase = joint.connectedBody.transform.position
-            + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
-        // don't allow adjusting length if it's not taunt
-        if (joint.distance * .99f >= (us - jointBase).magnitude) {
-            return;
-        }
+    public void Start() {
+        groundMask = 1 << LayerMask.NameToLayer("Ground");
+        swing = GetComponent<SwayPlayerSwing>();
+        box = GetComponent<BoxCollider2D>();
+        groundOffV = box.size.y / 2 + groundDist / 2;
+        groundOffH = box.size.x / 2;
+    }
 
-        bool moved = false;
-        if (Input.GetAxis("Vertical") > lenThreshold) {
-            joint.distance = Mathf.Max(minLen, joint.distance - lenSpeed * Time.deltaTime);
-            moved = true;
-        } else if (Input.GetAxis("Vertical") < -lenThreshold) {
-            joint.distance = Mathf.Min(maxLen, joint.distance + lenSpeed * Time.deltaTime);
-            moved = true;
-        }
-        if (moved) {
-            // automatically adjust our position for the new length
-            Ray ray = new Ray(jointBase, us - jointBase);
-            transform.position = ray.GetPoint(joint.distance);
+    public void Update() {
+        rigidbody2D.gravityScale = isGrounded ? 0 : 1;
+        HandleGrapple();
+        HandleMovement();
+        Debug.Log("Grounded=" + isGrounded);
+    }
+
+    private void HandleGrapple() {
+        if (Input.GetButtonDown("Jump")) {
+            swing.ActivateSwing();
         }
     }
 
-    private void HandleSwing() {
-        Vector3 src = transform.position
-            + new Vector3(joint.anchor.x, joint.anchor.y, 0);
-        Vector3 dest = joint.connectedBody.transform.position
-            + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
-
-        // Don't let input affect the rope's speed unless it's taunt
-        if (joint.distance * .99f >= (dest - src).magnitude) {
+    private void HandleMovement() {
+        if (swing.IsSwinging) {
+            // swinging handles input
+            swing.UpdateSwing();
             return;
         }
 
-        Vector2 delta = (swingAccel * Time.deltaTime) * rigidbody2D.velocity;
-        Vector2 before = delta;
-        if (delta.magnitude == 0) {
-            delta = Vector2.right * minAccel;
-        } else if (delta.magnitude < minAccel) {
-            delta *= (minAccel / delta.magnitude);
-        }
+        float force = Input.GetAxis("Horizontal") * moveSpeed;
+        
+        rigidbody2D.velocity = new Vector2(force, rigidbody2D.velocity.y);
+    }
 
-        // max speed scales upwards as the distance increases
-        float maxVelocity = maxVelocityBase + maxVelocityScale * (joint.distance - minLen);
-        if (Input.GetAxisRaw("Horizontal") == 1) {
-            if (rigidbody2D.velocity.x < 0) {
-                rigidbody2D.velocity -= delta;
-            } else {
-                if(rigidbody2D.velocity.magnitude < maxVelocity) {
-                    rigidbody2D.velocity += delta;
-                }
-            }
-        }
-        if (Input.GetAxisRaw("Horizontal") == -1) {
-            if (rigidbody2D.velocity.x > 0) {
-                rigidbody2D.velocity -= delta;
-            } else {
-                if (rigidbody2D.velocity.magnitude < maxVelocity) {
-                    rigidbody2D.velocity += delta;
-                }
-            }
-        }
-	}
+    //public void OnDrawGizmos() {
+    //    if (groundOffV == 0) {
+    //        return;
+    //    }
+    //    Gizmos.color = Color.cyan;
+    //    Vector3 posR = transform.position
+    //        + new Vector3(groundOffH, -groundOffV);
+    //    Vector3 posL = transform.position
+    //        + new Vector3(-groundOffH, -groundOffV);
+    //    Gizmos.DrawLine(posR, posR + new Vector3(0, -groundDist, 0));
+    //    Gizmos.DrawLine(posL, posL + new Vector3(0, -groundDist, 0));
+    //}
 }
