@@ -20,11 +20,15 @@ public class SwayPlayerSwing : MonoBehaviour {
     private float lenSpeed = 1f;
     private float lenThreshold = .5f;
 
+    private BoxCollider2D box;
     private DistanceJoint2D joint;
+    private CharacterController2D cc;
 
     public void Start() {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
+        cc = GetComponent<CharacterController2D>();
+        box = GetComponent<BoxCollider2D>();
     }
 
     // not automatically called every frame, invoked by
@@ -114,14 +118,27 @@ public class SwayPlayerSwing : MonoBehaviour {
         if (IsSwinging) {
             EndSwing();
         } else {
-            FireSwing();
+            StartSwing();
         }
     }
 
-    private void FireSwing() {
+    private void StartSwing() {
+        rigidbody2D.velocity = cc.velocity;
+        cc.enabled = false;
+        rigidbody2D.isKinematic = false;
+        box.enabled = true;
         joint.enabled = true;
+        Vector3 src = transform.position
+            + new Vector3(joint.anchor.x, joint.anchor.y, 0);
+        Vector3 dest = joint.connectedBody.transform.position
+            + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
+        joint.distance = (dest - src).magnitude;
     }
     private void EndSwing() {
+        cc.velocity = rigidbody2D.velocity;
+        cc.enabled = true;
+        rigidbody2D.isKinematic = true;
+        box.enabled = false;
         joint.enabled = false;
     }
 }

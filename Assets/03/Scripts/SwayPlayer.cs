@@ -3,68 +3,77 @@ using System.Collections;
 
 public class SwayPlayer : MonoBehaviour {
 
-    private float moveSpeed = 10f;
+	// movement config
+	private float gravity; // drived from rigidbody2d
+	private float runSpeed = 4f;
+	private float groundDamping = 20f; // how fast do we change direction? higher means faster
+	private float inAirDamping = 5f;
+	private float jumpHeight = 3f;
 
-    private const float groundDist = .02f;
-    private int groundMask;
-    private BoxCollider2D box;
     private SwayPlayerSwing swing;
-    private float groundOffV=0, groundOffH=0;
 
-    private bool isGrounded {
-        get {
-            Vector2 basePos = new Vector2(transform.position.x,
-                transform.position.y) + box.center;
-            Vector2 posR = basePos + new Vector2(groundOffH, -groundOffV);
-            Vector2 posL = basePos + new Vector2(-groundOffH, -groundOffV);
-            return Physics2D.Raycast(posR, -Vector2.up, groundDist, groundMask)
-                || Physics2D.Raycast(posL, -Vector2.up, groundDist, groundMask);
-        }
-    }
-    
+    private CharacterController2D cc;
+
+    private bool didJump = false, didFire = false;
+
     public void Start() {
-        groundMask = 1 << LayerMask.NameToLayer("Ground");
+        gravity = rigidbody2D.gravityScale * -9.8f;
         swing = GetComponent<SwayPlayerSwing>();
-        box = GetComponent<BoxCollider2D>();
-        groundOffV = box.size.y / 2 + groundDist / 2;
-        groundOffH = box.size.x / 2;
+        cc = GetComponent<CharacterController2D>();
     }
 
     public void Update() {
-        rigidbody2D.gravityScale = isGrounded ? 0 : 1;
+        if (Input.GetButtonDown("Jump")) {
+            didJump = true;
+        }
+        if (Input.GetButtonDown("Fire1")) {
+            didFire = true;
+        }
+    }
+    public void FixedUpdate() {
         HandleGrapple();
         HandleMovement();
-        Debug.Log("Grounded=" + isGrounded);
+        didJump = false;
+        didFire = false;
     }
 
     private void HandleGrapple() {
-        if (Input.GetButtonDown("Jump")) {
-            swing.ActivateSwing();
+        if (swing.IsSwinging) {
+            // while swinging, either jumping or firing lets go
+            if(didJump || didFire) {
+                swing.ActivateSwing();
+            }
+        } else {
+            if (didFire) {
+                swing.ActivateSwing();
+            }
         }
     }
 
     private void HandleMovement() {
+
         if (swing.IsSwinging) {
             // swinging handles input
             swing.UpdateSwing();
             return;
+        } else {
+            Vector3 velocity = cc.velocity;
+            float hSpeed = Input.GetAxis("Horizontal");
+
+            if ( (hSpeed > 0 && transform.localScale.x < 0f)
+                    || (hSpeed < 0 && transform.localScale.x > 0f) ) {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+		    float smoothedMovementFactor = cc.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+		    velocity.x = Mathf.Lerp( velocity.x, hSpeed * runSpeed, Time.fixedDeltaTime * smoothedMovementFactor );
+
+            if (cc.isGrounded && didJump) {
+                velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+            }
+
+		    // apply gravity
+		    velocity.y += gravity * Time.fixedDeltaTime;
+            cc.move(velocity * Time.deltaTime);
         }
-
-        float force = Input.GetAxis("Horizontal") * moveSpeed;
-        
-        rigidbody2D.velocity = new Vector2(force, rigidbody2D.velocity.y);
     }
-
-    //public void OnDrawGizmos() {
-    //    if (groundOffV == 0) {
-    //        return;
-    //    }
-    //    Gizmos.color = Color.cyan;
-    //    Vector3 posR = transform.position
-    //        + new Vector3(groundOffH, -groundOffV);
-    //    Vector3 posL = transform.position
-    //        + new Vector3(-groundOffH, -groundOffV);
-    //    Gizmos.DrawLine(posR, posR + new Vector3(0, -groundDist, 0));
-    //    Gizmos.DrawLine(posL, posL + new Vector3(0, -groundDist, 0));
-    //}
 }
