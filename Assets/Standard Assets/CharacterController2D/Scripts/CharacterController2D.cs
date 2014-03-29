@@ -424,7 +424,6 @@ public class CharacterController2D : MonoBehaviour
 
 	private bool handleHorizontalSlope( ref Vector3 deltaMovement, float angle, bool isGoingRight )
 	{
-		Debug.Log( "angle: " + angle );
 		// disregard 90 degree angles (walls)
 		if( Mathf.RoundToInt( angle ) == 90 )
 			return false;

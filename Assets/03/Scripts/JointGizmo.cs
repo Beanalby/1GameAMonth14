@@ -6,7 +6,7 @@ public class JointGizmo : MonoBehaviour {
 
     public void OnDrawGizmos() {
         DistanceJoint2D joint = GetComponent<DistanceJoint2D>();
-        if (!joint.enabled) {
+        if (!joint.enabled || joint.connectedBody == null) {
             return;
         }
         Vector3 src = transform.position
