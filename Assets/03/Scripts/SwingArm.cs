@@ -11,16 +11,20 @@ public class SwingArm : MonoBehaviour {
     /// </summary>
     private const int lengthScale = maxLength * 10;
 
-    private Transform player;
+
+    
+    
+    private SwayPlayerSwing swing;
+    private SwayPlayer player;
 
     private SpriteRenderer rend;
     public void Start() {
         rend = GetComponent<SpriteRenderer>();
-        player = transform.parent;
+        swing = transform.parent.GetComponent<SwayPlayerSwing>();
+        player = transform.parent.GetComponent<SwayPlayer>();
     }
 
     public void StartSwing(Rigidbody2D ropePoint) {
-        transform.parent = ropePoint.transform;
         transform.localPosition = Vector3.zero;
         rend.enabled = true;
         Update();
@@ -28,10 +32,14 @@ public class SwingArm : MonoBehaviour {
 
     public void Update() {
         if (rend.enabled) {
-            //float distance = (transform.position - player.position).magnitude;
-            //float percent = distance / maxLength;
-            //transform.localScale = new Vector3(1, lengthScale * percent);
-            //transform.localRotation = Quaternion.LookRotation(player.position - transform.position);
+            Vector3 posBase = transform.position;
+            Vector3 posTarget = swing.SwingTarget.transform.position;
+            float distance = (posTarget - posBase).magnitude;
+            float percent = distance / maxLength;
+            transform.localScale = new Vector3(1, lengthScale * percent, 1);
+            transform.localRotation = Quaternion.identity;
+            float deg = Mathf.Rad2Deg * Mathf.Atan2(player.FacingDir * (posBase.x - posTarget.x), (posTarget.y - posBase.y));
+            transform.Rotate(Vector3.forward, deg);
         }
     }
 

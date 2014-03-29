@@ -7,9 +7,13 @@ public class SwayPlayerSwing : MonoBehaviour {
 
     [HideInInspector]
     public bool IsSwinging {
-        get { return joint.enabled; }
+        get {  return joint.enabled; }
     }
 
+    [HideInInspector]
+    public Rigidbody2D SwingTarget {
+        get { return joint.connectedBody; }
+    }
     private float swingAccel = .5f;
     private float minAccel = .05f;
     private float maxVelocityBase = 5f;
@@ -26,19 +30,20 @@ public class SwayPlayerSwing : MonoBehaviour {
     private BoxCollider2D box;
     private DistanceJoint2D joint;
     private CharacterController2D cc;
+    private SwayPlayer player;
 
     public void Start() {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
-        Debug.Log("+++ in Start");
         cc = GetComponent<CharacterController2D>();
         box = GetComponent<BoxCollider2D>();
+        player = GetComponent<SwayPlayer>();
         ropePointMask = 1 << LayerMask.NameToLayer("RopePoint");
     }
 
     // not automatically called every frame, invoked by
     // SwayPlayer as needed
-	public void UpdateSwing () {
+    public void UpdateSwing () {
         if(Input.GetKeyDown(KeyCode.X)) {
             transform.position = new Vector3(0, transform.position.y, 0);
             rigidbody2D.velocity = new Vector2(.1f, 0);
@@ -117,7 +122,7 @@ public class SwayPlayerSwing : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
     public void StartSwing() {
         Rigidbody2D ropePoint = GetBestRopePoint();
@@ -159,9 +164,8 @@ public class SwayPlayerSwing : MonoBehaviour {
         /// to find a point far ahead, that way we maintain velocity once
         /// the rope starts constraining us.
         Vector2 optimalDir;
-        Debug.Log("+++ getting best rope point");
         if (cc.velocity == Vector3.zero || cc.velocity.y >= 0) {
-            optimalDir = Vector2.one * Mathf.Sign(transform.localScale.x);
+            optimalDir = new Vector2(player.FacingDir, 1);
         } else {
             optimalDir = new Vector2(-cc.velocity.y, cc.velocity.x);
         }
