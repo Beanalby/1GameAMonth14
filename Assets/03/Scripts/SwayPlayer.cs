@@ -27,17 +27,20 @@ public class SwayPlayer : MonoBehaviour {
         gravity = rigidbody2D.gravityScale * -9.8f;
         swing = GetComponent<SwayPlayerSwing>();
         cc = GetComponent<CharacterController2D>();
-        cc.onControllerCollidedEvent += OnControllerCollided;
-        cc.velocity = new Vector3(2, 0); isRopeFlying = true; // +++
+        //cc.onControllerCollidedEvent += OnControllerCollided;
+        //cc.velocity = new Vector3(2, 0); isRopeFlying = true; // +++
     }
 
     public void Update() {
-        if (!didTest1 && transform.position.y < 5.2f) {
-            didFire = true; didTest1 = true;
-        }
-        if (!didTest2 && transform.position.x > 3) {
-            didFire = true; didTest2 = true;
-        }
+        //if (!didTest1) {
+        //    didFire = true; didTest1 = true;
+        //}
+        //if (!didTest1 && transform.position.y < 5.2f) {
+        //    didFire = true; didTest1 = true;
+        //}
+        //if (!didTest2 && transform.position.x > 3) {
+        //    didFire = true; didTest2 = true;
+        //}
         if (Input.GetButtonDown("Jump")) {
             didJump = true;
         }

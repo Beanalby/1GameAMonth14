@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SwayPlayerSwing : MonoBehaviour {
 
-    public GameObject target;
+    public SwingArm arm;
 
     [HideInInspector]
     public bool IsSwinging {
@@ -30,6 +30,7 @@ public class SwayPlayerSwing : MonoBehaviour {
     public void Start() {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
+        Debug.Log("+++ in Start");
         cc = GetComponent<CharacterController2D>();
         box = GetComponent<BoxCollider2D>();
         ropePointMask = 1 << LayerMask.NameToLayer("RopePoint");
@@ -124,7 +125,7 @@ public class SwayPlayerSwing : MonoBehaviour {
             return;
         }
         joint.connectedBody = ropePoint;
-
+        
         rigidbody2D.velocity = cc.velocity;
         cc.enabled = false;
         rigidbody2D.isKinematic = false;
@@ -136,6 +137,7 @@ public class SwayPlayerSwing : MonoBehaviour {
         Vector3 dest = joint.connectedBody.transform.position
             + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
         joint.distance = (dest - src).magnitude;
+        arm.StartSwing(ropePoint);
     }
 
     public void EndSwing() {
@@ -145,6 +147,7 @@ public class SwayPlayerSwing : MonoBehaviour {
         box.enabled = false;
         joint.enabled = false;
         joint.connectedBody = null;
+        arm.EndSwing();
     }
 
     private Rigidbody2D GetBestRopePoint() {
@@ -156,6 +159,7 @@ public class SwayPlayerSwing : MonoBehaviour {
         /// to find a point far ahead, that way we maintain velocity once
         /// the rope starts constraining us.
         Vector2 optimalDir;
+        Debug.Log("+++ getting best rope point");
         if (cc.velocity == Vector3.zero || cc.velocity.y >= 0) {
             optimalDir = Vector2.one * Mathf.Sign(transform.localScale.x);
         } else {
