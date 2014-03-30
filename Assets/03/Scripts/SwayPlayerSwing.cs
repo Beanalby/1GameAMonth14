@@ -153,6 +153,15 @@ public class SwayPlayerSwing : MonoBehaviour {
         joint.enabled = false;
         joint.connectedBody = null;
         arm.EndSwing();
+
+        // always face the direction we're now moving
+        if((cc.velocity.x > 0 && transform.localScale.x < 0) // move L, face R
+            || (cc.velocity.x < 0 && transform.localScale.x > 0)) { // move R, face L
+            transform.localScale = new Vector3(
+                -transform.localScale.x,
+                transform.localScale.y,
+                transform.localScale.z);
+        }
     }
 
     private Rigidbody2D GetBestRopePoint() {
