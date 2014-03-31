@@ -127,7 +127,7 @@ public class SwayPlayerSwing : MonoBehaviour {
         joint.connectedBody = ropePoint;
         
         rigidbody2D.velocity = cc.velocity;
-        //cc.enabled = false;
+        cc.enabled = false;
         rigidbody2D.isKinematic = false;
         box.enabled = true;
         joint.enabled = true;
@@ -143,7 +143,7 @@ public class SwayPlayerSwing : MonoBehaviour {
 
     public void EndSwing() {
         cc.velocity = rigidbody2D.velocity;
-        //cc.enabled = true;
+        cc.enabled = true;
         rigidbody2D.isKinematic = true;
         box.enabled = false;
         joint.enabled = false;

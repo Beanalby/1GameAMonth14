@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SwayPlayer : MonoBehaviour {
 
+    public GameObject DeathEffect;
+
     // movement config
     private float gravity; // drived from rigidbody2d
     private float runSpeed = 4f;
@@ -14,9 +16,11 @@ public class SwayPlayer : MonoBehaviour {
 
     private CharacterController2D cc;
 
+    [HideInInspector]
     public int FacingDir {
         get { return (int)Mathf.Sign(transform.localScale.x);  }
     }
+
     /// <summary>
     /// When we let go of a rope, we maintain velocity until we hit something,
     /// unlike normally having horizontal velocity quickly drop to zero with
@@ -32,6 +36,7 @@ public class SwayPlayer : MonoBehaviour {
         swing = GetComponent<SwayPlayerSwing>();
         cc = GetComponent<CharacterController2D>();
         cc.onControllerCollidedEvent += OnControllerCollided;
+        cc.onTriggerEnterEvent += OnTriggerEnter2D;
         cc.velocity = new Vector3(2, 0); isRopeFlying = true; // +++
     }
 
@@ -107,8 +112,18 @@ public class SwayPlayer : MonoBehaviour {
         }
     }
 
+    private void Die() {
+        Instantiate(DeathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
     public void OnControllerCollided(RaycastHit2D hit) {
         //Debug.Log(name + " hit " + hit.collider.name);
         isRopeFlying = false;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Deadly") {
+            Die();
+        }
     }
 }
