@@ -77,7 +77,6 @@ public class SwayPlayer : MonoBehaviour {
 
         if (swing.IsSwinging) {
             // swinging handles input
-            swing.UpdateSwing();
             return;
         } else {
             Vector3 velocity = cc.velocity;

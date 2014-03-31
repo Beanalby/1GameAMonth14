@@ -25,7 +25,7 @@ public class SwingArm : MonoBehaviour {
     }
 
     public void StartSwing(Rigidbody2D ropePoint) {
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = swing.SwingPoint;
         rend.enabled = true;
         Update();
     }

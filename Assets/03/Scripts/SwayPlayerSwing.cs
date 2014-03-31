@@ -9,7 +9,9 @@ public class SwayPlayerSwing : MonoBehaviour {
     public bool IsSwinging {
         get {  return joint.enabled; }
     }
-
+    public Vector2 SwingPoint {
+        get { return joint.anchor; }
+    }
     [HideInInspector]
     public Rigidbody2D SwingTarget {
         get { return joint.connectedBody; }
@@ -23,14 +25,15 @@ public class SwayPlayerSwing : MonoBehaviour {
 
     private float minLen = 1.5f;
     private float maxLen = 5f;
-    private float lenSpeed = 1f;
-    private float lenThreshold = .5f;
+    private float lenSpeed = 3f;
 
     private int ropePointMask;
     private BoxCollider2D box;
     private DistanceJoint2D joint;
     private CharacterController2D cc;
     private SwayPlayer player;
+    private SpriteRenderer armL;
+    private int allButPlayerMask;
 
     public void Start() {
         joint = GetComponent<DistanceJoint2D>();
@@ -39,61 +42,53 @@ public class SwayPlayerSwing : MonoBehaviour {
         box = GetComponent<BoxCollider2D>();
         player = GetComponent<SwayPlayer>();
         ropePointMask = 1 << LayerMask.NameToLayer("RopePoint");
+        armL = transform.Find("robot_armL").GetComponent<SpriteRenderer>();
+        allButPlayerMask = ~(1 << LayerMask.NameToLayer("Player"));
     }
 
     // not automatically called every frame, invoked by
     // SwayPlayer as needed
-    public void UpdateSwing () {
-        if(Input.GetKeyDown(KeyCode.X)) {
-            transform.position = new Vector3(0, transform.position.y, 0);
-            rigidbody2D.velocity = new Vector2(.1f, 0);
-            joint.distance = 2f;
+    public void FixedUpdate() {
+        if(IsSwinging) {
+            HandleSwing();
+            HandleLengthen();
         }
-        if(Input.GetKeyDown(KeyCode.C)) {
-            joint.distance = 3f;
-        }
-        if(Input.GetKeyDown(KeyCode.V)) {
-            joint.distance = 4f;
-        }
-        HandleSwing();
-        HandleLengthen();
     }
-    
+
     private void HandleLengthen() {
         Vector3 us = transform.position
             + new Vector3(joint.anchor.x, joint.anchor.y, 0);
         Vector3 jointBase = joint.connectedBody.transform.position
             + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
-        // don't allow adjusting length if it's not taunt
-        if (joint.distance * .99f >= (us - jointBase).magnitude) {
-            return;
-        }
+        float curDistance = (jointBase - us).magnitude;
 
-        bool moved = false;
-        if (Input.GetAxis("Vertical") > lenThreshold) {
-            joint.distance = Mathf.Max(minLen, joint.distance - lenSpeed * Time.deltaTime);
-            moved = true;
-        } else if (Input.GetAxis("Vertical") < -lenThreshold) {
-            joint.distance = Mathf.Min(maxLen, joint.distance + lenSpeed * Time.deltaTime);
-            moved = true;
+        float newDistance = -1;
+
+        float vert = Input.GetAxisRaw("Vertical");
+        if (vert > 0) {
+            newDistance = Mathf.Max(minLen, curDistance - lenSpeed * vert * Time.deltaTime);
+        } else if (vert < 0) {
+            newDistance = Mathf.Min(maxLen, curDistance + lenSpeed * -vert * Time.deltaTime);
         }
-        if (moved) {
-            // automatically adjust our position for the new length
-            Ray ray = new Ray(jointBase, us - jointBase);
-            transform.position = ray.GetPoint(joint.distance);
+        if (newDistance != -1) {
+            // see if we'd hit anything by doing the lengthening
+            Vector2 newPos = new Ray(jointBase, us - jointBase).GetPoint(newDistance);
+            newPos += -joint.anchor;
+            Vector2 pos1 = box.center - box.size / 2 + newPos;
+            Vector2 pos2 = box.center + box.size / 2 + newPos;
+            Collider2D obj = Physics2D.OverlapArea(pos1, pos2, allButPlayerMask);
+            if(obj == null) {
+                joint.distance = newDistance;
+                // adjust our position manually if we're not moving,
+                // changing DistanceJoint2D doesn't move us if we're still
+                if(rigidbody2D.velocity.magnitude == 0) {
+                    transform.position = newPos;
+                }
+            }
         }
     }
 
     private void HandleSwing() {
-        Vector3 src = transform.position
-            + new Vector3(joint.anchor.x, joint.anchor.y, 0);
-        Vector3 dest = joint.connectedBody.transform.position
-            + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
-
-        // Don't let input affect the rope's speed unless it's taunt
-        if (joint.distance * .99f >= (dest - src).magnitude) {
-            return;
-        }
 
         Vector2 delta = (swingAccel * Time.deltaTime) * rigidbody2D.velocity;
         if (delta.magnitude == 0) {
@@ -132,27 +127,29 @@ public class SwayPlayerSwing : MonoBehaviour {
         joint.connectedBody = ropePoint;
         
         rigidbody2D.velocity = cc.velocity;
-        cc.enabled = false;
+        //cc.enabled = false;
         rigidbody2D.isKinematic = false;
         box.enabled = true;
         joint.enabled = true;
+        arm.StartSwing(ropePoint);
+        armL.enabled = false;
 
         Vector3 src = transform.position
             + new Vector3(joint.anchor.x, joint.anchor.y, 0);
         Vector3 dest = joint.connectedBody.transform.position
             + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
         joint.distance = (dest - src).magnitude;
-        arm.StartSwing(ropePoint);
     }
 
     public void EndSwing() {
         cc.velocity = rigidbody2D.velocity;
-        cc.enabled = true;
+        //cc.enabled = true;
         rigidbody2D.isKinematic = true;
         box.enabled = false;
         joint.enabled = false;
         joint.connectedBody = null;
         arm.EndSwing();
+        armL.enabled = true;
 
         // always face the direction we're now moving
         if((cc.velocity.x > 0 && transform.localScale.x < 0) // move L, face R
@@ -179,7 +176,6 @@ public class SwayPlayerSwing : MonoBehaviour {
             optimalDir = new Vector2(-cc.velocity.y, cc.velocity.x);
         }
 
-        //= (cc.velocity.x < 0) ? new Vector2(-1,1) : Vector2.one;
         Ray2D optimal = new Ray2D(transform.position, optimalDir);
 
         // iterate over all the rope points within a bounding box
@@ -187,9 +183,8 @@ public class SwayPlayerSwing : MonoBehaviour {
         // closest to our optimal line, while still being within ropeMax
         Collider2D bestPoint = null;
         float bestDist = Mathf.Infinity;
-        Vector3 pos = transform.position;
-        Vector2 box1 = new Vector2(pos.x - ropeMax, pos.y);
-        Vector2 box2 = new Vector3(pos.x + ropeMax, pos.y + ropeMax);
+        Vector2 box1 = new Vector2(transform.position.x, transform.position.y);
+        Vector2 box2 = box1 + new Vector2(ropeMax * player.FacingDir, ropeMax);
 
         foreach(Collider2D col in Physics2D.OverlapAreaAll(box1, box2, ropePointMask)) {
             if ((col.transform.position - transform.position).magnitude >= ropeMax) {
@@ -211,7 +206,6 @@ public class SwayPlayerSwing : MonoBehaviour {
         Vector2 pointRay1 = ray.origin, pointRay2 = ray.origin + ray.direction,
              pointCol1 = colPos, pointCol2 = colPos + new Vector2(-ray.direction.y, ray.direction.x);
         Vector2 intersect = LineIntersectionPoint(pointRay1, pointRay2, pointCol1, pointCol2);
-        //Debug.Log(colPos.ToString() + ": origin=" + ray.origin + ", intersect=" + intersect + ", dist=" + (intersect - colPos).magnitude);
         return (intersect - colPos).magnitude;
     }
 
@@ -239,5 +233,4 @@ public class SwayPlayerSwing : MonoBehaviour {
           (A1*C2 - A2*C1)/delta
       );
     }
-
 }
