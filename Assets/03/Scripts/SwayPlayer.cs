@@ -4,7 +4,7 @@ using System.Collections;
 public class SwayPlayer : MonoBehaviour {
 
     public GameObject DeathEffect;
-
+    public GameObject TeleportEffect;
     // movement config
     private float gravity; // drived from rigidbody2d
     private float runSpeed = 4f;
@@ -121,9 +121,19 @@ public class SwayPlayer : MonoBehaviour {
         isRopeFlying = false;
     }
 
+    private void Teleport() {
+        Debug.Log("Level Finished");
+        SwayStage.Instance.StageComplete();
+        Instantiate(TeleportEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
     public void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Deadly") {
             Die();
+        }
+        if(other.tag == "Teleport") {
+            Teleport();
         }
     }
 }

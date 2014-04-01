@@ -1,0 +1,43 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class SwayStage : MonoBehaviour {
+
+    private static SwayStage instance;
+    public static SwayStage Instance {
+        get { return instance; }
+    }
+    
+    public string NextStage;
+    public GUISkin skin;
+
+    private bool isComplete = false;
+
+    public void Awake() {
+        if(instance != null) {
+            Debug.LogError("Already has a SwayStage (" + instance.name + ")");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
+    public void OnGUI() {
+        GUI.skin = skin;
+        if(isComplete) {
+            GUI.Label(new Rect(0, 100, Screen.width, 200), "Stage Complete");
+        }
+    }
+
+
+    public void StageComplete() {
+        isComplete = true;
+        StartCoroutine(StartNextStage());
+    }
+
+    private IEnumerator StartNextStage() {
+        yield return new WaitForSeconds(4);
+        Application.LoadLevel(NextStage);
+    }
+
+}
