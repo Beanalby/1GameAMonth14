@@ -63,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.25, z: 0}
+  m_LocalPosition: {x: 43, y: -5.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathEffect: {fileID: 100000, guid: 91111512e9d512b47826b2e80af6004e, type: 2}
   TeleportEffect: {fileID: 100000, guid: 9e831d797eb1aae40ac071d4d12e03b7, type: 2}
+  JumpSound: {fileID: 8300000, guid: 9a8191679cc616d4593d6f28c28cf26b, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 11400008}
+  armOut: {fileID: 8300000, guid: fe1a26aefa670b24cba6a10dc0beb222, type: 3}
+  armIn: {fileID: 8300000, guid: cd1bfce33898c264fb31361750093a69, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

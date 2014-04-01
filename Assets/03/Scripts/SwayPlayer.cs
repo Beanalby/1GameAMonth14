@@ -5,6 +5,8 @@ public class SwayPlayer : MonoBehaviour {
 
     public GameObject DeathEffect;
     public GameObject TeleportEffect;
+    public AudioClip JumpSound;
+
     // movement config
     private float gravity; // drived from rigidbody2d
     private float runSpeed = 4f;
@@ -104,6 +106,7 @@ public class SwayPlayer : MonoBehaviour {
 
             if (cc.isGrounded && didJump) {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+                AudioSource.PlayClipAtPoint(JumpSound, transform.position);
             }
 
             // apply gravity

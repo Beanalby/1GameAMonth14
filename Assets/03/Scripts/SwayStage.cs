@@ -40,7 +40,7 @@ public class SwayStage : MonoBehaviour {
     }
 
     private IEnumerator ReloadStage() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         Application.LoadLevel(Application.loadedLevel);
     }
     private IEnumerator StartNextStage() {

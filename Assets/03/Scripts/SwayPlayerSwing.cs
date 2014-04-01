@@ -4,6 +4,7 @@ using System.Collections;
 public class SwayPlayerSwing : MonoBehaviour {
 
     public SwingArm arm;
+    public AudioClip armOut, armIn;
 
     [HideInInspector]
     public bool IsSwinging {
@@ -133,12 +134,14 @@ public class SwayPlayerSwing : MonoBehaviour {
         joint.enabled = true;
         arm.StartSwing(ropePoint);
         armL.enabled = false;
-
+        
         Vector3 src = transform.position
             + new Vector3(joint.anchor.x, joint.anchor.y, 0);
         Vector3 dest = joint.connectedBody.transform.position
             + new Vector3(joint.connectedAnchor.x, joint.connectedAnchor.y, 0);
         joint.distance = (dest - src).magnitude;
+
+        AudioSource.PlayClipAtPoint(armOut, transform.position);
     }
 
     public void EndSwing() {
@@ -159,6 +162,7 @@ public class SwayPlayerSwing : MonoBehaviour {
                 transform.localScale.y,
                 transform.localScale.z);
         }
+        AudioSource.PlayClipAtPoint(armIn, transform.position);
     }
 
     private Rigidbody2D GetBestRopePoint() {
