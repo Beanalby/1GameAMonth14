@@ -25,7 +25,7 @@ public class SwayStage : MonoBehaviour {
     public void OnGUI() {
         GUI.skin = skin;
         if(isComplete) {
-            GUI.Label(new Rect(0, 100, Screen.width, 200), "Stage Complete");
+            //GUI.Label(new Rect(0, 100, Screen.width, 200), "Stage Complete");
         }
     }
 
@@ -35,6 +35,14 @@ public class SwayStage : MonoBehaviour {
         StartCoroutine(StartNextStage());
     }
 
+    public void PlayerDied() {
+        StartCoroutine(ReloadStage());
+    }
+
+    private IEnumerator ReloadStage() {
+        yield return new WaitForSeconds(2);
+        Application.LoadLevel(Application.loadedLevel);
+    }
     private IEnumerator StartNextStage() {
         yield return new WaitForSeconds(4);
         Application.LoadLevel(NextStage);

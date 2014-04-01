@@ -45,7 +45,7 @@ public class CamFollow : MonoBehaviour
             return;
         }
         Vector3 pos;
-        if( _playerController == null || !_playerController.enabled)
+        if( _playerController == null)
         {
             pos = Vector3.SmoothDamp( transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime );
             return;

@@ -113,9 +113,11 @@ public class SwayPlayer : MonoBehaviour {
     }
 
     private void Die() {
+        SwayStage.Instance.PlayerDied();
         Instantiate(DeathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
     public void OnControllerCollided(RaycastHit2D hit) {
         //Debug.Log(name + " hit " + hit.collider.name);
         isRopeFlying = false;
