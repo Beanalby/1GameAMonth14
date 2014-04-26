@@ -18,8 +18,8 @@ TagManager:
   User Layer 9: Attackable
   User Layer 10: Ground
   User Layer 11: RopePoint
-  User Layer 12: 
-  User Layer 13: 
+  User Layer 12: World1
+  User Layer 13: World2
   User Layer 14: 
   User Layer 15: 
   User Layer 16: 
@@ -42,7 +42,7 @@ TagManager:
   - name: background
     userID: 1
     uniqueID: 2983011865
-    locked: 1
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
