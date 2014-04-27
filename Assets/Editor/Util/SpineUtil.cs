@@ -753,7 +753,7 @@ namespace UnitySpineImporter{
 
 						float newZ = boneGO.transform.localRotation.eulerAngles.z + origAngle;
 
-						Quaternion angle = Quaternion.Euler(0,0,newZ);
+                        //Quaternion angle = Quaternion.Euler(0,0,newZ);
 						float time = (float)boneAnimation.rotate[i].time;
 
 						curveData[i] = boneAnimation.rotate[i].curve;
@@ -798,9 +798,9 @@ namespace UnitySpineImporter{
 		static void fixAngles(AnimationCurve curve, JsonData[] curveData){
 			if (curve.keys.Length <3)
 				return;
-			int fullTurn = 0;
-			bool forward = true;
-			float currValue, previousValue, diff;
+            //int fullTurn = 0;
+            //bool forward = true;
+			float currValue, previousValue;
 			for (int previousI=0, i = 1; i < curve.keys.Length; previousI= i++) {
 				if (curveData[previousI] != null &&  curveData[previousI].IsString &&  ((string)curveData[previousI]).Equals("stepped"))
 					continue;
