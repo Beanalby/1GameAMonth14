@@ -5,14 +5,13 @@ public class gbXray : MonoBehaviour {
 
     public GameObject mask;
 
-    private float maxSize = 3;
+    private float maxSize = 5;
     private float spinSpeed = -100;
 
     private float pulseStart = -1;
     private float pulseDuration = 2;
 
     public void Start() {
-
     }
     public void Update() {
         if (pulseStart != -1) {
@@ -21,6 +20,7 @@ public class gbXray : MonoBehaviour {
                 mask.SetActive(false);
                 pulseStart = -1;
             } else {
+                mask.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
                 float scale;
                 if(percent > .8f) {
                     scale = (1 - ((percent - .8f) * 5)) * maxSize;
@@ -29,6 +29,7 @@ public class gbXray : MonoBehaviour {
                 } else {
                     scale = maxSize;
                 }
+                
                 mask.transform.localScale = new Vector3(scale, scale, scale);
 
                 Vector3 rot = mask.transform.localRotation.eulerAngles;
@@ -39,7 +40,9 @@ public class gbXray : MonoBehaviour {
     }
 
     public void DoXray() {
-        pulseStart = Time.time;
-        mask.SetActive(true);
+        if (pulseStart == -1) {
+            pulseStart = Time.time;
+            mask.SetActive(true);
+        }
     }
 }
