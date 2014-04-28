@@ -43,6 +43,10 @@ TagManager:
     userID: 1
     uniqueID: 2983011865
     locked: 0
+  - name: world2
+    userID: 2
+    uniqueID: 1134762741
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
