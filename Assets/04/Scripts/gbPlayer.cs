@@ -11,13 +11,15 @@ public class gbPlayer : MonoBehaviour {
     private float gravity; // comes from rigidbody2D
     CharacterController2D cc;
     Animator anim;
-
+    
     private bool didJump;
 
     public void Start() {
         gravity = -9.8f * rigidbody2D.gravityScale;
         cc = GetComponent<CharacterController2D>();
-        anim = GetComponent<Animator>();
+        cc.onTriggerEnterEvent += OnTriggerEnter2D;
+        cc.onTriggerExitEvent += OnTriggerExit2D;
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void Update() {
@@ -50,4 +52,10 @@ public class gbPlayer : MonoBehaviour {
         didJump = false;
     }
 
+    public void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("+++ OnTriggerEnter2D with " + other.name);
+    }
+    public void OnTriggerExit2D(Collider2D col) {
+        Debug.Log("+++ OnTriggerExit2D with " + col.name);
+    }
 }
