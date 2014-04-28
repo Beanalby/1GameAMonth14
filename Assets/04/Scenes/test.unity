@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3320e218af2533c43842c78422d13acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1614297016}
+  target: {fileID: 1822313365}
   smoothDampTime: .200000003
   transform: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: 0}
@@ -7216,7 +7216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1192050271
 Transform:
   m_ObjectHideFlags: 0
@@ -7224,18 +7224,18 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1192050270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.6920795, y: .303019047, z: -1}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 209060300}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1822313365}
 --- !u!114 &1192050272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1192050270}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70ceee44cf983e4d9809987a0b089fd, type: 3}
   m_Name: 
@@ -10481,6 +10481,7 @@ GameObject:
   - 50: {fileID: 1822313367}
   - 114: {fileID: 1822313366}
   - 114: {fileID: 1822313369}
+  - 114: {fileID: 1822313370}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -10499,6 +10500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1614297016}
+  - {fileID: 1192050271}
   m_Father: {fileID: 0}
 --- !u!114 &1822313366
 MonoBehaviour:
@@ -10587,6 +10589,18 @@ MonoBehaviour:
   transform: {fileID: 0}
   boxCollider: {fileID: 0}
   rigidBody2D: {fileID: 0}
+--- !u!114 &1822313370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1822313364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e7bc5e915a7414983aaf1b4eec356c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask: {fileID: 1192050270}
 --- !u!1 &1837650389
 GameObject:
   m_ObjectHideFlags: 0

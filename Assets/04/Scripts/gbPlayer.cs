@@ -11,7 +11,8 @@ public class gbPlayer : MonoBehaviour {
     private float gravity; // comes from rigidbody2D
     CharacterController2D cc;
     Animator anim;
-    
+    gbXray xray;
+
     private bool didJump;
 
     public void Start() {
@@ -20,11 +21,15 @@ public class gbPlayer : MonoBehaviour {
         cc.onTriggerEnterEvent += OnTriggerEnter2D;
         cc.onTriggerExitEvent += OnTriggerExit2D;
         anim = GetComponentInChildren<Animator>();
+        xray = GetComponent<gbXray>();
     }
 
     public void Update() {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
             didJump = true;
+        }
+        if (Input.GetButtonDown("Jump")) {
+            xray.DoXray();
         }
     }
 
@@ -53,9 +58,9 @@ public class gbPlayer : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("+++ OnTriggerEnter2D with " + other.name);
+        //Debug.Log("+++ OnTriggerEnter2D with " + other.name);
     }
     public void OnTriggerExit2D(Collider2D col) {
-        Debug.Log("+++ OnTriggerExit2D with " + col.name);
+        //Debug.Log("+++ OnTriggerExit2D with " + col.name);
     }
 }
