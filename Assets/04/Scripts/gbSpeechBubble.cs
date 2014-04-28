@@ -14,27 +14,39 @@ public class gbSpeechBubble : MonoBehaviour {
         thoughts = thoughts.Replace("\\n", "\n");
 
         Vector3 pos;
-        speechObj = (GameObject)GameObject.Instantiate(speechPrefab);
-        pos = speechObj.transform.position;
-        speechObj.transform.parent = transform;
-        speechObj.transform.localPosition = pos;
-        speechObj.GetComponentInChildren<TextMesh>().text = speech;
+        if(speech != "") {
+            speechObj = (GameObject)GameObject.Instantiate(speechPrefab);
+            pos = speechObj.transform.position;
+            speechObj.transform.parent = transform;
+            speechObj.transform.localPosition = pos;
+            speechObj.GetComponentInChildren<TextMesh>().text = speech;
+            speechObj.SetActive(false);
+        }
 
-        thoughtObj = (GameObject)GameObject.Instantiate(thoughtPrefab);
-        pos = thoughtObj.transform.position;
-        thoughtObj.transform.parent = transform;
-        thoughtObj.transform.localPosition = pos;
-        thoughtObj.GetComponentInChildren<TextMesh>().text = thoughts;
-        thoughtObj.SetActive(false);
-        speechObj.SetActive(false);
+        if(thoughts != "") {
+            thoughtObj = (GameObject)GameObject.Instantiate(thoughtPrefab);
+            pos = thoughtObj.transform.position;
+            thoughtObj.transform.parent = transform;
+            thoughtObj.transform.localPosition = pos;
+            thoughtObj.GetComponentInChildren<TextMesh>().text = thoughts;
+            thoughtObj.SetActive(false);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        thoughtObj.SetActive(true);
-        speechObj.SetActive(true);
+        if(thoughtObj) {
+            thoughtObj.SetActive(true);
+        }
+        if(speechObj) {
+            speechObj.SetActive(true);
+        }
     }
     public void OnTriggerExit2D(Collider2D other) {
-        thoughtObj.SetActive(false);
-        speechObj.SetActive(false);
+        if(thoughtObj) {
+            thoughtObj.SetActive(false);
+        }
+        if(speechObj) {
+            speechObj.SetActive(false);
+        }
     }
 }
