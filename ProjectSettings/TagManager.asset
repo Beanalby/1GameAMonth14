@@ -5,6 +5,7 @@ TagManager:
   tags:
   - Deadly
   - Teleport
+  - Pickup
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   User Layer 11: RopePoint
   User Layer 12: World1
   User Layer 13: World2
-  User Layer 14: 
+  User Layer 14: GroundOneWay
   User Layer 15: 
   User Layer 16: 
   User Layer 17: 
@@ -42,7 +43,7 @@ TagManager:
   - name: background
     userID: 1
     uniqueID: 2983011865
-    locked: 0
+    locked: 1
   - name: world2
     userID: 2
     uniqueID: 1134762741

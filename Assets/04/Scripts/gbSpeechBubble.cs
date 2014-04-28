@@ -13,21 +13,16 @@ public class gbSpeechBubble : MonoBehaviour {
         speech = speech.Replace("\\n", "\n");
         thoughts = thoughts.Replace("\\n", "\n");
 
-        Vector3 pos;
         if(speech != "") {
             speechObj = (GameObject)GameObject.Instantiate(speechPrefab);
-            pos = speechObj.transform.position;
-            speechObj.transform.parent = transform;
-            speechObj.transform.localPosition = pos;
+            speechObj.transform.position += transform.position;
             speechObj.GetComponentInChildren<TextMesh>().text = speech;
             speechObj.SetActive(false);
         }
 
         if(thoughts != "") {
             thoughtObj = (GameObject)GameObject.Instantiate(thoughtPrefab);
-            pos = thoughtObj.transform.position;
-            thoughtObj.transform.parent = transform;
-            thoughtObj.transform.localPosition = pos;
+            thoughtObj.transform.position += transform.position;
             thoughtObj.GetComponentInChildren<TextMesh>().text = thoughts;
             thoughtObj.SetActive(false);
         }

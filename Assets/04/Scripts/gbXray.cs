@@ -11,6 +11,10 @@ public class gbXray : MonoBehaviour {
     private float pulseStart = -1;
     private float pulseDuration = 2;
 
+    public bool IsXray {
+        get { return pulseStart != -1; }
+    }
+
     public void Start() {
     }
     public void Update() {

@@ -13,6 +13,11 @@ public class gbPlayer : MonoBehaviour {
     Animator anim;
     gbXray xray;
 
+    private int shipParts = 0;
+    public int ShipParts {
+        get { return shipParts; }
+    }
+
     private bool didJump;
 
     public void Start() {
@@ -58,9 +63,17 @@ public class gbPlayer : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        //Debug.Log("+++ OnTriggerEnter2D with " + other.name);
+        other.gameObject.SendMessage("PlayerEntered", this, SendMessageOptions.DontRequireReceiver);
+        if(other.tag == "Pickup") {
+            if(!xray.IsXray) {
+                Debug.Log("Not xray, skipping!");
+            } else {
+                Debug.Log("Picking up " + other.name);
+                other.SendMessage("PickedUp");
+                shipParts++;
+            }
+        }
     }
     public void OnTriggerExit2D(Collider2D col) {
-        //Debug.Log("+++ OnTriggerExit2D with " + col.name);
     }
 }
