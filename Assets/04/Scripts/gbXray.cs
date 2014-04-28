@@ -20,7 +20,7 @@ public class gbXray : MonoBehaviour {
                 mask.SetActive(false);
                 pulseStart = -1;
             } else {
-                mask.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+                mask.transform.position = new Vector3(transform.position.x, transform.position.y, mask.transform.position.z);
                 float scale;
                 if(percent > .8f) {
                     scale = (1 - ((percent - .8f) * 5)) * maxSize;
