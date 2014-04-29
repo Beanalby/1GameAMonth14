@@ -27,6 +27,14 @@ public class gbPlayer : MonoBehaviour {
         cc.onTriggerExitEvent += OnTriggerExit2D;
         anim = GetComponentInChildren<Animator>();
         xray = GetComponent<gbXray>();
+
+        ShowControls sc = ShowControls.CreateDocked(new ControlItem[] {
+            new ControlItem("Use left and right to move, up to jump", CustomDisplay.arrows),
+            new ControlItem("Press spacebar to active XRay powers", KeyCode.Space)
+        });
+        sc.gui.label.fontSize *= 2;
+        sc.showDuration *= 2;
+        sc.Show();
     }
 
     public void Update() {
