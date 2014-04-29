@@ -3,6 +3,8 @@ using System.Collections;
 
 public class gbPlayer : MonoBehaviour {
 
+    public AudioClip JumpSound;
+
     private float runSpeed = 4f;
     private float groundDamping = 20f; // how fast do we change direction? higher means faster
     private float inAirDamping = 5f;
@@ -65,7 +67,7 @@ public class gbPlayer : MonoBehaviour {
             if(didJump) {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
                 anim.SetTrigger("jump");
-                //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
+                AudioSource.PlayClipAtPoint(JumpSound, Camera.main.transform.position);
             }
         }
         velocity.y += gravity * Time.fixedDeltaTime;

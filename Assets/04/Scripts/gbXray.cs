@@ -3,6 +3,7 @@ using System.Collections;
 
 public class gbXray : MonoBehaviour {
 
+    public AudioClip xraySound;
     public GameObject mask;
 
     private float maxSize = 5;
@@ -47,6 +48,7 @@ public class gbXray : MonoBehaviour {
         if (pulseStart == -1) {
             pulseStart = Time.time;
             mask.SetActive(true);
+            AudioSource.PlayClipAtPoint(xraySound, Camera.main.transform.position);
         }
     }
 }

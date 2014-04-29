@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d50f6f24f3c6c45870b0ece62e7461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipStartSound: {fileID: 8300000, guid: d713e2c7445391048a6709778cfc7874, type: 3}
+  shipFlySound: {fileID: 8300000, guid: 153c43ea8efcfba4a9c6d5d461629a8f, type: 3}
   ships: {fileID: 400000}
   bubble: {fileID: 11400002}
   endPrefab: {fileID: 100000, guid: 8a1fc57d303dc4f43978ef42f3bb2b0b, type: 2}
@@ -179,6 +181,7 @@ MonoBehaviour:
   thoughtPrefab: {fileID: 100002, guid: b3c9f19a19e918845a7a8970facd0377, type: 2}
   speech: Thanks for your help!
   thoughts: See you later, sucker!
+  bubbleOffset: {x: 0, y: 0, z: 0}
   alwaysShow: 1
   parent: 1
 --- !u!212 &21200000

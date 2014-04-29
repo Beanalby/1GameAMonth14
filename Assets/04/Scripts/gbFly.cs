@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class gbFly : MonoBehaviour {
+    public AudioClip shipStartSound, shipFlySound;
     public Transform ships;
     public gbSpeechBubble bubble;
     public GameObject endPrefab;
@@ -20,6 +21,7 @@ public class gbFly : MonoBehaviour {
     public void Start() {
         flyStart = Time.time;
         basePos = ships.position;
+        AudioSource.PlayClipAtPoint(shipStartSound, Camera.main.transform.position);
     }
 
     public void Update() {
@@ -41,6 +43,7 @@ public class gbFly : MonoBehaviour {
                 Vector3 pos = bubble.transform.position;
                 bubble.transform.parent = ships;
                 bubble.transform.position = pos;
+                AudioSource.PlayClipAtPoint(shipFlySound, Camera.main.transform.position);
             }
             velocity.y += Time.deltaTime * flySpeed;
             ships.position = new Vector3(
