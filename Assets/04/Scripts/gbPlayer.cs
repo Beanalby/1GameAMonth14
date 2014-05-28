@@ -3,17 +3,24 @@ using System.Collections;
 
 public class gbPlayer : MonoBehaviour {
 
+    public AudioClip JumpSound;
+
     private float runSpeed = 4f;
     private float groundDamping = 20f; // how fast do we change direction? higher means faster
     private float inAirDamping = 5f;
     private float jumpHeight = 3f;
-
     private float gravity; // comes from rigidbody2D
     CharacterController2D cc;
     Animator anim;
     gbXray xray;
 
+    private int shipParts = 0;
+    public int ShipParts {
+        get { return shipParts; }
+    }
+
     private bool didJump;
+    public bool CanControl = true;
 
     public void Start() {
         gravity = -9.8f * rigidbody2D.gravityScale;
@@ -22,20 +29,33 @@ public class gbPlayer : MonoBehaviour {
         cc.onTriggerExitEvent += OnTriggerExit2D;
         anim = GetComponentInChildren<Animator>();
         xray = GetComponent<gbXray>();
+
+        ShowControls sc = ShowControls.CreateDocked(new ControlItem[] {
+            new ControlItem("Use left and right to move, up to jump", CustomDisplay.arrows),
+            new ControlItem("Press spacebar to active XRay powers", KeyCode.Space)
+        });
+        sc.gui.label.fontSize *= 2;
+        sc.showDuration *= 2;
+        sc.Show();
     }
 
     public void Update() {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            didJump = true;
-        }
-        if (Input.GetButtonDown("Jump")) {
-            xray.DoXray();
+        if(CanControl) {
+            if(Input.GetKeyDown(KeyCode.UpArrow)) {
+                didJump = true;
+            }
+            if(Input.GetButtonDown("Jump")) {
+                xray.DoXray();
+            }
         }
     }
 
     public void FixedUpdate() {
         Vector3 velocity = cc.velocity;
-        float hSpeed = Input.GetAxis("Horizontal");
+        float hSpeed = 0;
+        if(CanControl) {
+            hSpeed = Input.GetAxis("Horizontal");
+        }
 
         if((hSpeed > 0 && transform.localScale.x < 0f)
                 || (hSpeed < 0 && transform.localScale.x > 0f)) {
@@ -47,7 +67,7 @@ public class gbPlayer : MonoBehaviour {
             if(didJump) {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
                 anim.SetTrigger("jump");
-                //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
+                AudioSource.PlayClipAtPoint(JumpSound, Camera.main.transform.position);
             }
         }
         velocity.y += gravity * Time.fixedDeltaTime;
@@ -57,10 +77,18 @@ public class gbPlayer : MonoBehaviour {
         didJump = false;
     }
 
+    public void DisableControl() {
+        CanControl = false;
+    }
     public void OnTriggerEnter2D(Collider2D other) {
-        //Debug.Log("+++ OnTriggerEnter2D with " + other.name);
+        other.gameObject.SendMessage("PlayerEntered", this, SendMessageOptions.DontRequireReceiver);
+        if(other.tag == "Pickup") {
+            if(xray.IsXray) {
+                other.SendMessage("PickedUp");
+                shipParts++;
+            }
+        }
     }
     public void OnTriggerExit2D(Collider2D col) {
-        //Debug.Log("+++ OnTriggerExit2D with " + col.name);
     }
 }
