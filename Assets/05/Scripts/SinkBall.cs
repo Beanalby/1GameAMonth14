@@ -11,15 +11,14 @@ public class SinkBall : MonoBehaviour {
     Rigidbody rb;
 
     private bool isMoving = false;
+    private bool isControllable = true;
     public bool CanShoot {
-        get { return !isMoving; }
+        get { return !isMoving && isControllable; }
     }
 
     public void Start() {
         rb = GetComponent<Rigidbody>();
-        rb.maxAngularVelocity = 1000;
-        Physics.gravity *= 10;
-        
+        rb.maxAngularVelocity = 1000;        
         rb.velocity = new Vector3(startSpeed, 0, startSpeed);
     }
 
@@ -64,5 +63,11 @@ public class SinkBall : MonoBehaviour {
         float mouseDist = (pos - transform.position).magnitude;
         float lineDist = Mathf.Min(maxMouseDist, mouseDist) / maxMouseDist;
         return (transform.position - pos).normalized * lineDist;
+    }
+
+    public void OnTriggerEnter(Collider trig) {
+        isControllable = false;
+        trig.SendMessage("HoleComplete");
+        SinkDriver.instance.HoleComplete();
     }
 }
