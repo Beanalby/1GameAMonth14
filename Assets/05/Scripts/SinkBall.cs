@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SinkBall : MonoBehaviour {
-    float startSpeed = 15f;
+    float startSpeed = 0f;
     Rigidbody rb;
 
     public void Start() {
