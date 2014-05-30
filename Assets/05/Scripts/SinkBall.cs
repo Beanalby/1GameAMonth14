@@ -6,8 +6,8 @@ public class SinkBall : MonoBehaviour {
     public GameObject guide, trail;
 
     float startSpeed = 0f;
-    float maxMouseDist = 2;
-    float maxShotPower = 35;
+    float maxMouseDist = 4;
+    float maxShotPower = 70;
     Rigidbody rb;
 
     private bool isMoving = false;
@@ -30,6 +30,7 @@ public class SinkBall : MonoBehaviour {
         // if it's going super-slow, just stop it to get on with the next shot
         if (rb.velocity.sqrMagnitude != 0 && rb.velocity.sqrMagnitude < VELOCITY_CUTOFF) {
             rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         
         // if we've just stopped moving, let things know
@@ -41,14 +42,24 @@ public class SinkBall : MonoBehaviour {
     }
 
     private void ShootBall() {
-        Vector3 shotInfo = GetShotInfo();
-        rb.velocity = shotInfo * maxShotPower;
+        Vector3 shotInfo;
+        float percent;
+        GetShotInfo(out shotInfo, out percent);
+        /// scale power .25-1 between distance .5-1, so the smaller
+        /// .5 controls the lower .25 of power.  This gives more
+        /// control at lower power.
+        if (percent > .5f) {
+            percent = Mathf.Lerp(.25f, 1, 2 * (percent - .5f));
+        } else {
+            percent = Mathf.Lerp(0, .25f, 2 * percent);
+        }
+        rb.velocity = shotInfo * percent * maxShotPower;
         isMoving = true;
         guide.SendMessage("DisableShot");
         trail.SendMessage("DisableShot");
     }
 
-    public Vector3 GetShotInfo() {
+    public void GetShotInfo(out Vector3 dir, out float percent) {
         // Find the cursor's point projected onto the ball's plane
         Plane ballPlane = new Plane(Vector3.up, transform.position);
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -56,18 +67,22 @@ public class SinkBall : MonoBehaviour {
         if (!ballPlane.Raycast(mouseRay, out dist)) {
             Debug.LogError("Mouse ray doesn't intersect ball plane!");
             Debug.Break();
-            return Vector3.zero;
+            dir = Vector3.zero; percent = 0;
+            return;
         }
         Vector3 pos = mouseRay.GetPoint(dist);
+        dir = (transform.position - pos).normalized;
         // note how far away the curor is from the ball
         float mouseDist = (pos - transform.position).magnitude;
-        float lineDist = Mathf.Min(maxMouseDist, mouseDist) / maxMouseDist;
-        return (transform.position - pos).normalized * lineDist;
+        percent = Mathf.Min(maxMouseDist, mouseDist) / maxMouseDist;
     }
 
     public void OnTriggerEnter(Collider trig) {
         isControllable = false;
         trig.SendMessage("HoleComplete");
         SinkDriver.instance.HoleComplete();
+    }
+    public void OnCollisionEnter(Collision col) {
+        col.transform.SendMessage("OnHit", this, SendMessageOptions.DontRequireReceiver);
     }
 }

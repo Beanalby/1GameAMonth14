@@ -23,8 +23,10 @@ public class SinkGuide : MonoBehaviour {
     }
     private void UpdateGuide() {
         lr.SetPosition(0, transform.position);
-        Vector3 shot = sb.GetShotInfo();
-        lr.SetPosition(1, transform.position + (shot * guideDistance));
+        Vector3 shot;
+        float percent;
+        sb.GetShotInfo(out shot, out percent);
+        lr.SetPosition(1, transform.position + (shot * percent * guideDistance));
         mat.SetTextureOffset("_MainTex", new Vector2(-Time.time * scrollSpeed, 0));
     }
 
