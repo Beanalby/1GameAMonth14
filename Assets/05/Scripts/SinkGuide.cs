@@ -10,19 +10,28 @@ public class SinkGuide : MonoBehaviour {
     SinkBall sb;
 
     public void Start() {
-        sb = GetComponent<SinkBall>();
-        lr = GetComponentInChildren<LineRenderer>();
+        sb = GetComponentInParent<SinkBall>();
+        lr = GetComponent<LineRenderer>();
         lr.SetVertexCount(2);
         mat = lr.material;
-
     }
     public void Update() {
-        UpdateGuide();
+        if(lr.enabled) {
+            UpdateGuide();
+        }
     }
     private void UpdateGuide() {
         lr.SetPosition(0, transform.position);
         Vector3 shot = sb.GetShotInfo();
         lr.SetPosition(1, transform.position + (shot * guideDistance));
         mat.SetTextureOffset("_MainTex", new Vector2(-Time.time * scrollSpeed, 0));
+    }
+
+    public void EnableShot() {
+        UpdateGuide();
+        lr.enabled = true;
+    }
+    public void DisableShot() {
+        lr.enabled = false;
     }
 }

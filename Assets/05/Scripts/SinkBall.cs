@@ -2,10 +2,18 @@
 using System.Collections;
 
 public class SinkBall : MonoBehaviour {
+    const float VELOCITY_CUTOFF = .09f;
+    public GameObject guide, trail;
+
     float startSpeed = 0f;
     float maxMouseDist = 2;
-    float maxShotPower = 15;
+    float maxShotPower = 35;
     Rigidbody rb;
+
+    private bool isMoving = false;
+    public bool CanShoot {
+        get { return !isMoving; }
+    }
 
     public void Start() {
         rb = GetComponent<Rigidbody>();
@@ -16,13 +24,29 @@ public class SinkBall : MonoBehaviour {
     }
 
     public void Update() {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && CanShoot) {
             ShootBall();
         }
+
+        // if it's going super-slow, just stop it to get on with the next shot
+        if (rb.velocity.sqrMagnitude != 0 && rb.velocity.sqrMagnitude < VELOCITY_CUTOFF) {
+            rb.velocity = Vector3.zero;
+        }
+        
+        // if we've just stopped moving, let things know
+        if (isMoving && rb.velocity.sqrMagnitude == 0) {
+            isMoving = false;
+            guide.SendMessage("EnableShot");
+            trail.SendMessage("EnableShot");
+        }
     }
+
     private void ShootBall() {
         Vector3 shotInfo = GetShotInfo();
         rb.velocity = shotInfo * maxShotPower;
+        isMoving = true;
+        guide.SendMessage("DisableShot");
+        trail.SendMessage("DisableShot");
     }
 
     public Vector3 GetShotInfo() {

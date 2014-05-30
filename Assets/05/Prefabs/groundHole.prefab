@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 64: {fileID: 6400000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 64: {fileID: 6400002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: groundHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
