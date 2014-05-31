@@ -78,9 +78,10 @@ public class SinkBall : MonoBehaviour {
     }
 
     public void OnTriggerEnter(Collider trig) {
+        trig.SendMessage("OnHit", this);
+    }
+    public void HoleComplete() {
         isControllable = false;
-        trig.SendMessage("HoleComplete");
-        SinkDriver.instance.HoleComplete();
     }
     public void OnCollisionEnter(Collision col) {
         col.transform.SendMessage("OnHit", this, SendMessageOptions.DontRequireReceiver);

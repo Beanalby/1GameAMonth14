@@ -29,5 +29,7 @@ public class SinkBumper : MonoBehaviour {
     public void OnHit(SinkBall ball) {
         hitStart = Time.time;
         mat.color = hitColor;
+        //Debug.Log("ball v=" + ball.rigidbody.velocity.ToString(".000"));
+        ball.rigidbody.velocity = 1.1f * ball.rigidbody.velocity;
     }
 }

@@ -40,9 +40,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - hole1
-  - hole2
-  - hole3
+  - hole 1
+  - hole 2
+  - hole 3
+  - hole 4
+  - hole 5
+  - hole 6
+  - hole 7
+  - hole 8
+  - summary
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

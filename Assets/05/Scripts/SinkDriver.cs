@@ -25,7 +25,12 @@ public class SinkDriver : MonoBehaviour {
     }
 
     private IEnumerator holeComplete() {
-        string nextStage = stages[Array.IndexOf(stages, Application.loadedLevelName) + 1];
+        int index = Array.IndexOf(stages, Application.loadedLevelName);
+        if (index == -1) {
+            Debug.LogError("stage [" + Application.loadedLevelName + "] not found in list of stages");
+            yield break;
+        }
+        string nextStage = stages[index + 1];
         yield return new WaitForSeconds(3);
         Debug.Log("Loading [" + nextStage + "]");
     }

@@ -13,7 +13,12 @@ public class SinkHole : MonoBehaviour {
         Physics.gravity *= gravityScale;
     }
 
-    public void HoleComplete() {
+    public void OnHit(SinkBall ball) {
+        HoleComplete(ball);
+    }
+    public void HoleComplete(SinkBall ball) {
+        ball.HoleComplete();
+        SinkDriver.instance.HoleComplete();
         GameObject obj = (GameObject) Instantiate(successPrefab);
         obj.transform.position = transform.position;
     }
