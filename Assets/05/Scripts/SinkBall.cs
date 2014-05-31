@@ -3,12 +3,15 @@ using System.Collections;
 
 public class SinkBall : MonoBehaviour {
     const float VELOCITY_CUTOFF = .09f;
-    public GameObject guide, trail;
+    public GameObject guide, trail, shadow;
 
     float startSpeed = 0f;
     float maxMouseDist = 4;
     float maxShotPower = 70;
     Rigidbody rb;
+
+    private Vector3 shadowOffset;
+    private Quaternion shadowRotation;
 
     private bool isMoving = false;
     private bool isControllable = true;
@@ -20,9 +23,15 @@ public class SinkBall : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = 1000;        
         rb.velocity = new Vector3(startSpeed, 0, startSpeed);
+        shadowOffset = shadow.transform.position - transform.position;
+        shadowRotation = shadow.transform.rotation;
     }
 
     public void Update() {
+        // maintain the blob shadow's position and rotation above us
+        shadow.transform.position = transform.position + shadowOffset;
+        shadow.transform.rotation = shadowRotation;
+
         if (Input.GetButtonDown("Fire1") && CanShoot) {
             ShootBall();
         }
