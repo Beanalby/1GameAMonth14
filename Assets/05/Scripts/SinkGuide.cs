@@ -22,11 +22,12 @@ public class SinkGuide : MonoBehaviour {
         }
     }
     private void UpdateGuide() {
-        lr.SetPosition(0, transform.position);
+        transform.rotation = Quaternion.identity;
+        lr.SetPosition(0, Vector3.zero);
         Vector3 shot;
         float percent;
         sb.GetShotInfo(out shot, out percent);
-        lr.SetPosition(1, transform.position + (shot * percent * guideDistance));
+        lr.SetPosition(1, (shot * percent * guideDistance));
         mat.SetTextureOffset("_MainTex", new Vector2(-Time.time * scrollSpeed, 0));
     }
 

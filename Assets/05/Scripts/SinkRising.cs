@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class SinkRising : MonoBehaviour {
-    private float risingDistance = 5;
-    private float risingDuration = 1f;
+    public Vector3 direction = Vector3.up;
+
+    public float risingDistance = 5;
+    public float risingDuration = 1f;
 
     private float risingStart = -1;
     private bool isTriggered = false;
@@ -12,7 +14,7 @@ public class SinkRising : MonoBehaviour {
 
     public void Start() {
         startPos = transform.position;
-        endPos = startPos + new Vector3(0, risingDistance, 0);
+        endPos = startPos + (direction * risingDistance);
     }
 
     public void Update() {
@@ -29,6 +31,7 @@ public class SinkRising : MonoBehaviour {
     public void Triggered() {
         if (!isTriggered) {
             risingStart = Time.time;
+            isTriggered = true;
         }
     }
 }
