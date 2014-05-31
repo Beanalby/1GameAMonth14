@@ -22,8 +22,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/03/Scenes/stage3.unity
   - enabled: 0
+    path: Assets/03/Scenes/cliffhanger.unity
+  - enabled: 0
     path: Assets/03/Scenes/stage4.unity
   - enabled: 0
-    path: Assets/03/Scenes/cliffhanger.unity
-  - enabled: 1
     path: Assets/04/Scenes/test.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 1.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 2.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 3.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 4.unity

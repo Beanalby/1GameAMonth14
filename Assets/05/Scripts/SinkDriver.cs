@@ -32,7 +32,7 @@ public class SinkDriver : MonoBehaviour {
         }
         string nextStage = stages[index + 1];
         yield return new WaitForSeconds(3);
-        Debug.Log("Loading [" + nextStage + "]");
+        Application.LoadLevel(nextStage);
     }
 
 }
