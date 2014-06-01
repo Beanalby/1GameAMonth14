@@ -6,7 +6,7 @@ public class SinkHole : MonoBehaviour {
     /// <summary>
     /// Scale up gravity so the 1M-diameter ball feels smaller
     /// </summary>
-    private float gravityScale = 10;
+    private float gravityScale = 2;
 
     public GameObject successPrefab;
 
