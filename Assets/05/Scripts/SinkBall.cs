@@ -16,14 +16,14 @@ public class SinkBall : MonoBehaviour {
     private Quaternion shadowRotation;
 
     private bool isMoving = false;
-    private bool isControllable = true;
+    public bool IsControllable = true;
     public bool CanShoot {
-        get { return !isMoving && isControllable; }
+        get { return !isMoving && IsControllable; }
     }
 
     public void Start() {
         rb = GetComponent<Rigidbody>();
-        rb.maxAngularVelocity = 1000;        
+        rb.maxAngularVelocity = 10000;
         rb.velocity = new Vector3(startSpeed, 0, startSpeed);
         shadowOffset = shadow.transform.position - transform.position;
         shadowRotation = shadow.transform.rotation;
@@ -47,8 +47,10 @@ public class SinkBall : MonoBehaviour {
         // if we've just stopped moving, let things know
         if (isMoving && rb.velocity.sqrMagnitude == 0) {
             isMoving = false;
-            guide.SendMessage("EnableShot");
-            trail.SendMessage("EnableShot");
+            if (CanShoot) {
+                guide.SendMessage("EnableShot");
+                trail.SendMessage("EnableShot");
+            }
         }
     }
 
@@ -64,14 +66,18 @@ public class SinkBall : MonoBehaviour {
         } else {
             percent = Mathf.Lerp(0, .25f, 2 * percent);
         }
-        rb.velocity = shotInfo * percent * maxShotPower;
+        ApplyHit(shotInfo * percent * maxShotPower);
+    }
+    public void ApplyHit(Vector3 v) {
+        rb.velocity = v;
         isMoving = true;
         guide.SendMessage("DisableShot");
         trail.SendMessage("DisableShot");
-        SinkDriver.instance.Stroked();
+        if (SinkDriver.instance) {
+            SinkDriver.instance.Stroked();
+        }
         AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position);
     }
-
     public void GetShotInfo(out Vector3 dir, out float percent) {
         // Find the cursor's point projected onto the ball's plane
         Plane ballPlane = new Plane(Vector3.up, transform.position);
@@ -94,7 +100,7 @@ public class SinkBall : MonoBehaviour {
         trig.SendMessage("OnHit", this);
     }
     public void HoleComplete() {
-        isControllable = false;
+        IsControllable = false;
         AudioSource.PlayClipAtPoint(cupSounds[Random.Range(0, cupSounds.Length)], Camera.main.transform.position);
     }
     public void OnCollisionEnter(Collision col) {

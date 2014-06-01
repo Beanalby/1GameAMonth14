@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: bumperMoving
   m_TagString: Untagged
@@ -111,6 +112,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitColor: {r: 1, g: 1, b: 1, a: 1}
+  hitSound: {fileID: 8300000, guid: d7951e26361cd7b4bae9972cd5d9c287, type: 3}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d3d5768a2391b4a9c51d01fe9b8996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: -1, z: 0}
+  startSound: {fileID: 0}
+  endSound: {fileID: 0}
+  risingDistance: 5
+  risingDuration: .100000001
 --- !u!119 &11900000
 Projector:
   m_ObjectHideFlags: 1

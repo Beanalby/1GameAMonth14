@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class SinkHole : MonoBehaviour {
-    
+
+    public bool showSuccess = true;
+
     /// <summary>
     /// Scale up gravity so the 1M-diameter ball feels smaller
     /// </summary>
@@ -11,7 +13,7 @@ public class SinkHole : MonoBehaviour {
     public GameObject successPrefab;
 
     public void Start() {
-        Physics.gravity *= gravityScale;
+        Physics.gravity = new Vector3(0, -9.8f, 0) * gravityScale;
     }
 
     public void OnHit(SinkBall ball) {
@@ -19,8 +21,12 @@ public class SinkHole : MonoBehaviour {
     }
     public void HoleComplete(SinkBall ball) {
         ball.HoleComplete();
-        SinkDriver.instance.HoleComplete();
-        GameObject obj = (GameObject) Instantiate(successPrefab);
-        obj.transform.position = transform.position;
+        if (SinkDriver.instance) {
+            SinkDriver.instance.HoleComplete();
+        }
+        if (showSuccess) {
+            GameObject obj = (GameObject)Instantiate(successPrefab);
+            obj.transform.position = transform.position;
+        }
     }
 }
