@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13, y: .5, z: -24}
+  m_LocalPosition: {x: -20, y: .5, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -246,6 +246,11 @@ MonoBehaviour:
   guide: {fileID: 100000}
   trail: {fileID: 100006}
   shadow: {fileID: 100008}
+  cupSounds:
+  - {fileID: 8300000, guid: 1362dd350b73e514d8c297a20b45afd3, type: 3}
+  - {fileID: 8300000, guid: 37cb10662063e804e95e7e738c27e4d7, type: 3}
+  - {fileID: 8300000, guid: 2f0486c12b8cfe74c96ed7ef0593977b, type: 3}
+  shootSound: {fileID: 8300000, guid: 1e54bc9f96d1781438f21dc8b8bcf5c0, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

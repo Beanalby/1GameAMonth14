@@ -4,6 +4,8 @@ using System.Collections;
 public class SinkBall : MonoBehaviour {
     const float VELOCITY_CUTOFF = .09f;
     public GameObject guide, trail, shadow;
+    public AudioClip[] cupSounds;
+    public AudioClip shootSound;
 
     float startSpeed = 0f;
     float maxMouseDist = 4;
@@ -67,6 +69,7 @@ public class SinkBall : MonoBehaviour {
         guide.SendMessage("DisableShot");
         trail.SendMessage("DisableShot");
         SinkDriver.instance.Stroked();
+        AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position);
     }
 
     public void GetShotInfo(out Vector3 dir, out float percent) {
@@ -92,6 +95,7 @@ public class SinkBall : MonoBehaviour {
     }
     public void HoleComplete() {
         isControllable = false;
+        AudioSource.PlayClipAtPoint(cupSounds[Random.Range(0, cupSounds.Length)], Camera.main.transform.position);
     }
     public void OnCollisionEnter(Collision col) {
         col.transform.SendMessage("OnHit", this, SendMessageOptions.DontRequireReceiver);

@@ -94,6 +94,7 @@ GameObject:
   - 4: {fileID: 400010}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: wallRaising
   m_TagString: Untagged
@@ -366,6 +367,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d3d5768a2391b4a9c51d01fe9b8996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  startSound: {fileID: 8300000, guid: fc834fbb538ff9c4d84b02b530b8874d, type: 3}
+  endSound: {fileID: 8300000, guid: 8cf74f53f82c8a34f8073e1bf52c98bd, type: 3}
+  risingDistance: 5
+  risingDuration: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902f79e354415ee4b8cdfadf0bbc2b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 8300000, guid: b829f2a26c55d8443b9a9ddd7f5b1abb, type: 3}
 --- !u!119 &11900000
 Projector:
   m_ObjectHideFlags: 1

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SinkBumper : MonoBehaviour {
     public Color hitColor = Color.white;
+    public AudioClip hitSound;
 
     private Color original;
     private Material mat;
@@ -31,5 +32,6 @@ public class SinkBumper : MonoBehaviour {
         mat.color = hitColor;
         //Debug.Log("ball v=" + ball.rigidbody.velocity.ToString(".000"));
         ball.rigidbody.velocity = 1.1f * ball.rigidbody.velocity;
+        AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
     }
 }

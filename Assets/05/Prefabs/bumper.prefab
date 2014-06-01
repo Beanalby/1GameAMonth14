@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitColor: {r: 1, g: 1, b: 1, a: 1}
+  hitSound: {fileID: 8300000, guid: d7951e26361cd7b4bae9972cd5d9c287, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

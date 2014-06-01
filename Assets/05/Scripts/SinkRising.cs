@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SinkRising : MonoBehaviour {
     public Vector3 direction = Vector3.up;
+    public AudioClip startSound, endSound;
 
     public float risingDistance = 5;
     public float risingDuration = 1f;
@@ -23,6 +24,9 @@ public class SinkRising : MonoBehaviour {
             if (percent >= 1) {
                 transform.position = endPos;
                 risingStart = -1;
+                if (endSound) {
+                    AudioSource.PlayClipAtPoint(endSound, Camera.main.transform.position);
+                }
             } else {
                 transform.position = Vector3.Lerp(startPos, endPos, percent);
             }
@@ -32,6 +36,9 @@ public class SinkRising : MonoBehaviour {
         if (!isTriggered) {
             risingStart = Time.time;
             isTriggered = true;
+            if (startSound) {
+                AudioSource.PlayClipAtPoint(startSound, Camera.main.transform.position);
+            }
         }
     }
 }
