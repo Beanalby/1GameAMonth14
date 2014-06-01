@@ -35,3 +35,9 @@ EditorBuildSettings:
     path: Assets/05/Scenes/hole 3.unity
   - enabled: 1
     path: Assets/05/Scenes/hole 4.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 5.unity
+  - enabled: 1
+    path: Assets/05/Scenes/hole 6.unity
+  - enabled: 1
+    path: Assets/05/Scenes/summary.unity

@@ -39,16 +39,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f016412a696fd58468be57c944586125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skin: {fileID: 11400000, guid: 8f3643ca473d9b844be709c879ab6296, type: 2}
   stages:
-  - hole 1
-  - hole 2
-  - hole 3
-  - hole 4
-  - hole 5
-  - hole 6
-  - hole 7
-  - hole 8
-  - summary
+  - name: hole 1
+    par: 2
+  - name: hole 2
+    par: 3
+  - name: hole 3
+    par: 4
+  - name: hole 4
+    par: 4
+  - name: hole 5
+    par: 4
+  - name: hole 6
+    par: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

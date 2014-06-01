@@ -66,6 +66,7 @@ public class SinkBall : MonoBehaviour {
         isMoving = true;
         guide.SendMessage("DisableShot");
         trail.SendMessage("DisableShot");
+        SinkDriver.instance.Stroked();
     }
 
     public void GetShotInfo(out Vector3 dir, out float percent) {

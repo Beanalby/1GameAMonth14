@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class SinkGuide : MonoBehaviour {
+
     LineRenderer lr;
     float guideDistance = 3;
     private float scrollSpeed = 2f;
