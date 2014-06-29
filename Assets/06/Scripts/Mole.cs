@@ -46,8 +46,14 @@ namespace onegam_1406 {
             }
         }
 
-        public void Raise(float duration) {
+        public bool Raise(float duration) {
+            // if it's raised or moving, fail this raising.
+            if(isRaised || moveStart != -1) {
+                return false;
+            }
+            isRaised = true;
             StartCoroutine(doRaiseCycle(duration));
+            return true;
         }
         private IEnumerator doRaiseCycle(float duration) {
             raiseSpeed = duration / 8;
@@ -56,17 +62,16 @@ namespace onegam_1406 {
             Lower();
         }
         private void doRaise() {
-            isRaised = true;
             moveStart = Time.time;
-            moveBase = transform.localPosition;
-            moveDelta = raiseDistance - transform.localPosition;
+            moveBase = Vector3.zero;
+            moveDelta = raiseDistance;
         }
         public void Lower() {
             if(isRaised) {
                 isRaised = false;
                 moveStart = Time.time;
-                moveBase = transform.localPosition;
-                moveDelta = -transform.localPosition;
+                moveBase = raiseDistance;
+                moveDelta = -raiseDistance;
             }
         }
  

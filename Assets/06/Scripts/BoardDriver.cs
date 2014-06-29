@@ -34,6 +34,11 @@ namespace onegam_1406 {
         private int waveTotal, waveMiss, waveHit;
 
         public void Start() {
+            InitMoles();
+            SetupWaveRandom(1f);
+        }
+
+        private void InitMoles() {
             moles = moleHolder.GetComponentsInChildren<MoleHole>();
             System.Array.Sort(moles, (x, y) => x.name.CompareTo(y.name));
             // create some convience arrays for making patterns
@@ -57,9 +62,7 @@ namespace onegam_1406 {
             diagonalR = new MoleHole[] { moles[2], moles[4], moles[6], moles[8], moles[10] };
             diagonalR1 = new MoleHole[] { moles[1], moles[3], moles[5] };
             diagonalR2 = new MoleHole[] { moles[7], moles[9], moles[11] };
-            DoWaves();
         }
-
         private void UseWaves() {
             // never actually called, just stops warning messages about unused vars
             SetPop(0, 0, rowBottom);
@@ -101,6 +104,14 @@ namespace onegam_1406 {
             offset += 3 * duration;
         }
 
+        private void SetupWaveRandom(float duration, int num = 6) {
+            InitWave();
+            float offset = 1;
+            while(num-- > 0) {
+                SetPopRandom(duration, offset, 5);
+                offset += duration * 1.1f;
+            }
+        }
         private void InitDiagonalWave(float duration, float offset) {
             SetPop(duration, offset, diagonalL, true);
             offset += 1.5f * duration;
@@ -123,7 +134,10 @@ namespace onegam_1406 {
         private IEnumerator _setPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
             yield return new WaitForSeconds(offset);
             foreach(MoleHole mole in moles) {
-                mole.Raise(duration);
+                if(!mole.Raise(duration)) {
+                    // raising failed, take it off the total count
+                    waveTotal--;
+                }
                 if(stagger) {
                     yield return new WaitForSeconds(duration / 10);
                 }
