@@ -7,24 +7,27 @@ namespace onegam_1406 {
         public Mallet mallet;
 
         private Plane zeroPlane;
-        private float swingStart = -1;
+        private float upStart = -1;
         private Vector3 swingPos;
-        private float swingDuration = .8f;
+        private float swingDuration = .29f; // swingUp animation durationa
 
         public GameObject crosshairs;
 
-        public bool CanSwing {
-            get { return swingStart != -1f; }
-        }
+        public bool CanSwing = false;
 
+        private bool isDown = false;
         public void Start() {
             zeroPlane.SetNormalAndPosition(Vector3.up, Vector3.zero);
+            CanSwing = true; // will eventually be done by GameController
         }
 
         public void Update() {
             UpdatePosition();
-            if(Input.GetButtonDown("Fire1") && swingStart == -1) {
-                Swing();
+            if(Input.GetButtonDown("Fire1") && !isDown) {
+                SwingDown();
+            }
+            if(isDown && Input.GetButtonUp("Fire1")) {
+                SwingUp();
             }
         }
 
@@ -34,33 +37,46 @@ namespace onegam_1406 {
             float pos;
             zeroPlane.Raycast(mouseRay, out pos);
             transform.position = mouseRay.GetPoint(pos);
-            if(swingStart == -1) {
-                // haven't swung recently, it sticks to us
+            // if the mallet's currently down, leave it.
+            if(isDown) {
+                return;
+            }
+            // if we're not moving up, mallet sticks to the target
+            if(upStart == -1) {
+                mallet.transform.position = transform.position;
+                return;
+            }
+            // Mallet has been released and is moving up.
+            // Leave it in place for most of the upward swing (to avoid
+            // whacking other moles), then start interpolating the mallet
+            // back to  where it should be (which is a moving target)
+            float percent = (Time.time - upStart) / swingDuration;
+            if(percent >= 1) {
+                // it's totally up, screw all this interpolation crap
+                // and we can go back to snapping to the target
+                upStart = -1;
+                crosshairs.SendMessage("SwingEnabled", SendMessageOptions.RequireReceiver);
                 mallet.transform.position = transform.position;
             } else {
-                // if we just swung, leave the mallet where it is.
-                // after that, interpolate the mallet back to
-                // where it should be (which is a moving target)
-                float percent = (Time.time - swingStart) / swingDuration;
-                if(percent >= 1) {
-                    swingStart = -1;
-                    crosshairs.SendMessage("SwingEnabled", SendMessageOptions.RequireReceiver);
-                    mallet.transform.position = transform.position;
-                } else {
-                    if(percent > .75f) {
-                        mallet.transform.position = Vector3.Lerp(swingPos,
-                            transform.position,
-                            (percent - .75f) * 4);
-                    }
+                if(percent > .75f) {
+                    mallet.transform.position = Vector3.Lerp(swingPos,
+                        transform.position,
+                        (percent - .75f) * 4);
                 }
             }
         }
 
-        private void Swing() {
-            mallet.Swing();
-            swingStart = Time.time;
+        private void SwingDown() {
+            mallet.transform.position = transform.position;
+            isDown = true;
+            mallet.SwingDown();
             swingPos = transform.position;
             crosshairs.SendMessage("SwingDisabled", SendMessageOptions.RequireReceiver);
+        }
+        private void SwingUp() {
+            mallet.SwingUp();
+            isDown = false;
+            upStart = Time.time;
         }
     }
 }

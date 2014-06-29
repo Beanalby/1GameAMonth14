@@ -31,6 +31,8 @@ ModelImporter:
     7400002: swing
     7400004: Idle
     7400006: idle
+    7400008: swingDown
+    7400010: swingUp
     9500000: //RootNode
     13700000: MalletHandle
   materials:
@@ -88,10 +90,48 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: swing
-      takeName: swing
+      name: swingDown
+      takeName: swingDown
       firstFrame: -1
-      lastFrame: 19
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/center
+        weight: 1
+      - path: Armature/root/smush
+        weight: 1
+      - path: MalletHandle
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: swingUp
+      takeName: swingUp
+      firstFrame: -1
+      lastFrame: 6
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

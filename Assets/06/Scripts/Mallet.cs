@@ -10,8 +10,11 @@ namespace onegam_1406 {
             anim.Play("Idle");
         }
 
-        public void Swing() {
-             anim.SetTrigger("swing");
+        public void SwingDown() {
+             anim.SetTrigger("swingDown");
+        }
+        public void SwingUp() {
+            anim.SetTrigger("swingUp");
         }
     }
 }
