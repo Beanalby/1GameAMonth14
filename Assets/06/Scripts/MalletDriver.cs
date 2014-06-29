@@ -3,27 +3,13 @@ using System.Collections;
 
 namespace onegam_1406 {
     public class MalletDriver : MonoBehaviour {
-        //private Vector3 downBase = new Vector3(1.342f, .825f, -1.235f);
-        //private Vector3 downDelta;
-        //private Vector3 downRot = new Vector3(0, -45, 0);
-        //private float downSpeed = .1f;
-        //private Interpolate.Function downFunc = Interpolate.Ease(Interpolate.EaseType.EaseInCubic);
 
-        //private Vector3 upPos = new Vector3(2.342f, 3.820f, -1.235f);
-        //private Vector3 upRot = new Vector3(-43.88f, -48.71f, 25.948f);
-        //private float upSpeed = .5f;
-        //private Interpolate.Function upFunc = Interpolate.Ease(Interpolate.EaseType.EaseInOutCubic);
-
-        public Transform mallet;
-
-        private Vector3 moveBase, moveDelta;
-        private Vector3 rotBase, rotDelta;
-        private float moveStart = -1f, moveSpeed;
-        private Interpolate.Function moveFunc;
+        public Mallet mallet;
 
         private Plane zeroPlane;
-
-        private bool isSwinging = false;
+        private float swingStart = -1;
+        private Vector3 swingPos;
+        private float swingDuration = .8f;
 
         public void Start() {
             zeroPlane.SetNormalAndPosition(Vector3.up, Vector3.zero);
@@ -33,7 +19,7 @@ namespace onegam_1406 {
             UpdatePosition();
             HandleMovement();
             if(Input.GetButtonDown("Fire1")) {
-                StartCoroutine(Swing());
+                Swing();
             }
         }
 
@@ -46,14 +32,29 @@ namespace onegam_1406 {
             float pos;
             zeroPlane.Raycast(mouseRay, out pos);
             transform.position = mouseRay.GetPoint(pos);
+            if(swingStart == -1) {
+                mallet.transform.position = transform.position;
+            } else {
+                // if we just swung, leave the mallet where it is.
+                // after that, interpolate the mallet back to
+                // where it should be (which is a moving target)
+                float percent = (Time.time - swingStart) / swingDuration;
+                if(percent >= 1) {
+                    swingStart = -1;
+                    mallet.transform.position = transform.position;
+                } else {
+                    if(percent > .75f) {
+                        mallet.transform.position = Vector3.Lerp(swingPos,
+                            transform.position,
+                            (percent - .75f) * 4);
+                    }
+                }
+            }
         }
 
-        private IEnumerator Swing() {
-            MoveDown();
-            isSwinging = true;
-           yield return new WaitForSeconds(.5f);
-            MoveUp();
-            isSwinging = false;
+        private void Swing() {
+            swingStart = Time.time;
+            swingPos = transform.position;
         }
 
         private void MoveDown() {
