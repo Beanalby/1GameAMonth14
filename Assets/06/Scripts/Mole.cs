@@ -4,6 +4,8 @@ using System.Collections;
 namespace onegam_1406 {
 
     public class Mole : MonoBehaviour {
+        public GameObject hitEffect;
+
         private Vector3 raiseDistance = new Vector3(0, 2.5f, 0);
         private float raiseSpeed = .25f;
         private float raiseDuration = 1.5f;
@@ -15,6 +17,12 @@ namespace onegam_1406 {
         private bool isRaised = false;
         public bool IsRaised {
             get { return isRaised; }
+        }
+
+        private Vector3 basePos;
+
+        public void Start() {
+            basePos = transform.position;
         }
 
         public void Update() {
@@ -56,6 +64,14 @@ namespace onegam_1406 {
                 moveBase = transform.localPosition;
                 moveDelta = -transform.localPosition;
             }
+        }
+        public void OnTriggerEnter(Collider other) {
+            GameObject obj = Instantiate(hitEffect) as GameObject;
+            obj.transform.position += basePos;
+            // immediately go all the way down
+            transform.position = basePos;
+            isRaised = false;
+            moveStart = -1;
         }
     }
 }
