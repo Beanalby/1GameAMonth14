@@ -27,19 +27,21 @@ EditorBuildSettings:
     path: Assets/03/Scenes/stage4.unity
   - enabled: 0
     path: Assets/04/Scenes/test.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/title.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 1.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 2.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 3.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 4.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 5.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/hole 6.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/05/Scenes/summary.unity
+  - enabled: 1
+    path: Assets/06/Scenes/game.unity

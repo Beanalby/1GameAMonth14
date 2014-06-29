@@ -4,8 +4,13 @@ using System.Collections;
 namespace onegam_1406 {
 
     public class Mole : MonoBehaviour {
-        private float raiseDistance = 2f;
+        private Vector3 raiseDistance = new Vector3(0, 2.5f, 0);
+        private float raiseSpeed = .25f;
         private float raiseDuration = 1.5f;
+
+        private Vector3 moveBase, moveDelta;
+        private float moveStart = -1;
+        Interpolate.Function moveFunc = Interpolate.Ease(Interpolate.EaseType.EaseOutCubic);
 
         private bool isRaised = false;
         public bool IsRaised {
@@ -13,7 +18,22 @@ namespace onegam_1406 {
         }
 
         public void Update() {
+            HandleMove();
          }
+
+        private void HandleMove() {
+            if(moveStart == -1) {
+                return;
+            }
+            float percent = (Time.time - moveStart) / raiseSpeed;
+            if(percent >= 1) {
+                transform.localPosition = moveBase + moveDelta;
+                moveStart = -1;
+            } else {
+                transform.localPosition = Interpolate.Ease(
+                    moveFunc, moveBase, moveDelta, percent, 1);
+            }
+        }
 
         public void Raise() {
             StartCoroutine(doRaiseCycle());
@@ -25,12 +45,16 @@ namespace onegam_1406 {
         }
         private void doRaise() {
             isRaised = true;
-            transform.localPosition = new Vector3(0, raiseDistance, 0);
+            moveStart = Time.time;
+            moveBase = transform.localPosition;
+            moveDelta = raiseDistance - transform.localPosition;
         }
         public void Lower() {
             if(isRaised) {
-                transform.localPosition = Vector3.zero;
                 isRaised = false;
+                moveStart = Time.time;
+                moveBase = transform.localPosition;
+                moveDelta = -transform.localPosition;
             }
         }
     }
