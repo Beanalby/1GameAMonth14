@@ -11,19 +11,21 @@ namespace onegam_1406 {
         private Vector3 swingPos;
         private float swingDuration = .8f;
 
+        public GameObject crosshairs;
+
+        public bool CanSwing {
+            get { return swingStart != -1f; }
+        }
+
         public void Start() {
             zeroPlane.SetNormalAndPosition(Vector3.up, Vector3.zero);
         }
 
         public void Update() {
             UpdatePosition();
-            HandleMovement();
-            if(Input.GetButtonDown("Fire1")) {
+            if(Input.GetButtonDown("Fire1") && swingStart == -1) {
                 Swing();
             }
-        }
-
-        void HandleMovement() {
         }
 
         void UpdatePosition() {
@@ -33,6 +35,7 @@ namespace onegam_1406 {
             zeroPlane.Raycast(mouseRay, out pos);
             transform.position = mouseRay.GetPoint(pos);
             if(swingStart == -1) {
+                // haven't swung recently, it sticks to us
                 mallet.transform.position = transform.position;
             } else {
                 // if we just swung, leave the mallet where it is.
@@ -41,6 +44,7 @@ namespace onegam_1406 {
                 float percent = (Time.time - swingStart) / swingDuration;
                 if(percent >= 1) {
                     swingStart = -1;
+                    crosshairs.SendMessage("SwingEnabled", SendMessageOptions.RequireReceiver);
                     mallet.transform.position = transform.position;
                 } else {
                     if(percent > .75f) {
@@ -53,13 +57,10 @@ namespace onegam_1406 {
         }
 
         private void Swing() {
+            mallet.Swing();
             swingStart = Time.time;
             swingPos = transform.position;
-        }
-
-        private void MoveDown() {
-        }
-        private void MoveUp() {
+            crosshairs.SendMessage("SwingDisabled", SendMessageOptions.RequireReceiver);
         }
     }
 }

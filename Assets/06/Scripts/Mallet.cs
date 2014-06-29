@@ -9,10 +9,9 @@ namespace onegam_1406 {
             anim = GetComponent<Animator>();
             anim.Play("Idle");
         }
-        public void Update() {
-            if(Input.GetButtonDown("Fire1")) {
-                anim.SetTrigger("swing");
-            }
+
+        public void Swing() {
+             anim.SetTrigger("swing");
         }
     }
 }

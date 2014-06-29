@@ -1217,6 +1217,7 @@ GameObject:
   - 4: {fileID: 660103833}
   - 33: {fileID: 660103832}
   - 23: {fileID: 660103831}
+  - 114: {fileID: 660103834}
   m_Layer: 0
   m_Name: crosshairs
   m_TagString: Untagged
@@ -1265,6 +1266,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2122229219}
   m_RootOrder: 0
+--- !u!114 &660103834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660103830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92ce429886651b40943e2b84d2cb791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &712941381
 Prefab:
   m_ObjectHideFlags: 0
@@ -2236,6 +2248,10 @@ Prefab:
       propertyPath: mallet
       value: 
       objectReference: {fileID: 457504426}
+    - target: {fileID: 11400000, guid: bc7878128a7eb554bb6d4bdeae5ec9d7, type: 2}
+      propertyPath: crosshairs
+      value: 
+      objectReference: {fileID: 660103830}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc7878128a7eb554bb6d4bdeae5ec9d7, type: 2}
   m_RootGameObject: {fileID: 2122229218}
@@ -3628,3 +3644,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mallet: {fileID: 457504426}
+  crosshairs: {fileID: 660103830}
