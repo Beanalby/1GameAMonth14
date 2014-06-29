@@ -7,11 +7,8 @@ namespace onegam_1406 {
         public void Start() {
             mole = GetComponentInChildren<Mole>();
         }
-        public void Raise() {
-            mole.Raise();
-        }
-        public void Lower() {
-            mole.Lower();
+        public void Raise(float duration) {
+            mole.Raise(duration);
         }
     }
 }

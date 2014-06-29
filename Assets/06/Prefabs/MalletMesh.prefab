@@ -71,7 +71,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
-  - 136: {fileID: 13600000}
   m_Layer: 0
   m_Name: center
   m_TagString: Untagged
@@ -281,19 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0612f2475445f429b8d90e461bfa73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &13600000
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

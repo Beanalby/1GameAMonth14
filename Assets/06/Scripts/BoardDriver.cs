@@ -4,6 +4,25 @@ using System.Collections;
 namespace onegam_1406 {
 
     public class BoardDriver : MonoBehaviour {
+        private static BoardDriver _instance = null;
+        public static BoardDriver Instance {
+            get {
+                if(_instance == null) {
+                    Debug.LogError("Accessing BoardDriver instance before Awake");
+                    Debug.Break();
+                    return null;
+                }
+            return _instance; }
+        }
+        public void Awake() {
+            if(_instance != null) {
+                Debug.LogError("Two BoardDrivers, that shouldn't happen.");
+                Debug.Break();
+                return;
+            }
+            _instance = this;
+        }
+
         public GameObject moleHolder;
 
         private MoleHole[] moles,
@@ -11,6 +30,8 @@ namespace onegam_1406 {
             columnLeft, columnMid, columnRight,
             diagonalL, diagonalL1, diagonalL2,
             diagonalR, diagonalR1, diagonalR2;
+
+        private int waveTotal, waveMiss, waveHit;
 
         public void Start() {
             moles = moleHolder.GetComponentsInChildren<MoleHole>();
@@ -36,36 +57,99 @@ namespace onegam_1406 {
             diagonalR = new MoleHole[] { moles[2], moles[4], moles[6], moles[8], moles[10] };
             diagonalR1 = new MoleHole[] { moles[1], moles[3], moles[5] };
             diagonalR2 = new MoleHole[] { moles[7], moles[9], moles[11] };
-            InitPop();
+            DoWaves();
         }
 
-        private void InitPop() {
+        private void UseWaves() {
+            // never actually called, just stops warning messages about unused vars
+            SetPop(0, 0, rowBottom);
+            SetPop(0, 0, rowMid);
+            SetPop(0, 0, rowTop);
+            SetPop(0, 0,columnLeft);
+            SetPop(0, 0,columnMid);
+            SetPop(0, 0,columnRight);
+            SetPop(0, 0, diagonalL);
+            SetPop(0, 0, diagonalL1);
+            SetPop(0, 0, diagonalL2);
+            SetPop(0, 0, diagonalR);
+            SetPop(0, 0, diagonalR1);
+            SetPop(0, 0, diagonalR2);
+        }
+        private void InitWave() {
+            waveTotal = waveMiss = waveHit = 0;
+        }
+
+        private void DoWaves() {
+            InitWave();
             float offset = 1f;
-            SetPop(offset, diagonalL, .1f);
-            offset += 2.5f;
-            SetPop(offset, diagonalR);
+            float duration;
+
+            duration = 2f;
+            InitDiagonalWave(duration, offset);
+            offset += 3 * duration;
+
+            duration = 1.5f;
+            InitDiagonalWave(duration, offset);
+            offset += 3 * duration;
+
+            duration = 1f;
+            InitDiagonalWave(duration, offset);
+            offset += 3 * duration;
+
+            duration = .75f;
+            InitDiagonalWave(duration, offset);
+            offset += 3 * duration;
         }
 
-        private void SetPopRandom(float offset, int num = 1) {
+        private void InitDiagonalWave(float duration, float offset) {
+            SetPop(duration, offset, diagonalL, true);
+            offset += 1.5f * duration;
+            SetPop(duration, offset, diagonalR, true);
+        }
+
+        private void SetPopRandom(float duration, float offset, int num = 1) {
             while(num-- > 0) {
-                SetPop(offset, moles[Random.Range(0, moles.Length)]);
+                SetPop(duration, offset, moles[Random.Range(0, moles.Length)]);
             }
         }
-        private void SetPop(float offset, MoleHole mole) {
-            StartCoroutine(_setPop(offset, new MoleHole[] { mole }, 0));
+        private void SetPop(float duration, float offset, MoleHole mole) {
+            SetPop(duration, offset, new MoleHole[] { mole }, false);
         }
-        private void SetPop(float offset, MoleHole[] moles, float delay = 0) {
-            StartCoroutine(_setPop(offset, moles, delay));
+        private void SetPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
+            waveTotal += moles.Length;
+            StartCoroutine(_setPop(duration, offset, moles, stagger));
         }
 
-        private IEnumerator _setPop(float offset, MoleHole[] moles, float delay) {
+        private IEnumerator _setPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
             yield return new WaitForSeconds(offset);
             foreach(MoleHole mole in moles) {
-                mole.Raise();
-                if(delay != 0) {
-                    yield return new WaitForSeconds(delay);
+                mole.Raise(duration);
+                if(stagger) {
+                    yield return new WaitForSeconds(duration / 10);
                 }
             }
+        }
+
+        public void MoleHit(Mole mole) {
+            waveHit++;
+            Debug.Log(mole.GetHole().name + " hit, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
+            CheckWave();
+        }
+        public void MoleMiss(Mole mole) {
+            waveMiss++;
+            Debug.Log(mole.GetHole().name + " miss, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
+            CheckWave();
+        }
+
+        private void CheckWave() {
+            if(waveHit + waveMiss >= waveTotal) {
+                WaveDone();
+            }
+        }
+
+        private void WaveDone() {
+            Debug.Log("Wave is done, hit " + (((float)waveHit / waveTotal) * 100)
+                + "%, missed " + (((float)waveMiss / waveTotal) * 100));
         }
     }
 }
