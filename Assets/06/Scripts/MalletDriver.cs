@@ -4,6 +4,26 @@ using System.Collections;
 namespace onegam_1406 {
     public class MalletDriver : MonoBehaviour {
 
+        private static MalletDriver _instance = null;
+        public static MalletDriver Instance {
+            get {
+                if(_instance == null) {
+                    Debug.LogError("Accessing BoardDriver instance before Awake");
+                    Debug.Break();
+                    return null;
+                }
+                return _instance;
+            }
+        }
+        public void Awake() {
+            if(_instance != null) {
+                Debug.LogError("Two MalletDrivers, that shouldn't happen.");
+                Debug.Break();
+                return;
+            }
+            _instance = this;
+        }
+
         public Mallet mallet;
 
         private Plane zeroPlane;
@@ -23,10 +43,10 @@ namespace onegam_1406 {
 
         public void Update() {
             UpdatePosition();
-            if(Input.GetButtonDown("Fire1") && !isDown) {
+            if(CanSwing && Input.GetButtonDown("Fire1") && !isDown) {
                 SwingDown();
             }
-            if(isDown && Input.GetButtonUp("Fire1")) {
+            if(CanSwing && isDown && Input.GetButtonUp("Fire1")) {
                 SwingUp();
             }
         }
@@ -78,5 +98,12 @@ namespace onegam_1406 {
             isDown = false;
             upStart = Time.time;
         }
+
+        public void GameEnded() {
+            CanSwing = false;
+            mallet.gameObject.SetActive(false);
+            crosshairs.SetActive(false);
+        }
     }
+
 }

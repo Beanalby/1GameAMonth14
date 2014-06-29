@@ -12,7 +12,8 @@ namespace onegam_1406 {
                     Debug.Break();
                     return null;
                 }
-            return _instance; }
+                return _instance;
+            }
         }
         public void Awake() {
             if(_instance != null) {
@@ -33,9 +34,15 @@ namespace onegam_1406 {
 
         private int waveTotal, waveMiss, waveHit;
 
+        private bool isRunning = false;
+
         public void Start() {
             InitMoles();
-            SetupWaveRandom(1f);
+        }
+
+        public void SendWave() {
+            isRunning = true;
+            SetupWaveRandom(2f);
         }
 
         private void InitMoles() {
@@ -106,7 +113,7 @@ namespace onegam_1406 {
 
         private void SetupWaveRandom(float duration, int num = 6) {
             InitWave();
-            float offset = 1;
+            float offset = 0;
             while(num-- > 0) {
                 SetPopRandom(duration, offset, 5);
                 offset += duration * 1.1f;
@@ -133,6 +140,9 @@ namespace onegam_1406 {
 
         private IEnumerator _setPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
             yield return new WaitForSeconds(offset);
+            if(!isRunning) {
+                yield break;
+            }
             foreach(MoleHole mole in moles) {
                 if(!mole.Raise(duration)) {
                     // raising failed, take it off the total count
@@ -140,16 +150,25 @@ namespace onegam_1406 {
                 }
                 if(stagger) {
                     yield return new WaitForSeconds(duration / 10);
+                    if(!isRunning) {
+                        yield break;
+                    }
                 }
             }
         }
 
         public void MoleHit(Mole mole) {
+            if(!isRunning) {
+                return;
+            }
             waveHit++;
             Debug.Log(mole.GetHole().name + " hit, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
             CheckWave();
         }
         public void MoleMiss(Mole mole) {
+            if(!isRunning) {
+                return;
+            }
             waveMiss++;
             Debug.Log(mole.GetHole().name + " miss, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
             CheckWave();
@@ -162,8 +181,14 @@ namespace onegam_1406 {
         }
 
         private void WaveDone() {
+            if(!isRunning) {
+            }
             Debug.Log("Wave is done, hit " + (((float)waveHit / waveTotal) * 100)
                 + "%, missed " + (((float)waveMiss / waveTotal) * 100));
         }
-    }
+
+        public void GameEnded() {
+            isRunning = false;
+        }
+   }
 }
