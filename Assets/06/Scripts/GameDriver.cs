@@ -3,6 +3,26 @@ using System.Collections;
 
 namespace onegam_1406 {
     public class GameDriver : MonoBehaviour {
+        private static GameDriver _instance = null;
+        public static GameDriver Instance {
+            get {
+                if(_instance == null) {
+                    Debug.LogError("Accessing GameDriver instance before Awake");
+                    Debug.Break();
+                    return null;
+                }
+                return _instance;
+            }
+        }
+        public void Awake() {
+            if(_instance != null) {
+                Debug.LogError("Two GameDrivers, that shouldn't happen.");
+                Debug.Break();
+                return;
+            }
+            _instance = this;
+        }
+
 
         public GUISkin skin;
         private string msg = null;
@@ -12,6 +32,9 @@ namespace onegam_1406 {
         private GUIStyle msgStyle, timeStyle, scoreStyle;
         private float timeLeft {
             get { return Mathf.Max(0, totalTime - (Time.time - timeStart)); }
+        }
+        public bool IsRunning {
+            get { return timeStart != -1 && timeLeft > 0; }
         }
         private int pad = 10;
 

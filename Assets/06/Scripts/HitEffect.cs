@@ -3,16 +3,21 @@ using System.Collections;
 
 public class HitEffect : MonoBehaviour {
     public GameObject HitEffectRing;
+    public Light HitEffectLight;
 
-    private float duration = 1f;
+    private float duration = .8f;
+    private float numRings = 2;
 
     private float start;
     
     private float ringDelay = .2f;
 
+    private float baseIntensity;
+
     public void Start() {
         start = Time.time;
         StartCoroutine(MakeRings());
+        baseIntensity = HitEffectLight.intensity;
     }
 
     public void Update() {
@@ -21,10 +26,14 @@ public class HitEffect : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
+        if(percent >= .75f) {
+            HitEffectLight.intensity = Mathf.Lerp(baseIntensity, 0,
+                (percent - .75f) * 4);
+        }
     }
 
     private IEnumerator MakeRings() {
-        while(true) {
+        while(numRings-- > 0) {
             MakeRing();
             yield return new WaitForSeconds(ringDelay);
         }

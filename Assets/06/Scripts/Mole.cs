@@ -5,6 +5,7 @@ namespace onegam_1406 {
 
     public class Mole : MonoBehaviour {
         public GameObject hitEffect;
+        public GameObject missEffect;
 
         private float raiseSpeed;
         private Vector3 raiseDistance = new Vector3(0, 2.5f, 0);
@@ -38,7 +39,7 @@ namespace onegam_1406 {
                 moveStart = -1;
                 if(!isRaised) {
                     // if we got here, then we didn't get hit.  BOO!
-                    BoardDriver.Instance.MoleMiss(this);
+                    MoleMissed();
                 }
             } else {
                 transform.localPosition = Interpolate.Ease(
@@ -76,6 +77,11 @@ namespace onegam_1406 {
         }
  
         public void OnTriggerEnter(Collider other) {
+            MoleHit();
+        }
+
+        private void MoleHit() {
+            BoardDriver.Instance.MoleHit(this);
             // create the hitEffect and move it to our location
             GameObject obj = Instantiate(hitEffect) as GameObject;
             obj.transform.position += basePos;
@@ -84,7 +90,16 @@ namespace onegam_1406 {
             transform.position = basePos;
             isRaised = false;
             moveStart = -1;
-            BoardDriver.Instance.MoleHit(this);
+        }
+        private void MoleMissed() {
+            // skip it if the game's already over
+            if(!GameDriver.Instance.IsRunning) {
+                return;
+            }
+            BoardDriver.Instance.MoleMiss(this);
+            // create a missEffect and move it to our location
+            GameObject obj = Instantiate(missEffect) as GameObject;
+            obj.transform.position += basePos;
         }
 
         /// <summary>

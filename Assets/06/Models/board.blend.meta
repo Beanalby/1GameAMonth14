@@ -15,6 +15,8 @@ ModelImporter:
     3300002: holes
     4300000: holes
     4300002: board
+    6400000: board
+    6400002: holes
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -39,7 +41,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -50,8 +52,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 0
     normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1

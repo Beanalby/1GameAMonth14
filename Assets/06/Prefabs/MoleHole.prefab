@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 100000, guid: 8c54b34d41c8f41469cf4966bff198b0, type: 2}
+  missEffect: {fileID: 100000, guid: 4c76ce42e6507724e86c15e1111c00c7, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

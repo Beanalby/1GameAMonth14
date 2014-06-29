@@ -8,7 +8,7 @@ namespace onegam_1406 {
         public static MalletDriver Instance {
             get {
                 if(_instance == null) {
-                    Debug.LogError("Accessing BoardDriver instance before Awake");
+                    Debug.LogError("Accessing MalletDriver instance before Awake");
                     Debug.Break();
                     return null;
                 }
@@ -75,7 +75,7 @@ namespace onegam_1406 {
                 // it's totally up, screw all this interpolation crap
                 // and we can go back to snapping to the target
                 upStart = -1;
-                crosshairs.SendMessage("SwingEnabled", SendMessageOptions.RequireReceiver);
+                crosshairs.SendMessage("SwingEnabled");
                 mallet.transform.position = transform.position;
             } else {
                 if(percent > .75f) {
@@ -91,7 +91,7 @@ namespace onegam_1406 {
             isDown = true;
             mallet.SwingDown();
             swingPos = transform.position;
-            crosshairs.SendMessage("SwingDisabled", SendMessageOptions.RequireReceiver);
+            crosshairs.SendMessage("SwingDisabled");
         }
         private void SwingUp() {
             mallet.SwingUp();
@@ -100,10 +100,10 @@ namespace onegam_1406 {
         }
 
         public void GameEnded() {
-            CanSwing = false;
             mallet.gameObject.SetActive(false);
             crosshairs.SetActive(false);
-        }
+            gameObject.SetActive(false);
+       }
     }
 
 }
