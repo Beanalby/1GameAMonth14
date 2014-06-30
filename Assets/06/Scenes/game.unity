@@ -417,6 +417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d911404a9bd8146a1c1c12cef6cbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgReady: {fileID: 2800000, guid: 66a1168042dd4334bbe63a9756a7c359, type: 3}
+  imgSet: {fileID: 2800000, guid: fa2564fcdde5f7d449a5733becd2bf14, type: 3}
+  imgWhack: {fileID: 2800000, guid: b384175bfc8bcb44594917295767acfd, type: 3}
+  imgGameOver: {fileID: 2800000, guid: ab8b0f22494ae0b40a815822c5adff09, type: 3}
   skin: {fileID: 11400000, guid: 9a762508203d7b1428ae91535f185fc8, type: 2}
 --- !u!4 &68436292
 Transform:
@@ -2794,6 +2798,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: imgReady
+      value: 
+      objectReference: {fileID: 2800000, guid: 66a1168042dd4334bbe63a9756a7c359, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: imgSet
+      value: 
+      objectReference: {fileID: 2800000, guid: fa2564fcdde5f7d449a5733becd2bf14, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: imgWhack
+      value: 
+      objectReference: {fileID: 2800000, guid: b384175bfc8bcb44594917295767acfd, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: imgGameOver
+      value: 
+      objectReference: {fileID: 2800000, guid: ab8b0f22494ae0b40a815822c5adff09, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
   m_RootGameObject: {fileID: 68436290}

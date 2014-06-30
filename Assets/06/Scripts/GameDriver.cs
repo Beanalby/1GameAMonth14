@@ -3,6 +3,10 @@ using System.Collections;
 
 namespace onegam_1406 {
     public class GameDriver : MonoBehaviour {
+        public Texture2D imgReady, imgSet, imgWhack, imgGameOver;
+
+        private Texture2D topImg;
+
         private static GameDriver _instance = null;
         public static GameDriver Instance {
             get {
@@ -25,11 +29,10 @@ namespace onegam_1406 {
 
 
         public GUISkin skin;
-        private string msg = null;
 
         private float timeStart = -1, totalTime = 10f;
 
-        private GUIStyle msgStyle, timeStyle, scoreStyle;
+        private GUIStyle timeStyle, scoreStyle;
         private float timeLeft {
             get { return Mathf.Max(0, totalTime - (Time.time - timeStart)); }
         }
@@ -39,9 +42,6 @@ namespace onegam_1406 {
         private int pad = 10;
 
         public void Start() {
-            msgStyle = new GUIStyle(skin.label);
-            msgStyle.alignment = TextAnchor.UpperCenter;
-            msgStyle.fontSize *= 2;
 
             timeStyle = new GUIStyle(skin.label);
             timeStyle.alignment = TextAnchor.UpperRight;
@@ -57,20 +57,20 @@ namespace onegam_1406 {
         }
         private IEnumerator Intro() {
             yield return new WaitForSeconds(1);
-            msg = "Ready...";
+            topImg = imgReady;
             yield return new WaitForSeconds(1);
-            msg = "Set...";
+            topImg = imgSet;
             yield return new WaitForSeconds(1);
-            msg = "WHACK!";
+            topImg = imgWhack;
             yield return new WaitForSeconds(1);
-            msg = null;
+            topImg = null;
             BoardDriver.Instance.SendWave();
             timeStart = Time.time;
         }
 
         private void EndGame() {
             timeStart = -1;
-            msg = "END!!!";
+            topImg = imgGameOver;
             MalletDriver.Instance.GameEnded();
             BoardDriver.Instance.GameEnded();
         }
@@ -79,7 +79,6 @@ namespace onegam_1406 {
             Vector3 shadowDir = new Vector3(-2, 2, 0);
             Rect scoreRect = new Rect(pad, pad, Screen.width / 2, 100);
             Rect timeRect = new Rect(Screen.width / 2 - pad, pad, Screen.width / 2, 100);
-            Rect msgRect = new Rect(0, 10, Screen.width, 100);
             GUIContent content = new GUIContent();
 
             content.text = "Score: 12";
@@ -93,11 +92,11 @@ namespace onegam_1406 {
             }
             ShadowAndOutline.DrawShadow(timeRect, content, timeStyle,
                 Color.white, Color.black, shadowDir);
-            
-            if(msg != null) {
-                content.text = msg;
-                ShadowAndOutline.DrawShadow(msgRect, content, msgStyle,
-                    Color.white, Color.black, shadowDir);
+
+            if(topImg != null) {
+                GUI.DrawTexture(new Rect(
+                    (Screen.width / 2) - topImg.width / 2, 10,
+                    topImg.width, topImg.height), topImg);
             }
         }
     }
