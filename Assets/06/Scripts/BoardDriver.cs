@@ -26,11 +26,16 @@ namespace onegam_1406 {
 
         public GameObject moleHolder;
 
+        private float currentDuration = 3;
+        private float initialOffset = 2;
+        bool lastWasRandom = false;
+
         private MoleHole[] moles,
             rowBottom, rowMid, rowTop,
             columnLeft, columnMid, columnRight,
             diagonalL, diagonalL1, diagonalL2,
-            diagonalR, diagonalR1, diagonalR2;
+            diagonalR, diagonalR1, diagonalR2,
+            squareInner, squareOuter;
 
         private int waveTotal, waveMiss, waveHit;
 
@@ -40,9 +45,27 @@ namespace onegam_1406 {
             InitMoles();
         }
 
-        public void SendWave() {
+        public void SendWave(int index=-1) {
             isRunning = true;
-            SetupWaveRandom(2f);
+            // do a random wave between every other one
+            if(!lastWasRandom && index==-1) {
+                lastWasRandom = true;
+                SetupWaveIndividual(currentDuration);
+            } else {
+                lastWasRandom = false;
+                int total = 6;
+                if(index == -1) {
+                    index = Random.Range(0, total);
+                }
+                switch(index) {
+                    case 0: SetupWaveRandomGroup(currentDuration); break;
+                    case 1: SetupWaveDiagonal(currentDuration); break;
+                    case 2: SetupWaveZ(currentDuration); break;
+                    case 3: SetupWaveLines(currentDuration); break;
+                    case 4: SetupWaveChase(currentDuration); break;
+                    case 5: SetupWaveSquare(currentDuration); break;
+                }
+            }
         }
 
         private void InitMoles() {
@@ -69,62 +92,121 @@ namespace onegam_1406 {
             diagonalR = new MoleHole[] { moles[2], moles[4], moles[6], moles[8], moles[10] };
             diagonalR1 = new MoleHole[] { moles[1], moles[3], moles[5] };
             diagonalR2 = new MoleHole[] { moles[7], moles[9], moles[11] };
-        }
-        private void UseWaves() {
-            // never actually called, just stops warning messages about unused vars
-            SetPop(0, 0, rowBottom);
-            SetPop(0, 0, rowMid);
-            SetPop(0, 0, rowTop);
-            SetPop(0, 0,columnLeft);
-            SetPop(0, 0,columnMid);
-            SetPop(0, 0,columnRight);
-            SetPop(0, 0, diagonalL);
-            SetPop(0, 0, diagonalL1);
-            SetPop(0, 0, diagonalL2);
-            SetPop(0, 0, diagonalR);
-            SetPop(0, 0, diagonalR1);
-            SetPop(0, 0, diagonalR2);
+            squareInner = new MoleHole[] { moles[3], moles[4], moles[8], moles[9] };
+            squareOuter = new MoleHole[] { moles[0], moles[2], moles[10], moles[12] };
         }
         private void InitWave() {
             waveTotal = waveMiss = waveHit = 0;
         }
-
-        private void DoWaves() {
+        private void SetupWaveIndividual(float duration, int num = 10) {
             InitWave();
-            float offset = 1f;
-            float duration;
-
-            duration = 2f;
-            InitDiagonalWave(duration, offset);
-            offset += 3 * duration;
-
-            duration = 1.5f;
-            InitDiagonalWave(duration, offset);
-            offset += 3 * duration;
-
-            duration = 1f;
-            InitDiagonalWave(duration, offset);
-            offset += 3 * duration;
-
-            duration = .75f;
-            InitDiagonalWave(duration, offset);
-            offset += 3 * duration;
-        }
-
-        private void SetupWaveRandom(float duration, int num = 6) {
-            InitWave();
-            float offset = 0;
+            float offset = initialOffset;
             while(num-- > 0) {
-                SetPopRandom(duration, offset, 5);
+                SetPopRandom(duration, offset);
+                offset += duration * .3f;
+            }
+        }
+        private void SetupWaveRandomGroup(float duration, int num = 6) {
+            InitWave();
+            float offset = initialOffset;
+            while(num-- > 0) {
+                SetPopRandom(duration, offset, 3);
                 offset += duration * 1.1f;
             }
         }
-        private void InitDiagonalWave(float duration, float offset) {
+        private void SetupWaveDiagonal(float duration) {
+            float offset = initialOffset;
+            InitWave();
             SetPop(duration, offset, diagonalL, true);
             offset += 1.5f * duration;
             SetPop(duration, offset, diagonalR, true);
+            offset += 1.5f * duration;
+            SetPop(duration, offset, diagonalL1, false);
+            offset += .5f * duration;
+            SetPop(duration, offset, diagonalL2, false);
+            offset += 1 * duration;
+            SetPop(duration, offset, diagonalR1, false);
+            offset += .5f * duration;
+            SetPop(duration, offset, diagonalR2, false);
+            offset += 1 * duration;
+        }
+        private void SetupWaveZ(float duration) {
+            InitWave();
+            float offset = initialOffset;
+            SetPop(duration, offset, rowTop, true);
+            offset += .5f * duration;
+            SetPop(duration, offset, diagonalL, true, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, rowBottom, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, rowBottom, true);
+            offset += .5f * duration;
+            SetPop(duration, offset, diagonalR, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, rowTop, true);
+            offset += .5f * duration;
+        }
+        private void SetupWaveLines(float duration) {
+            InitWave();
+            float offset = initialOffset;
+            SetPop(duration, offset, rowBottom, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, rowMid, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, rowTop, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, columnLeft, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, columnMid, true);
+            offset += .75f * duration;
+            SetPop(duration, offset, columnRight, true);
+            offset += .75f * duration;
         }
 
+        private void SetupWaveChase(float duration) {
+            InitWave();
+            float offset = initialOffset;
+            SetPop(duration, offset, diagonalL, true);
+            offset += .8f * duration;
+            SetPop(duration, offset, rowTop);
+            offset += .8f * duration;
+
+            SetPop(duration, offset, diagonalR, true);
+            offset += .8f * duration;
+            SetPop(duration, offset, columnLeft);
+            offset += .8f * duration;
+
+            SetPop(duration, offset, diagonalR, true, true);
+            offset += .8f * duration;
+            SetPop(duration, offset, columnRight);
+            offset += .8f * duration;
+
+            SetPop(duration, offset, diagonalL, true, true);
+            offset += .8f * duration;
+            SetPop(duration, offset, rowBottom);
+            offset += .8f * duration;
+        }
+        private void SetupWaveSquare(float duration) {
+            InitWave();
+            float offset = initialOffset;
+            SetPop(duration, offset, moles[6]);
+            offset += .5f;
+            SetPop(duration, offset, squareInner, true);
+            offset += 1.5f;
+            SetPop(duration, offset, squareOuter, true);
+            offset += 1.5f;
+            int num = 6;
+            while(num-- > 0) {
+                SetPopRandom(duration, offset);
+                offset += duration * .3f;
+            }
+            SetPop(duration, offset, squareOuter, true, true);
+            offset += 1.5f;
+            SetPop(duration, offset, squareInner, true, true);
+            offset += 1.5f;
+            SetPop(duration, offset, moles[6]);
+            offset += .5f;
+        }
         private void SetPopRandom(float duration, float offset, int num = 1) {
             while(num-- > 0) {
                 SetPop(duration, offset, moles[Random.Range(0, moles.Length)]);
@@ -133,25 +215,40 @@ namespace onegam_1406 {
         private void SetPop(float duration, float offset, MoleHole mole) {
             SetPop(duration, offset, new MoleHole[] { mole }, false);
         }
-        private void SetPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
+        private void SetPop(float duration, float offset, MoleHole[] moles, bool stagger = false, bool reverse = false) {
             waveTotal += moles.Length;
-            StartCoroutine(_setPop(duration, offset, moles, stagger));
+            StartCoroutine(_setPop(duration, offset, moles, stagger, reverse));
         }
 
-        private IEnumerator _setPop(float duration, float offset, MoleHole[] moles, bool stagger = false) {
+        private IEnumerator _setPop(float duration, float offset, MoleHole[] moles, bool stagger, bool reverse) {
             yield return new WaitForSeconds(offset);
             if(!isRunning) {
                 yield break;
             }
-            foreach(MoleHole mole in moles) {
-                if(!mole.Raise(duration)) {
-                    // raising failed, take it off the total count
-                    waveTotal--;
+            if(reverse) {
+                for(int i=moles.Length-1; i>=0;i--) {
+                    if(!moles[i].Raise(duration)) {
+                        // raising failed, take it off the total count
+                        waveTotal--;
+                    }
+                    if(stagger) {
+                        yield return new WaitForSeconds(duration / 10);
+                        if(!isRunning) {
+                            yield break;
+                        }
+                    }
                 }
-                if(stagger) {
-                    yield return new WaitForSeconds(duration / 10);
-                    if(!isRunning) {
-                        yield break;
+            } else {
+                foreach(MoleHole mole in moles) {
+                    if(!mole.Raise(duration)) {
+                        // raising failed, take it off the total count
+                        waveTotal--;
+                    }
+                    if(stagger) {
+                        yield return new WaitForSeconds(duration / 10);
+                        if(!isRunning) {
+                            yield break;
+                        }
                     }
                 }
             }
@@ -162,7 +259,6 @@ namespace onegam_1406 {
                 return;
             }
             waveHit++;
-            Debug.Log(mole.GetHole().name + " hit, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
             CheckWave();
         }
         public void MoleMiss(Mole mole) {
@@ -170,7 +266,6 @@ namespace onegam_1406 {
                 return;
             }
             waveMiss++;
-            Debug.Log(mole.GetHole().name + " miss, now " + waveHit + "-" + waveMiss + " / " + waveTotal);
             CheckWave();
         }
 
@@ -182,9 +277,18 @@ namespace onegam_1406 {
 
         private void WaveDone() {
             if(!isRunning) {
+                return;
             }
             Debug.Log("Wave is done, hit " + (((float)waveHit / waveTotal) * 100)
                 + "%, missed " + (((float)waveMiss / waveTotal) * 100));
+            if(waveHit == waveTotal) {
+                GameDriver.Instance.WavePerfect();
+                currentDuration *= .83f;
+                Debug.Log("currentDuration recuced t= " + currentDuration);
+            } else {
+                GameDriver.Instance.WaveComplete();
+            }
+            SendWave();
         }
 
         public void GameEnded() {

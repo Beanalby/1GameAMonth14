@@ -102,7 +102,7 @@ Transform:
   m_Children:
   - {fileID: 2107006183}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 11
+  m_RootOrder: 1
 --- !u!114 &4155668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ Transform:
   m_Children:
   - {fileID: 888009406}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 5
+  m_RootOrder: 8
 --- !u!114 &53122057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +421,9 @@ MonoBehaviour:
   imgSet: {fileID: 2800000, guid: fa2564fcdde5f7d449a5733becd2bf14, type: 3}
   imgWhack: {fileID: 2800000, guid: b384175bfc8bcb44594917295767acfd, type: 3}
   imgGameOver: {fileID: 2800000, guid: ab8b0f22494ae0b40a815822c5adff09, type: 3}
+  waveComplete: {fileID: 2800000, guid: 141246a3f78498945a39cb5993ba786d, type: 3}
+  wavePerfect: {fileID: 2800000, guid: 1c272aa49121aa649884b3e9a10f6473, type: 3}
+  speedUp: {fileID: 2800000, guid: de50c7896569a2d4893ca96c9c21153f, type: 3}
   skin: {fileID: 11400000, guid: 9a762508203d7b1428ae91535f185fc8, type: 2}
 --- !u!4 &68436292
 Transform:
@@ -584,7 +587,7 @@ Transform:
   m_Children:
   - {fileID: 464270584}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 8
+  m_RootOrder: 11
 --- !u!114 &232762586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,6 +1595,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1506179914}
+  - {fileID: 4155667}
+  - {fileID: 1684615248}
   - {fileID: 1504052784}
   - {fileID: 1730776904}
   - {fileID: 1954949797}
@@ -1602,9 +1608,6 @@ Transform:
   - {fileID: 1217795458}
   - {fileID: 232762585}
   - {fileID: 1689012321}
-  - {fileID: 1506179914}
-  - {fileID: 4155667}
-  - {fileID: 1684615248}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &793872951
@@ -1999,7 +2002,7 @@ Transform:
   m_Children:
   - {fileID: 1671509802}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 4
+  m_RootOrder: 7
 --- !u!114 &927870989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2579,7 +2582,7 @@ Transform:
   m_Children:
   - {fileID: 1603818609}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 7
+  m_RootOrder: 10
 --- !u!114 &1217795459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2814,6 +2817,18 @@ Prefab:
       propertyPath: imgGameOver
       value: 
       objectReference: {fileID: 2800000, guid: ab8b0f22494ae0b40a815822c5adff09, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: wavePerfect
+      value: 
+      objectReference: {fileID: 2800000, guid: 1c272aa49121aa649884b3e9a10f6473, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: waveComplete
+      value: 
+      objectReference: {fileID: 2800000, guid: 141246a3f78498945a39cb5993ba786d, type: 3}
+    - target: {fileID: 11400000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
+      propertyPath: speedUp
+      value: 
+      objectReference: {fileID: 2800000, guid: de50c7896569a2d4893ca96c9c21153f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78ae15102fb7a0c4ba0314d6d0fa237e, type: 2}
   m_RootGameObject: {fileID: 68436290}
@@ -2955,7 +2970,7 @@ Transform:
   m_Children:
   - {fileID: 793872952}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 0
+  m_RootOrder: 3
 --- !u!114 &1504052785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,7 +3011,7 @@ Transform:
   m_Children:
   - {fileID: 980111364}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 10
+  m_RootOrder: 0
 --- !u!114 &1506179915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,7 +3365,7 @@ Transform:
   m_Children:
   - {fileID: 880385327}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 3
+  m_RootOrder: 6
 --- !u!114 &1653224622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3466,7 +3481,7 @@ Transform:
   m_Children:
   - {fileID: 1177511565}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 12
+  m_RootOrder: 2
 --- !u!114 &1684615249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3507,7 +3522,7 @@ Transform:
   m_Children:
   - {fileID: 1187168303}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 9
+  m_RootOrder: 12
 --- !u!114 &1689012322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3684,7 +3699,7 @@ Transform:
   m_Children:
   - {fileID: 718026620}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 1
+  m_RootOrder: 4
 --- !u!114 &1730776905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4055,7 +4070,7 @@ Transform:
   m_Children:
   - {fileID: 236668635}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 2
+  m_RootOrder: 5
 --- !u!1 &1961413432
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,7 +4157,7 @@ Transform:
   m_Children:
   - {fileID: 1095233274}
   m_Father: {fileID: 763703499}
-  m_RootOrder: 6
+  m_RootOrder: 9
 --- !u!114 &1977525615
 MonoBehaviour:
   m_ObjectHideFlags: 0

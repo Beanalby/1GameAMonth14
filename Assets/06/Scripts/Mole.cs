@@ -53,7 +53,8 @@ namespace onegam_1406 {
                 return false;
             }
             isRaised = true;
-            StartCoroutine(doRaiseCycle(duration));
+            // use string name so we can stop it when hit
+            StartCoroutine("doRaiseCycle", duration);
             return true;
         }
         private IEnumerator doRaiseCycle(float duration) {
@@ -87,6 +88,7 @@ namespace onegam_1406 {
             obj.transform.position += basePos;
 
             // immediately go all the way down, screw any movement
+            StopCoroutine("doRaiseCycle");
             transform.position = basePos;
             isRaised = false;
             moveStart = -1;

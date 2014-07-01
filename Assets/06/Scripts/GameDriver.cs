@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace onegam_1406 {
     public class GameDriver : MonoBehaviour {
-        public Texture2D imgReady, imgSet, imgWhack, imgGameOver;
+        public Texture2D imgReady, imgSet, imgWhack, imgGameOver, waveComplete, wavePerfect, speedUp;
 
         private Texture2D topImg;
 
@@ -30,7 +30,7 @@ namespace onegam_1406 {
 
         public GUISkin skin;
 
-        private float timeStart = -1, totalTime = 10f;
+        private float timeStart = -1, totalTime = 90f;
 
         private GUIStyle timeStyle, scoreStyle;
         private float timeLeft {
@@ -57,20 +57,19 @@ namespace onegam_1406 {
         }
         private IEnumerator Intro() {
             yield return new WaitForSeconds(1);
-            topImg = imgReady;
+            ShowImage(imgReady);
             yield return new WaitForSeconds(1);
-            topImg = imgSet;
-            yield return new WaitForSeconds(1);
-            topImg = imgWhack;
-            yield return new WaitForSeconds(1);
-            topImg = null;
+            ShowImage(imgSet);
             BoardDriver.Instance.SendWave();
+            yield return new WaitForSeconds(1);
+            ShowImage(imgWhack);
+            yield return new WaitForSeconds(1);
             timeStart = Time.time;
         }
 
         private void EndGame() {
             timeStart = -1;
-            topImg = imgGameOver;
+            ShowImage(imgGameOver, Mathf.Infinity);
             MalletDriver.Instance.GameEnded();
             BoardDriver.Instance.GameEnded();
         }
@@ -97,6 +96,28 @@ namespace onegam_1406 {
                 GUI.DrawTexture(new Rect(
                     (Screen.width / 2) - topImg.width / 2, 10,
                     topImg.width, topImg.height), topImg);
+            }
+        }
+
+        public void WaveComplete() {
+            ShowImage(waveComplete);
+        }
+        public void WavePerfect() {
+            StartCoroutine(_wavePerfect());
+        }
+        private IEnumerator _wavePerfect() {
+            ShowImage(wavePerfect);
+            yield return new WaitForSeconds(1f);
+            ShowImage(speedUp);
+        }
+        private void ShowImage(Texture2D img, float duration = 1f) {
+            StartCoroutine(_showImage(img, duration));
+        }
+        private IEnumerator _showImage(Texture2D img, float duration) {
+            topImg = img;
+            yield return new WaitForSeconds(duration);
+            if(topImg == img) {
+                topImg = null;
             }
         }
     }
