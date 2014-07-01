@@ -31,6 +31,7 @@ namespace onegam_1406 {
         public GUISkin skin;
 
         private float timeStart = -1, totalTime = 90f;
+        private int score = 0;
 
         private GUIStyle timeStyle, scoreStyle;
         private float timeLeft {
@@ -39,14 +40,15 @@ namespace onegam_1406 {
         public bool IsRunning {
             get { return timeStart != -1 && timeLeft > 0; }
         }
+        private bool showRetry = false;
         private int pad = 10;
 
         public void Start() {
 
             timeStyle = new GUIStyle(skin.label);
-            timeStyle.alignment = TextAnchor.UpperRight;
+            timeStyle.alignment = TextAnchor.LowerRight;
             scoreStyle = new GUIStyle(skin.label);
-            scoreStyle.alignment = TextAnchor.UpperLeft;
+            scoreStyle.alignment = TextAnchor.LowerLeft;
             StartCoroutine(Intro());
         }
 
@@ -68,24 +70,29 @@ namespace onegam_1406 {
         }
 
         private void EndGame() {
-            timeStart = -1;
+            StartCoroutine(_endGame());
+        }
+        private IEnumerator _endGame() {
             ShowImage(imgGameOver, Mathf.Infinity);
             MalletDriver.Instance.GameEnded();
             BoardDriver.Instance.GameEnded();
+            yield return new WaitForSeconds(1.5f);
+            showRetry = true;
         }
 
         public void OnGUI() {
+            GUI.skin = skin;
             Vector3 shadowDir = new Vector3(-2, 2, 0);
-            Rect scoreRect = new Rect(pad, pad, Screen.width / 2, 100);
-            Rect timeRect = new Rect(Screen.width / 2 - pad, pad, Screen.width / 2, 100);
+            Rect scoreRect = new Rect(pad, Screen.height - (pad + 100), Screen.width / 2, 100);
+            Rect timeRect = new Rect(Screen.width / 2 - pad, Screen.height - (pad + 100), Screen.width / 2, 100);
             GUIContent content = new GUIContent();
 
-            content.text = "Score: 12";
+            content.text = "Score: " + score;
             ShadowAndOutline.DrawShadow(scoreRect, content, scoreStyle,
                 Color.white, Color.black, shadowDir);
             content.text = "Time: ";
             if(timeStart == -1) {
-                content.text += "____";
+                content.text += totalTime;
             } else {
                 content.text += timeLeft.ToString("00.0");
             }
@@ -97,8 +104,19 @@ namespace onegam_1406 {
                     (Screen.width / 2) - topImg.width / 2, 10,
                     topImg.width, topImg.height), topImg);
             }
+            if(showRetry) {
+                int width = 300, height = 100;
+                Rect buttonRect = new Rect((Screen.width / 2) - (width/2), 
+                    (Screen.height / 2) - (height/2), width, height);
+                if(GUI.Button(buttonRect, "Play Again")) {
+                    Application.LoadLevel(Application.loadedLevel);
+                }
+            }
         }
 
+        public void MoleHit() {
+            score++;
+        }
         public void WaveComplete() {
             ShowImage(waveComplete);
         }

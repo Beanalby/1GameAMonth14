@@ -98,12 +98,12 @@ namespace onegam_1406 {
         private void InitWave() {
             waveTotal = waveMiss = waveHit = 0;
         }
-        private void SetupWaveIndividual(float duration, int num = 10) {
+        private void SetupWaveIndividual(float duration, int num = 15) {
             InitWave();
             float offset = initialOffset;
             while(num-- > 0) {
                 SetPopRandom(duration, offset);
-                offset += duration * .3f;
+                offset += duration * .2f;
             }
         }
         private void SetupWaveRandomGroup(float duration, int num = 6) {
@@ -259,6 +259,7 @@ namespace onegam_1406 {
                 return;
             }
             waveHit++;
+            GameDriver.Instance.MoleHit();
             CheckWave();
         }
         public void MoleMiss(Mole mole) {
