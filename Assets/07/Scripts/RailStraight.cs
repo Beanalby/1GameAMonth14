@@ -2,11 +2,17 @@
 using System.Collections;
 
 namespace onegam_1407 {
+    [RequireComponent(typeof(BoxCollider))]
     public class RailStraight : RailSection {
 
         public float length = 1f;
         private Vector3 EndPos;
 
+        public void Awake() {
+            BoxCollider box = GetComponent<BoxCollider>();
+            box.size = new Vector3(1, 1, length);
+            box.center = new Vector3(0, .5f, length / 2);
+        }
         public void Start() {
             EndPos = new Vector3(0, 0, length);
         }
