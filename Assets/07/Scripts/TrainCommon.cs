@@ -10,16 +10,12 @@ namespace onegam_1407 {
         protected RailSection rail;
         protected float railPos = -1;
 
-        protected bool run;
 
         abstract protected RailSection GetNextSection();
         abstract protected void SetNextSection(RailSection next);
 
         public void Update() {
-            if(Input.GetKeyDown(KeyCode.R)) {
-                run = true;
-            }
-            if(run) {
+            if(GameDriver.Instance.IsRunning) {
                 Move();
             }
         }
@@ -42,7 +38,6 @@ namespace onegam_1407 {
                 railPos = remainder;
                 if(rail == null) {
                     Debug.LogError("End of the line!");
-                    run = false;
                     Debug.Break();
                 }
             }

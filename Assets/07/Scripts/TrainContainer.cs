@@ -37,6 +37,7 @@ namespace onegam_1407 {
                 return;
             }
             Debug.Log("+++ " + name + " dropping off at " + city.city);
+            GameDriver.Instance.CargoDelivered(cargo);
             Destroy(cargo.gameObject);
             cargo = null;
         }
