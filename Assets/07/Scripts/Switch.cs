@@ -2,13 +2,28 @@
 using System.Collections;
 
 namespace onegam_1407 {
-    public class Switch : MonoBehaviour {
-        public RailBranch target;
-        public KeyCode key;
+    public enum SwitchPosition { Left, Right };
 
-        public void Update() {
-            if(Input.GetKeyDown(key) && GameDriver.Instance.IsRunning) {
+    public class Switch : MonoBehaviour {
+        public Transform SwitchTip;
+        public RailBranch target;
+        private SwitchPosition pos;
+        public Transform switchMesh;
+
+        public void SwitchLeft() {
+            if(pos != SwitchPosition.Left) {
+                pos = SwitchPosition.Left;
+                Debug.Log("Switching to " + pos);
                 target.Switch();
+                switchMesh.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            }
+        }
+        public void SwitchRight() {
+            if(pos != SwitchPosition.Right) {
+                pos = SwitchPosition.Right;
+                Debug.Log("Switching to " + pos);
+                target.Switch();
+                switchMesh.localRotation = Quaternion.Euler(new Vector3(0, 0, -90));
             }
         }
     }

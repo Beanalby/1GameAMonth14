@@ -20,7 +20,6 @@ namespace onegam_1407 {
             MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
             meshObj = mr.transform;
             mat = mr.material;
-            Debug.Log("+++ " + name + " got mat [" + mat + "]");
 
             enabledPos = meshObj.transform.position;
             disabledPos = enabledPos;
@@ -28,13 +27,11 @@ namespace onegam_1407 {
         }
 
         public void EnableRail() {
-            Debug.Log("+++ mat on " + name + "=" + mat);
             mat.color = enabledColor;
             box.enabled = true;
             meshObj.position = enabledPos;
         }
         public void DisableRail() {
-            Debug.Log("Disabling Rail");
             box.enabled = false;
             mat.color = disabledColor;
             meshObj.position = disabledPos;
