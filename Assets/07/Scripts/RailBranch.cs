@@ -12,17 +12,17 @@ namespace onegam_1407 {
 
         public void Start() {
             if(ActiveAtStart == BranchChoice.Left) {
-                railLeft.gameObject.SetActive(true);
-                railRight.gameObject.SetActive(false);
+                railLeft.EnableRail();
+                railRight.DisableRail();
             } else {
-                railLeft.gameObject.SetActive(false);
-                railRight.gameObject.SetActive(true);
+                railLeft.DisableRail();
+                railRight.EnableRail();
             }
         }
 
         public void Switch() {
-            railLeft.gameObject.SetActive(!railLeft.gameObject.activeSelf);
-            railRight.gameObject.SetActive(!railRight.gameObject.activeSelf);
+            railLeft.ToggleRail();
+            railRight.ToggleRail();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace onegam_1407 {
         private Vector3 EndPos;
 
         public void Awake() {
+            base.baseAwake();
             BoxCollider box = GetComponent<BoxCollider>();
             box.size = new Vector3(1, 1, length);
             box.center = new Vector3(0, .5f, length / 2);

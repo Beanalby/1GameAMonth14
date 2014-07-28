@@ -11,7 +11,10 @@ namespace onegam_1407 {
         // the radius 2 = 2*pi*r / 4 = (2*pi*2) / 4 = pi
         private float curveDistance = Mathf.PI;
 
-        void Start() {
+        public void Awake() {
+            base.baseAwake();
+        }
+        public void Start() {
             if(!curveRight) {
                 curveSign = -1f;
                 // flip the mesh's scale, and move its position accordingly
