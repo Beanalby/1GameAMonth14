@@ -12,6 +12,8 @@ namespace onegam_1407 {
             BoxCollider box = GetComponent<BoxCollider>();
             box.size = new Vector3(1, 1, length);
             box.center = new Vector3(0, .5f, length / 2);
+            GameObject meshObj = GetComponentInChildren<MeshRenderer>().gameObject;
+            meshObj.transform.localScale = new Vector3(1, length, 1);
         }
         public void Start() {
             EndPos = new Vector3(0, 0, length);

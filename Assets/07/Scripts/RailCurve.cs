@@ -11,19 +11,17 @@ namespace onegam_1407 {
         // the radius 2 = 2*pi*r / 4 = (2*pi*2) / 4 = pi
         private float curveDistance = Mathf.PI;
 
-        // Use this for initialization
         void Start() {
             if(!curveRight) {
                 curveSign = -1f;
+                // flip the mesh's scale, and move its position accordingly
+                GameObject meshObj = GetComponentInChildren<MeshRenderer>().gameObject;
+                meshObj.transform.localScale = new Vector3(-1, 1, 1);
+                Vector3 pos = meshObj.transform.localPosition;
+                pos.x = -pos.x;
+                meshObj.transform.localPosition = pos;
             }
-            //for(float i = 0; i <= 1; i += .25f) {
-            //    Debug.Log(i + "=" + GetPosition(i * curveDistance));
-            //}
-            //Debug.Log("last=" + GetPosition(curveDistance));
-        }
-
-        // Update is called once per frame
-        void Update() {
+            
         }
 
         public override Vector3 GetPosition(float position) {
