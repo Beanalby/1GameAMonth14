@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace onegam_1407 {
     public class CargoPickup : MonoBehaviour {
         public Transform SpawnPoint;
-        public Cargo[] cargoPrefabs;
+        public Cargo cargoPrefab;
         private int numCities;
+        City city;
 
         private float spawnDelay = 4f;
         private float spawnRange = 1f;
@@ -13,12 +15,14 @@ namespace onegam_1407 {
 
         public void Start() {
             numCities = GameObject.FindObjectsOfType<City>().Length;
-            StartCoroutine(Spawn());
+            city = transform.parent.GetComponent<City>();
+            SpawnCargo();
         }
 
-        private IEnumerator Spawn() {
+        private IEnumerator SpawnAfterDelay() {
             yield return new WaitForSeconds(
                 spawnDelay + Random.Range(-spawnRange, spawnRange));
+
             SpawnCargo();
 
         }
@@ -27,7 +31,7 @@ namespace onegam_1407 {
             if(cargo != null) {
                 Cargo tmp = cargo;
                 cargo = null;
-                StartCoroutine(Spawn());
+                StartCoroutine(SpawnAfterDelay());
                 return tmp;
             } else {
                 return null;
@@ -38,10 +42,15 @@ namespace onegam_1407 {
         }
 
         void SpawnCargo() {
-            int randCity = Random.Range(0, numCities);
-            cargo = (Instantiate(cargoPrefabs[randCity].gameObject,
+            CityName randCity;
+            do {
+                randCity = (CityName)City.CityNames.GetValue(Random.Range(0, numCities));
+            } while(randCity == city.city);
+
+            cargo = (Instantiate(cargoPrefab.gameObject,
                 SpawnPoint.position, Quaternion.identity) as GameObject)
                     .GetComponent<Cargo>();
+            cargo.city = randCity;
         }
     }
 }
