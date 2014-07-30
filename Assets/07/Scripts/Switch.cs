@@ -9,6 +9,11 @@ namespace onegam_1407 {
         public RailBranch target;
         private SwitchPosition pos;
         public Transform switchMesh;
+        public MeshRenderer sign;
+
+        public void Start() {
+            sign.material.SetTexture("_MainTex", target.GetSignTexture());
+        }
 
         public void SwitchLeft() {
             if(pos != SwitchPosition.Left) {

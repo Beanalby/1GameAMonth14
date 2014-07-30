@@ -18,6 +18,7 @@ namespace onegam_1407 {
         public void Start() {
             sphere = GetComponent<SphereCollider>();
             lr = GetComponent<LineRenderer>();
+            lr.useWorldSpace = true;
         }
         public void Update() {
             //if(GameDriver.Instance.IsRunning) {
