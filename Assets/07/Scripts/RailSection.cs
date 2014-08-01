@@ -29,12 +29,12 @@ namespace onegam_1407 {
         public void EnableRail() {
             mat.color = enabledColor;
             box.enabled = true;
-            meshObj.position = enabledPos;
+            //meshObj.position = enabledPos;
         }
         public void DisableRail() {
             box.enabled = false;
             mat.color = disabledColor;
-            meshObj.position = disabledPos;
+            //meshObj.position = disabledPos;
         }
 
         public void ToggleRail() {

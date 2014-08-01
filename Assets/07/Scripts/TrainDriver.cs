@@ -7,6 +7,8 @@ namespace onegam_1407 {
     [RequireComponent(typeof(SphereCollider))]
     public class TrainDriver : TrainCommon {
 
+        public float locomotiveSpeed = 3.5f;
+
         private int groundMask;
         private SphereCollider sphere;
 
@@ -14,6 +16,7 @@ namespace onegam_1407 {
             groundMask = 1 << LayerMask.NameToLayer("Ground");
             sphere = GetComponent<SphereCollider>();
             rail = GetNextSection();
+            base.SetSpeed(locomotiveSpeed);
         }
 
         /// <summary>

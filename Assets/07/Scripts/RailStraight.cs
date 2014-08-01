@@ -6,13 +6,17 @@ namespace onegam_1407 {
     public class RailStraight : RailSection {
 
         public float length = 1f;
+        public bool expandCollider = true;
+
         private Vector3 EndPos;
 
         public void Awake() {
             base.baseAwake();
-            BoxCollider box = GetComponent<BoxCollider>();
-            box.size = new Vector3(1, 1, length);
-            box.center = new Vector3(0, .5f, length / 2);
+            if(expandCollider) {
+                BoxCollider box = GetComponent<BoxCollider>();
+                box.size = new Vector3(1, 1, length);
+                box.center = new Vector3(0, .5f, length / 2);
+            }
             GameObject meshObj = GetComponentInChildren<MeshRenderer>().gameObject;
             meshObj.transform.localScale = new Vector3(1, length, 1);
         }

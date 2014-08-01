@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace onegam_1407 {
     public abstract class TrainCommon : MonoBehaviour {
 
-        private float speed = 3.5f;
+        private float speed;
         public TrainCommon nextCar = null;
 
         protected RailSection rail;
@@ -46,6 +46,13 @@ namespace onegam_1407 {
         protected void PropagateNextSection(RailSection next) {
             if(nextCar != null) {
                 nextCar.SetNextSection(next);
+            }
+        }
+
+        public void SetSpeed(float newSpeed) {
+            speed = newSpeed;
+            if(nextCar != null) {
+                nextCar.SetSpeed(newSpeed);
             }
         }
     }
