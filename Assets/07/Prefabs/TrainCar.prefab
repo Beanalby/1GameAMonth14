@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cargoPoint: {fileID: 400004}
+  pickupSound: {fileID: 8300000, guid: 7cf1cc30e4f9fd748abf51f192408a42, type: 3}
+  dropoffSound: {fileID: 8300000, guid: 53e32c728f2fb964abaec4936bab4730, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

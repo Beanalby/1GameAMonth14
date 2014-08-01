@@ -11,7 +11,6 @@ namespace onegam_1407 {
 
         private int groundMask;
         private SphereCollider sphere;
-
         public void Start() {
             groundMask = 1 << LayerMask.NameToLayer("Ground");
             sphere = GetComponent<SphereCollider>();

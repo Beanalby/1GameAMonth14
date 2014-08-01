@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 2
+  expandCollider: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,6 +340,7 @@ MonoBehaviour:
   railRight: {fileID: 11400004}
   sign: {fileID: 2300004}
   ActiveAtStart: 0
+  switchSound: {fileID: 8300000, guid: 8664b97efa1cc10418214f870af06f8b, type: 3}
   signs:
   - {fileID: 2800000, guid: d0cc5476d78a5b145bde0c99f95e7f61, type: 3}
   - {fileID: 2800000, guid: dd8d82e98e60a5144acf1a7916a98065, type: 3}

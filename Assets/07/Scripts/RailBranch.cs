@@ -12,6 +12,7 @@ namespace onegam_1407 {
         public RailSection railRight;
         public MeshRenderer sign;
         public BranchChoice ActiveAtStart = BranchChoice.Left;
+        public AudioClip switchSound;
         public Texture[] signs;
 
         public void Start() {
@@ -31,6 +32,7 @@ namespace onegam_1407 {
         public void Switch() {
             railLeft.ToggleRail();
             railRight.ToggleRail();
+            AudioSource.PlayClipAtPoint(switchSound, Camera.main.transform.position);
         }
     }
 }

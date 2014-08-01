@@ -5,6 +5,8 @@ namespace onegam_1407 {
     public class TrainContainer : MonoBehaviour {
 
         public Transform cargoPoint;
+        public AudioClip pickupSound, dropoffSound;
+
         private Cargo cargo = null;
         private int layerPickup, layerCity;
 
@@ -32,6 +34,7 @@ namespace onegam_1407 {
             cargo.transform.parent = cargoPoint;
             cargo.transform.localPosition = Vector3.zero;
             GameDriver.Instance.CargoPicked(cargo);
+            AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position);
         }
         private void TryDropoff(City city) {
             if(cargo == null  || cargo.city != city.city) {
@@ -40,6 +43,7 @@ namespace onegam_1407 {
             GameDriver.Instance.CargoDelivered(cargo);
             Destroy(cargo.gameObject);
             cargo = null;
+            AudioSource.PlayClipAtPoint(dropoffSound, Camera.main.transform.position);
         }
     }
 }

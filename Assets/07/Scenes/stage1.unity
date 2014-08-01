@@ -1084,70 +1084,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 7362592}
   m_GameObject: {fileID: 246663514}
   m_Mesh: {fileID: 4300000, guid: 361001c0d6efe904399ca3f85a5ca423, type: 3}
---- !u!1001 &264200425
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1525006442}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -.707106888
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: .707106769
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_Name
-      value: locomotiveMesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
-    - target: {fileID: 2300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9ee2c3e14a632574091bbec0934f0a15, type: 2}
-    - target: {fileID: 2300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
-    - target: {fileID: 2300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-      propertyPath: m_Materials.Array.data[3]
-      value: 
-      objectReference: {fileID: 2100000, guid: de3ee82405c625040960a66a803e07eb, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-  m_RootGameObject: {fileID: 1615623420}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &271085930
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,6 +3283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cargoPoint: {fileID: 1976220810}
+  pickupSound: {fileID: 8300000, guid: 7cf1cc30e4f9fd748abf51f192408a42, type: 3}
+  dropoffSound: {fileID: 8300000, guid: 53e32c728f2fb964abaec4936bab4730, type: 3}
 --- !u!65 &986776253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3737,6 +3675,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 437775233}
   m_RootOrder: 1
+--- !u!1001 &1135457010
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 466353322}
+    m_Modifications:
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: nextCar
+      value: 
+      objectReference: {fileID: 986776250}
+    - target: {fileID: 11400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+      propertyPath: locomotiveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+  m_RootGameObject: {fileID: 1525006441}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &1136453359
 Prefab:
   m_ObjectHideFlags: 0
@@ -4988,12 +4978,14 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1135457010}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1525006442}
-  - 135: {fileID: 1525006443}
-  - 114: {fileID: 1525006444}
+  - 135: {fileID: 1525006446}
+  - 114: {fileID: 1525006445}
+  - 82: {fileID: 1525006444}
+  - 114: {fileID: 1525006443}
   m_Layer: 0
   m_Name: Locomotive
   m_TagString: Untagged
@@ -5005,32 +4997,92 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1135457010}
   m_GameObject: {fileID: 1525006441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1615623421}
+  - {fileID: 1893919444}
   m_Father: {fileID: 466353322}
   m_RootOrder: 0
---- !u!135 &1525006443
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1525006441}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .25
-  m_Center: {x: 0, y: .25, z: .600000024}
---- !u!114 &1525006444
+--- !u!114 &1525006443
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400000, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1525006441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062555b1f0b22f44bbab56cae38f304b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &1525006444
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1525006441}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 57d8f3fef6aee4140abda5358265700a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &1525006445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
   m_GameObject: {fileID: 1525006441}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -5038,7 +5090,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextCar: {fileID: 986776250}
-  locomotiveSpeed: 3.5
+  locomotiveSpeed: 4
+--- !u!135 &1525006446
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13500000, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1525006441}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .25
+  m_Center: {x: 0, y: .25, z: .600000024}
 --- !u!1 &1572787174
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,67 +5161,6 @@ Transform:
   - {fileID: 699938593}
   m_Father: {fileID: 330110902}
   m_RootOrder: 0
---- !u!1 &1615623420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-  m_PrefabInternal: {fileID: 264200425}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1615623421}
-  - 33: {fileID: 1615623423}
-  - 23: {fileID: 1615623422}
-  m_Layer: 0
-  m_Name: locomotiveMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1615623421
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
-  m_PrefabInternal: {fileID: 264200425}
-  m_GameObject: {fileID: 1615623420}
-  m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1525006442}
-  m_RootOrder: 0
---- !u!23 &1615623422
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02,
-    type: 3}
-  m_PrefabInternal: {fileID: 264200425}
-  m_GameObject: {fileID: 1615623420}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 9ee2c3e14a632574091bbec0934f0a15, type: 2}
-  - {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
-  - {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
-  - {fileID: 2100000, guid: de3ee82405c625040960a66a803e07eb, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &1615623423
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02,
-    type: 3}
-  m_PrefabInternal: {fileID: 264200425}
-  m_GameObject: {fileID: 1615623420}
-  m_Mesh: {fileID: 4300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
 --- !u!1 &1627570533
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,6 +5209,7 @@ MonoBehaviour:
   railRight: {fileID: 306293222}
   sign: {fileID: 1249779351}
   ActiveAtStart: 0
+  switchSound: {fileID: 8300000, guid: 8664b97efa1cc10418214f870af06f8b, type: 3}
   signs:
   - {fileID: 2800000, guid: d0cc5476d78a5b145bde0c99f95e7f61, type: 3}
   - {fileID: 2800000, guid: dd8d82e98e60a5144acf1a7916a98065, type: 3}
@@ -6029,6 +6034,67 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: .5, z: .5}
+--- !u!1 &1893919443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1893919444}
+  - 33: {fileID: 1893919446}
+  - 23: {fileID: 1893919445}
+  m_Layer: 0
+  m_Name: locomotiveMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1893919444
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: a53e0a070e69993408fc7d2f883cd046, type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1893919443}
+  m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1525006442}
+  m_RootOrder: 0
+--- !u!23 &1893919445
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1893919443}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 9ee2c3e14a632574091bbec0934f0a15, type: 2}
+  - {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
+  - {fileID: 2100000, guid: d384e4deaf7e8e142818a9c6f362124a, type: 2}
+  - {fileID: 2100000, guid: de3ee82405c625040960a66a803e07eb, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &1893919446
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: a53e0a070e69993408fc7d2f883cd046,
+    type: 2}
+  m_PrefabInternal: {fileID: 1135457010}
+  m_GameObject: {fileID: 1893919443}
+  m_Mesh: {fileID: 4300000, guid: 47dacbcfe4f1fd74a9d6dc722c0e4e02, type: 3}
 --- !u!1 &1907004889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6062,6 +6128,7 @@ MonoBehaviour:
   railRight: {fileID: 2123876612}
   sign: {fileID: 308214402}
   ActiveAtStart: 0
+  switchSound: {fileID: 8300000, guid: 8664b97efa1cc10418214f870af06f8b, type: 3}
   signs:
   - {fileID: 2800000, guid: d0cc5476d78a5b145bde0c99f95e7f61, type: 3}
   - {fileID: 2800000, guid: dd8d82e98e60a5144acf1a7916a98065, type: 3}

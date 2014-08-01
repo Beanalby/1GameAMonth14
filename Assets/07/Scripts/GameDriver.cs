@@ -12,7 +12,7 @@ namespace onegam_1407 {
 
         public GUISkin skin;
         public int activePickups;
-        public float cargoValue = 100;
+        public int cargoValue = 100;
         public float timeTotal = 45f;
 
         private float timeStart=-1;
@@ -114,7 +114,7 @@ namespace onegam_1407 {
         }
 
         public void CargoDelivered(Cargo cargo) {
-            score += 100;
+            score += cargoValue;
         }
 
         public void OnGUI() {
