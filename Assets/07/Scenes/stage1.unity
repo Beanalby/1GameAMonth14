@@ -286,6 +286,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
+      propertyPath: curveRight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
   m_RootGameObject: {fileID: 827035946}
@@ -443,7 +447,7 @@ GameObject:
   - 65: {fileID: 78831688}
   - 114: {fileID: 78831687}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -475,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 1
+  expandCollider: 1
 --- !u!65 &78831688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -821,7 +826,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 207275673}
   m_LocalRotation: {x: .499999374, y: 0, z: 0, w: .866025805}
-  m_LocalPosition: {x: 0, y: 23.1097412, z: -13.7236423}
+  m_LocalPosition: {x: 1, y: 23.1097412, z: -13.7236423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 569928049}
@@ -1165,8 +1170,8 @@ Transform:
   m_PrefabInternal: {fileID: 298353867}
   m_GameObject: {fileID: 271085930}
   m_LocalRotation: {x: .500000596, y: -.499999434, z: .499999493, w: .500000596}
-  m_LocalPosition: {x: .75, y: .0500000007, z: 0}
-  m_LocalScale: {x: 1.5, y: .75, z: 1}
+  m_LocalPosition: {x: .857657909, y: .0500000119, z: .390355796}
+  m_LocalScale: {x: 2.5, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 437775233}
   m_RootOrder: 0
@@ -1270,6 +1275,18 @@ Prefab:
       propertyPath: city
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .857657909
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .0500000119
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .390355796
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
   m_RootGameObject: {fileID: 437775232}
@@ -1288,7 +1305,7 @@ GameObject:
   m_Layer: 10
   m_Name: RailCurveBranch
   m_TagString: Untagged
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1299,7 +1316,7 @@ Transform:
   m_PrefabInternal: {fileID: 553805918}
   m_GameObject: {fileID: 306293220}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1429004507}
@@ -1572,7 +1589,7 @@ GameObject:
   - 65: {fileID: 399716525}
   - 114: {fileID: 399716524}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1604,6 +1621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &399716525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1659,6 +1677,18 @@ Prefab:
     - target: {fileID: 11400000, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
       propertyPath: city
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .887717724
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .0500000194
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .390355706
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
@@ -1721,10 +1751,16 @@ MonoBehaviour:
   - {r: .270588249, g: .674509823, b: .717647076, a: 0}
   - {r: .992156863, g: .933333337, b: .811764717, a: 0}
   - {r: .921568632, g: .80392158, b: .160784319, a: 0}
+  - {r: .97647059, g: .97647059, b: .97647059, a: 0}
+  - {r: .921568632, g: .294117659, b: .141176477, a: 0}
+  - {r: .847058833, g: .329411775, b: .250980407, a: 0}
   cityColorB:
   - {r: .886274517, g: .886274517, b: .886274517, a: 0}
   - {r: .905882359, g: .650980413, b: .239215687, a: 0}
   - {r: .200000003, g: .396078438, b: .447058827, a: 0}
+  - {r: .776470602, g: .219607845, b: .141176477, a: 0}
+  - {r: .411764711, g: .701960802, b: .650980413, a: 0}
+  - {r: .866666675, g: .858823538, b: .639215708, a: 0}
 --- !u!65 &437775235
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1749,7 +1785,7 @@ GameObject:
   - 65: {fileID: 457922094}
   - 114: {fileID: 457922093}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1803,7 +1839,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: ce07cf5a69258b34a843c28f0cc10797, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.00000048
+      value: 5.00000095
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ce07cf5a69258b34a843c28f0cc10797, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1932,7 +1968,7 @@ GameObject:
   m_Layer: 15
   m_Name: Pickup
   m_TagString: Untagged
-  m_Icon: {fileID: 120240766, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1987,7 +2023,7 @@ GameObject:
   - 65: {fileID: 522061101}
   - 114: {fileID: 522061100}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2041,7 +2077,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2082,6 +2118,22 @@ Prefab:
     - target: {fileID: 11400002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: branchName
       value: B
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: curveRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
@@ -2194,6 +2246,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
+      propertyPath: curveRight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
   m_RootGameObject: {fileID: 457922092}
@@ -2236,6 +2292,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
+      propertyPath: curveRight
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2325,7 +2385,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: c2f211d410e0bbd49995b4c14012e266, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: c2f211d410e0bbd49995b4c14012e266, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2670,7 +2730,7 @@ GameObject:
   - 65: {fileID: 827035949}
   - 114: {fileID: 827035948}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2726,7 +2786,7 @@ GameObject:
   - 65: {fileID: 841017429}
   - 114: {fileID: 841017428}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2895,7 +2955,7 @@ GameObject:
   - 65: {fileID: 885087027}
   - 114: {fileID: 885087026}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2991,7 +3051,7 @@ Transform:
   m_PrefabInternal: {fileID: 1517606256}
   m_GameObject: {fileID: 907172779}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: .707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: 2, y: .0199999996, z: 0}
+  m_LocalPosition: {x: 2, y: .0199999996, z: 4.76837158e-07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2123876614}
@@ -3109,7 +3169,7 @@ GameObject:
   m_Layer: 10
   m_Name: RailStraightBranch
   m_TagString: Untagged
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3126,6 +3186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 2
+  expandCollider: 1
 --- !u!65 &966884881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3146,7 +3207,7 @@ Transform:
   m_PrefabInternal: {fileID: 1517606256}
   m_GameObject: {fileID: 966884879}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1343696477}
@@ -3165,7 +3226,7 @@ GameObject:
   m_Layer: 15
   m_Name: Pickup
   m_TagString: Untagged
-  m_Icon: {fileID: 120240766, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3492,7 +3553,7 @@ GameObject:
   - 65: {fileID: 1119782039}
   - 114: {fileID: 1119782038}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3511,6 +3572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &1119782039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3561,7 +3623,7 @@ Transform:
   m_PrefabInternal: {fileID: 692165942}
   m_GameObject: {fileID: 1133998195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.25, z: -1.8970381}
+  m_LocalPosition: {x: -4, y: -.25, z: -1.8970381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783629283}
@@ -4106,10 +4168,16 @@ MonoBehaviour:
   - {r: .270588249, g: .674509823, b: .717647076, a: 0}
   - {r: .992156863, g: .933333337, b: .811764717, a: 0}
   - {r: .921568632, g: .80392158, b: .160784319, a: 0}
+  - {r: .97647059, g: .97647059, b: .97647059, a: 0}
+  - {r: .921568632, g: .294117659, b: .141176477, a: 0}
+  - {r: .847058833, g: .329411775, b: .250980407, a: 0}
   cityColorB:
   - {r: .886274517, g: .886274517, b: .886274517, a: 0}
   - {r: .905882359, g: .650980413, b: .239215687, a: 0}
   - {r: .200000003, g: .396078438, b: .447058827, a: 0}
+  - {r: .776470602, g: .219607845, b: .141176477, a: 0}
+  - {r: .411764711, g: .701960802, b: .650980413, a: 0}
+  - {r: .866666675, g: .858823538, b: .639215708, a: 0}
 --- !u!65 &1279500684
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4305,6 +4373,18 @@ Prefab:
     - target: {fileID: 400000, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .887079537
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .0500000194
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .390355706
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28f574d43a7ae664c9035fb0861ec327, type: 2}
@@ -4536,7 +4616,7 @@ Transform:
   m_PrefabInternal: {fileID: 553805918}
   m_GameObject: {fileID: 1429004506}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: .707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: 2, y: .0199999996, z: 0}
+  m_LocalPosition: {x: 2, y: .0199999996, z: 4.76837158e-07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 306293221}
@@ -4792,7 +4872,7 @@ GameObject:
   - 65: {fileID: 1506467136}
   - 114: {fileID: 1506467135}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4811,6 +4891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &1506467136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4846,7 +4927,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4879,6 +4960,22 @@ Prefab:
     - target: {fileID: 100002, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
       propertyPath: m_Name
       value: RailBranch1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: curveRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c5979f6ebce40849b54aaafc4c024e1, type: 2}
@@ -4939,6 +5036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextCar: {fileID: 986776250}
+  locomotiveSpeed: 3.5
 --- !u!1 &1572787174
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,7 +5048,7 @@ GameObject:
   - 65: {fileID: 1572787176}
   - 114: {fileID: 1572787175}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4969,6 +5067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &1572787176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5068,7 +5167,7 @@ GameObject:
   m_Layer: 0
   m_Name: RailBranch2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5079,7 +5178,7 @@ Transform:
   m_PrefabInternal: {fileID: 553805918}
   m_GameObject: {fileID: 1627570533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalPosition: {x: 6, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1742611130}
@@ -5122,7 +5221,7 @@ GameObject:
   - 65: {fileID: 1628799309}
   - 114: {fileID: 1628799308}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5135,7 +5234,7 @@ Transform:
   m_PrefabInternal: {fileID: 458170711}
   m_GameObject: {fileID: 1628799306}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 5.00000048, y: 0, z: 4.99999952}
+  m_LocalPosition: {x: 5.00000095, y: 0, z: 4.99999952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 882325597}
@@ -5154,6 +5253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 1
+  expandCollider: 1
 --- !u!65 &1628799309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5220,8 +5320,8 @@ Transform:
   m_PrefabInternal: {fileID: 1331281369}
   m_GameObject: {fileID: 1636871198}
   m_LocalRotation: {x: .500000596, y: -.499999434, z: .499999493, w: .500000596}
-  m_LocalPosition: {x: .75, y: .0500000007, z: 0}
-  m_LocalScale: {x: 1.5, y: .75, z: 1}
+  m_LocalPosition: {x: .887079537, y: .0500000194, z: .390355706}
+  m_LocalScale: {x: 2.5, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 1872443488}
   m_RootOrder: 0
@@ -5236,7 +5336,7 @@ GameObject:
   - 65: {fileID: 1643566220}
   - 114: {fileID: 1643566219}
   m_Layer: 10
-  m_Name: RailCurve
+  m_Name: Curve
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5462,7 +5562,7 @@ GameObject:
   m_Layer: 10
   m_Name: RailStraightBranch
   m_TagString: Untagged
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5473,7 +5573,7 @@ Transform:
   m_PrefabInternal: {fileID: 553805918}
   m_GameObject: {fileID: 1742611129}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1965085188}
@@ -5492,6 +5592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 2
+  expandCollider: 1
 --- !u!65 &1742611132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5516,7 +5617,7 @@ GameObject:
   - 65: {fileID: 1746005651}
   - 114: {fileID: 1746005650}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5548,6 +5649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 1
+  expandCollider: 1
 --- !u!65 &1746005651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5728,6 +5830,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
+      propertyPath: curveRight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
   m_RootGameObject: {fileID: 841017427}
@@ -5774,6 +5880,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7e5f4df816a519648b8dc93e8eff2ea7, type: 2}
+      propertyPath: curveRight
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5850,10 +5960,16 @@ MonoBehaviour:
   - {r: .270588249, g: .674509823, b: .717647076, a: 0}
   - {r: .992156863, g: .933333337, b: .811764717, a: 0}
   - {r: .921568632, g: .80392158, b: .160784319, a: 0}
+  - {r: .97647059, g: .97647059, b: .97647059, a: 0}
+  - {r: .921568632, g: .294117659, b: .141176477, a: 0}
+  - {r: .847058833, g: .329411775, b: .250980407, a: 0}
   cityColorB:
   - {r: .886274517, g: .886274517, b: .886274517, a: 0}
   - {r: .905882359, g: .650980413, b: .239215687, a: 0}
   - {r: .200000003, g: .396078438, b: .447058827, a: 0}
+  - {r: .776470602, g: .219607845, b: .141176477, a: 0}
+  - {r: .411764711, g: .701960802, b: .650980413, a: 0}
+  - {r: .866666675, g: .858823538, b: .639215708, a: 0}
 --- !u!1 &1883298707
 GameObject:
   m_ObjectHideFlags: 0
@@ -5865,7 +5981,7 @@ GameObject:
   - 65: {fileID: 1883298710}
   - 114: {fileID: 1883298709}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5897,6 +6013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 1
+  expandCollider: 1
 --- !u!65 &1883298710
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5922,7 +6039,7 @@ GameObject:
   m_Layer: 0
   m_Name: RailBranch1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5957,7 +6074,7 @@ Transform:
   m_PrefabInternal: {fileID: 1517606256}
   m_GameObject: {fileID: 1907004889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 5}
+  m_LocalPosition: {x: 3, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 966884882}
@@ -5976,7 +6093,7 @@ GameObject:
   - 65: {fileID: 1915820170}
   - 114: {fileID: 1915820169}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6008,6 +6125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &1915820170
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6103,8 +6221,8 @@ Transform:
   m_PrefabInternal: {fileID: 434633600}
   m_GameObject: {fileID: 1958969121}
   m_LocalRotation: {x: .500000596, y: -.499999434, z: .499999493, w: .500000596}
-  m_LocalPosition: {x: .75, y: .0500000007, z: 0}
-  m_LocalScale: {x: 1.5, y: .75, z: 1}
+  m_LocalPosition: {x: .887717724, y: .0500000194, z: .390355706}
+  m_LocalScale: {x: 2.5, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 1279500685}
   m_RootOrder: 0
@@ -6312,7 +6430,7 @@ GameObject:
   m_Layer: 15
   m_Name: Pickup
   m_TagString: Untagged
-  m_Icon: {fileID: 120240766, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6419,7 +6537,7 @@ GameObject:
   - 65: {fileID: 2076787656}
   - 114: {fileID: 2076787655}
   m_Layer: 10
-  m_Name: RailStraight
+  m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6438,6 +6556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 3
+  expandCollider: 1
 --- !u!65 &2076787656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6565,7 +6684,7 @@ GameObject:
   m_Layer: 10
   m_Name: RailCurveBranch
   m_TagString: Untagged
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6602,7 +6721,7 @@ Transform:
   m_PrefabInternal: {fileID: 1517606256}
   m_GameObject: {fileID: 2123876611}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 907172780}
