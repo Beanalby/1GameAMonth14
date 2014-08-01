@@ -48,6 +48,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/06/Scenes/game.unity
   - enabled: 1
+    path: Assets/07/Scenes/title.unity
+  - enabled: 1
+    path: Assets/07/Scenes/levelChooser.unity
+  - enabled: 1
     path: Assets/07/Scenes/stage1.unity
   - enabled: 1
     path: Assets/07/Scenes/stage2.unity

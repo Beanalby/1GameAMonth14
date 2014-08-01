@@ -21,10 +21,10 @@ namespace onegam_1407 {
             lr.useWorldSpace = true;
         }
         public void Update() {
-            //if(GameDriver.Instance.IsRunning) {
+            if(GameDriver.Instance.CanControl) {
                 HandleSwitch();
                 HandleMove();
-            //}
+            }
         }
 
         private void HandleSwitch() {

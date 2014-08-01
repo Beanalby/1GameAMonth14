@@ -1008,6 +1008,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 876744fb17f9caf4986b3eaf7fcde798, type: 2}
   activePickups: 2
+  cargoValue: 100
+  timeTotal: 45
 --- !u!1 &246663514
 GameObject:
   m_ObjectHideFlags: 0
