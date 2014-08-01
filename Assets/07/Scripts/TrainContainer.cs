@@ -26,17 +26,17 @@ namespace onegam_1407 {
                 return; // we already have cargo, don't pickup
             }
             cargo = pickup.GetCargo();
-            Debug.Log("+++ " + name + " got " + cargo + " from pickup");
-            if(cargo != null) {
-                cargo.transform.parent = cargoPoint;
-                cargo.transform.localPosition = Vector3.zero;
+            if(cargo == null) {
+                return; // no cargo to pickup
             }
+            cargo.transform.parent = cargoPoint;
+            cargo.transform.localPosition = Vector3.zero;
+            GameDriver.Instance.CargoPicked(cargo);
         }
         private void TryDropoff(City city) {
             if(cargo == null  || cargo.city != city.city) {
                 return;
             }
-            Debug.Log("+++ " + name + " dropping off at " + city.city);
             GameDriver.Instance.CargoDelivered(cargo);
             Destroy(cargo.gameObject);
             cargo = null;

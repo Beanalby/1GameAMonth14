@@ -12,36 +12,42 @@ namespace onegam_1407 {
         private float spawnDelay = 4f;
         private float spawnRange = 1f;
         private Cargo cargo;
+        private bool isSpawning = false;
 
-        public void Start() {
+        public void Awake() {
             numCities = GameObject.FindObjectsOfType<City>().Length;
             city = transform.parent.GetComponent<City>();
-            SpawnCargo();
         }
 
-        private IEnumerator SpawnAfterDelay() {
+        public void SpawnAfterDelay() {
+            StartCoroutine(_SpawnAfterDelay());
+        }
+
+        private IEnumerator _SpawnAfterDelay() {
+            isSpawning = true;
             yield return new WaitForSeconds(
                 spawnDelay + Random.Range(-spawnRange, spawnRange));
-
             SpawnCargo();
-
         }
 
         public Cargo GetCargo() {
             if(cargo != null) {
                 Cargo tmp = cargo;
                 cargo = null;
-                StartCoroutine(SpawnAfterDelay());
                 return tmp;
             } else {
                 return null;
             }
         }
+        public bool CanSpawn() {
+            return !HasCargo() && !isSpawning;
+        }
         public bool HasCargo() {
             return cargo != null;
         }
 
-        void SpawnCargo() {
+        public void SpawnCargo() {
+            isSpawning = false;
             CityName randCity;
             do {
                 randCity = (CityName)City.CityNames.GetValue(Random.Range(0, numCities));
@@ -51,6 +57,9 @@ namespace onegam_1407 {
                 SpawnPoint.position, Quaternion.identity) as GameObject)
                     .GetComponent<Cargo>();
             cargo.city = randCity;
+        }
+        public override string ToString() {
+            return city + " pickup" + (HasCargo() ? " (Cargo)" : "(NoCargo)");
         }
     }
 }

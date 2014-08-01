@@ -22,5 +22,8 @@ namespace onegam_1407 {
             cityRend.materials[1].color = cityColorB[(int)city];
         }
 
+        public override String ToString() {
+            return city.ToString();
+        }
     }
 }

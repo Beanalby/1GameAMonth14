@@ -10,6 +10,8 @@ namespace onegam_1407 {
         }
 
         public GUISkin skin;
+        public int activePickups;
+
         private float timeTotal=30f, timeStart=-1;
         public float TimeLeft {
             get {
@@ -21,8 +23,8 @@ namespace onegam_1407 {
             }
         }
         private GUIStyle scoreStyle, timeStyle;
-
         private int score;
+        private CargoPickup[] pickups;
 
         private bool _isRunning;
         public bool IsRunning {
@@ -39,10 +41,15 @@ namespace onegam_1407 {
         }
 
         public void Start() {
+            pickups = FindObjectsOfType<CargoPickup>();
             scoreStyle = new GUIStyle(skin.label);
             scoreStyle.alignment = TextAnchor.UpperLeft;
             timeStyle = new GUIStyle(skin.label);
             timeStyle.alignment = TextAnchor.UpperRight;
+            while (activePickups != 0) {
+                SpawnRandomCargo(true);
+                activePickups--;
+            }
         }
 
         public void Update() {
@@ -61,6 +68,24 @@ namespace onegam_1407 {
         private void EndGame() {
             _isRunning = false;
         }
+        public void CargoPicked(Cargo cargo) {
+            SpawnRandomCargo(false);
+        }
+
+        private void SpawnRandomCargo(bool now) {
+            while (true) {
+                CargoPickup p = pickups[Random.Range(0, pickups.Length)];
+                if (p.CanSpawn()) {
+                    if (now) {
+                        p.SpawnCargo();
+                    } else {
+                        p.SpawnAfterDelay();
+                    }
+                    return;
+                }
+            }
+        }
+
         public void CargoDelivered(Cargo cargo) {
             score += 100;
         }
