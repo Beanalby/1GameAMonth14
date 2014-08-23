@@ -5,21 +5,27 @@ namespace onegam_1408 {
     [RequireComponent(typeof(Animator))]
     public class Bat : MonoBehaviour {
 
-        private float attackSpeed = 7f;
+        private float attackSpeed = 10f;
+        private float resetSpeed = 3f;
         private Animator anim;
 
-        private GameObject target;
+        private Vector3 startPos;
+        private GameObject target = null;
+        private GameObject inRange = null;
         private float attackStart = -1f;
+        private bool isResetting = false;
 
         public void Start() {
+            startPos = transform.position;
             anim = GetComponent<Animator>();
         }
 
         public void Update() {
             UpdateAttack();
+            UpdateReset();
         }
 
-        public void UpdateAttack() {
+        private void UpdateAttack() {
             if(attackStart == -1f) {
                 return;
             }
@@ -28,6 +34,23 @@ namespace onegam_1408 {
             dir.Normalize();
             transform.position += dir * attackSpeed * Time.deltaTime;
         }
+        private void UpdateReset() {
+            if(!isResetting) {
+                return;
+            }
+            Vector3 dir = startPos - transform.position;
+            if(dir.magnitude <= resetSpeed * Time.deltaTime) {
+                rigidbody2D.MovePosition(startPos);
+                isResetting = false;
+                // if the target is still in range, hit 'em again
+                if(inRange != null) {
+                    Attack(inRange);
+                }
+            } else {
+                dir.Normalize();
+                rigidbody2D.MovePosition(transform.position + dir * resetSpeed * Time.deltaTime);
+            }
+        }
 
         public void Attack(GameObject newTarget) {
             StartCoroutine(_attack(newTarget));
@@ -35,19 +58,25 @@ namespace onegam_1408 {
 
         private IEnumerator _attack(GameObject newTarget) {
             anim.SetTrigger("attackStart");
-            yield return new WaitForSeconds(.4f);
             target = newTarget;
+            yield return new WaitForSeconds(.4f);
             attackStart = Time.time;
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("+++ " + name + " hit " + other.name);
-            if(other.gameObject.layer == LayerMask.NameToLayer("Attackable")) {
+            if(other.gameObject.layer == LayerMask.NameToLayer("Attackable") && attackStart==-1f) {
                 Attack(other.gameObject);
+                inRange = other.gameObject;
             } else if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
                 attackStart = -1;
+                isResetting = true;
                 anim.SetTrigger("attackStop");
-                rigidbody2D.MovePosition(transform.position + new Vector3(0, 1, 0));
+            }
+        }
+        public void OnTriggerExit2D(Collider2D other) {
+            // if our target's out of range, don't launch another attack
+            if(other.gameObject == inRange) {
+                inRange = null;
             }
         }
     }
