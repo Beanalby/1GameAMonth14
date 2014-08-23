@@ -17,11 +17,6 @@ namespace onegam_1408 {
 
         public void Update() {
             UpdateAttack();
-            if(Input.GetKeyDown(KeyCode.Space)) {
-                GameObject obj = GameObject.Find("Sphere");
-                Debug.Log("+++ attacking " + obj);
-                Attack(obj);
-            }
         }
 
         public void UpdateAttack() {
