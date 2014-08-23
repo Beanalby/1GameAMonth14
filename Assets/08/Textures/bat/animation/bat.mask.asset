@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: bat.mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: root
+    m_Weight: 1
+  - m_Path: root/batWingL
+    m_Weight: 1
+  - m_Path: root/batWingL/slot [batWingL]
+    m_Weight: 1
+  - m_Path: root/batWingR
+    m_Weight: 1
+  - m_Path: root/batWingR/slot [batWingR]
+    m_Weight: 1
+  - m_Path: root/slot [batBody]
+    m_Weight: 1

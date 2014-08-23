@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: diving
+  serializedVersion: 4
+  m_AnimationType: 2
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 0, y: 0, z: .499924451, w: .866069019}
+        inSlope: {x: 0, y: 0, z: 0, w: 0}
+        outSlope: {x: -0, y: -0, z: .735804737, w: -.468669534}
+        tangentMode: 160274380
+      - time: .100000001
+        value: {x: 0, y: 0, z: .573504925, w: .819202065}
+        inSlope: {x: 0, y: 0, z: .735804737, w: -.468669534}
+        outSlope: {x: -0, y: -0, z: -.735804737, w: .468669534}
+        tangentMode: 160306116
+      - time: .200000003
+        value: {x: 0, y: 0, z: .499924451, w: .866069019}
+        inSlope: {x: 0, y: 0, z: -.735804737, w: .468669534}
+        outSlope: {x: 0, y: 0, z: 0, w: 0}
+        tangentMode: 150077476
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: root/batWingR
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 0, y: 0, z: .866025448, w: .49999997}
+        inSlope: {x: 0, y: 0, z: 0, w: 0}
+        outSlope: {x: -0, y: -0, z: -.468733907, w: .735764802}
+        tangentMode: 160274380
+      - time: .100000001
+        value: {x: 0, y: 0, z: .819152057, w: .57357645}
+        inSlope: {x: 0, y: 0, z: -.468733907, w: .735764802}
+        outSlope: {x: -0, y: -0, z: .468733907, w: -.735764802}
+        tangentMode: 160306116
+      - time: .200000003
+        value: {x: 0, y: 0, z: .866025448, w: .49999997}
+        inSlope: {x: 0, y: 0, z: .468733907, w: -.735764802}
+        outSlope: {x: 0, y: 0, z: 0, w: 0}
+        tangentMode: 150077476
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: root/batWingL
+  m_CompressedRotationCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: -1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: root/batWingR
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: -1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: root/batWingL
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 30
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings: []
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: .200000003
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_Events: []
