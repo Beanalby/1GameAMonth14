@@ -42,6 +42,7 @@ namespace onegam_1408 {
 
         private void TurnOn() {
             isCharged = true;
+            Debug.Log("Turning on");
             portal.EnablePortal();
         }
         private void TurnOff() {
@@ -49,9 +50,11 @@ namespace onegam_1408 {
             portal.DisablePortal();
         }
         public void StartCharge() {
+            Debug.Log("Stopping charge!");
             isCharging = true;
         }
         public void StopCharge() {
+            Debug.Log("Stopping charge!");
             isCharging = false;
         }
     }

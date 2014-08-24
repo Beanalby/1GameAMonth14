@@ -10,7 +10,7 @@ namespace onegam_1408 {
         public ParticleSystem healthParticles;
         public Transform playerMesh;
 
-        private float maxHealth = 100;
+        private float maxHealth = 40;
         private float jumpHeight = 3f;
         private float runSpeed = 4f;
         private float groundDamping = 20f; // how fast do we change direction? higher means faster
@@ -24,7 +24,8 @@ namespace onegam_1408 {
 
         private bool isHealing = false;
         private CharacterController2D cc;
-        private bool canControl = true;
+        private bool isDead = false;
+        public bool CanControl { get { return !isDead; } }
 
         public void Awake() {
             if(_instance != null) {
@@ -40,19 +41,18 @@ namespace onegam_1408 {
             cc = GetComponent<CharacterController2D>();
             gravity = rigidbody2D.gravityScale * -9.8f;
             cam = GameObject.FindObjectOfType<StageCamera>();
+            transform.position = GameDriver.Instance.SpawnPoint.transform.position;
         }
 
         public void Update() {
-            if(canControl && Input.GetButtonDown("Jump") && cc.isGrounded) {
+            if(CanControl && Input.GetButtonDown("Jump") && cc.isGrounded) {
                 didJump = true;
             }
             UpdateHaze();
             UpdateHealth();
         }
         public void FixedUpdate() {
-            if(canControl) {
-                UpdateMovement();
-            }
+            UpdateMovement();
         }
 
         private void UpdateHaze() {
@@ -69,13 +69,15 @@ namespace onegam_1408 {
         }
         private void UpdateMovement() {
             Vector3 velocity = cc.velocity;
-            float hSpeed = Input.GetAxis("Horizontal");
+            float hSpeed = 0;
+            if(CanControl) {
+                hSpeed = Input.GetAxis("Horizontal");
+            }
             if((hSpeed > 0 && playerMesh.localScale.x < 0f) || (hSpeed < 0 && playerMesh.localScale.x > 0f)) {
                 playerMesh.localScale = new Vector3(-playerMesh.localScale.x, playerMesh.localScale.y, playerMesh.localScale.z);
             }
             float smoothedMovementFactor = cc.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
             velocity.x = Mathf.Lerp(velocity.x, hSpeed * runSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
-
             if (cc.isGrounded && didJump) {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
                 //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
@@ -83,33 +85,32 @@ namespace onegam_1408 {
             }
 
             velocity.y += gravity * Time.fixedDeltaTime;
-
             cc.move(velocity * Time.deltaTime);
         }
 
         public void GotHit(int damage) {
+            if(isDead) {
+                return;
+            }
             health = Mathf.Max(0, health - damage);
             if(health <= 0) {
                 Die();
             }
        }
         private void Die() {
-            canControl = false;
+            isDead = true;
             playerMesh.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
             playerMesh.transform.localPosition = new Vector3(0, .25f, 0);
-        }
-        public void OnTriggerEnter2D(Collider2D other) {
-            if(other.CompareTag("Portal")) {
-                PortalEntered();
-            }
-        }
-        public void OnTriggerExit2D(Collider2D other) {
-            if(other.CompareTag("Portal")) {
-                PortalExited();
-            }
+            GameDriver.Instance.PlayerDied();
+            SendMessage("PlayerDied");
         }
 
-        // OnTriggerEnter2D not working 
+        public void OnTriggerEnter2D(Collider2D other) {
+            if(other.CompareTag("Respawn")) {
+                GameDriver.Instance.SetSpawnPoint(other.gameObject);
+            }
+        }
+        // OnTriggerExit2D not working 
         // http://answers.unity3d.com/questions/575438/how-to-make-ontriggerenter2d-work.html
         // let portal tell us when we enter exit instead
         public void PortalEntered() {
