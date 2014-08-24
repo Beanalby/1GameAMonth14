@@ -29,7 +29,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: playerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,8 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fa5147ee6c7de488fe84f5ee99a8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redHaze: {fileID: 0}
-  healthParticles: {fileID: 100004}
+  healthParticles: {fileID: 19800000}
   playerMesh: {fileID: 400002}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -241,7 +240,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1

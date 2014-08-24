@@ -7,7 +7,6 @@ namespace onegam_1408 {
         private static Player _instance = null;
         public static Player Instance { get { return _instance; } }
 
-        public GameObject redHaze;
         public ParticleSystem healthParticles;
         public Transform playerMesh;
 
@@ -21,11 +20,10 @@ namespace onegam_1408 {
 
         private float health;
         private bool didJump = false;
-        private Color hazeFull = new Color(1, 0, 0, .5f), hazeEmpty = new Color(1, 0, 0, 0);
+        private StageCamera cam;
 
         private bool isHealing = false;
         private CharacterController2D cc;
-        private Material hazeMat;
         private bool canControl = true;
 
         public void Awake() {
@@ -40,8 +38,8 @@ namespace onegam_1408 {
         public void Start() {
             health = maxHealth;
             cc = GetComponent<CharacterController2D>();
-            hazeMat = redHaze.GetComponent<MeshRenderer>().material;
             gravity = rigidbody2D.gravityScale * -9.8f;
+            cam = GameObject.FindObjectOfType<StageCamera>();
         }
 
         public void Update() {
@@ -58,8 +56,9 @@ namespace onegam_1408 {
         }
 
         private void UpdateHaze() {
-            hazeMat.color = Color.Lerp(hazeEmpty, hazeFull, (maxHealth - health) / maxHealth);
+            cam.SetHaze((maxHealth - health) / maxHealth);
         }
+
         private void UpdateHealth() {
             if(isHealing) {
                 health = Mathf.Min(maxHealth, health + (healRate * Time.deltaTime));
