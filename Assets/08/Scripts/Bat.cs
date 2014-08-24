@@ -15,9 +15,13 @@ namespace onegam_1408 {
         private float attackStart = -1f;
         private bool isResetting = false;
 
+        private int layerAttackable, layerPlayer;
+
         public void Start() {
             startPos = transform.position;
             anim = GetComponent<Animator>();
+            layerAttackable = LayerMask.NameToLayer("Attackable");
+            layerPlayer = LayerMask.NameToLayer("Player");
         }
 
         public void Update() {
@@ -64,10 +68,14 @@ namespace onegam_1408 {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Attackable") && attackStart==-1f) {
+            if(other.gameObject.layer == layerAttackable && attackStart==-1f) {
                 Attack(other.gameObject);
                 inRange = other.gameObject;
-            } else if(other.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            } else if(other.gameObject.layer == layerPlayer) {
+                attackStart = -1;
+                isResetting = true;
+                anim.SetTrigger("attackStop");
+            } else if(other.tag == "Portal") {
                 attackStart = -1;
                 isResetting = true;
                 anim.SetTrigger("attackStop");
