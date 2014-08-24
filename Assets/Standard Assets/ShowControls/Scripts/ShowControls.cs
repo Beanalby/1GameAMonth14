@@ -18,7 +18,7 @@ public enum MouseButton { None, LeftClick, RightClick, BothClick, MiddleClick, S
 public enum ShowControlStyle { Docked, FullScreen };
 
 /// <summary>
-/// Defines whether the docked ShowControls should start at the top or
+/// Defines whether the docked ShowqControls should start at the top or
 /// the bottom of the screen.  Has no effect on Fullscreen ShowControls.
 /// </summary>
 public enum ShowControlPosition { Top, Bottom };

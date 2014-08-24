@@ -7,9 +7,15 @@ namespace onegam_1408 {
         private static GameDriver _instance;
         public static GameDriver Instance { get { return _instance; } }
 
+        public GUISkin skin;
+
         private string _spawnPoint = null;
         public GameObject SpawnPoint { get { return GameObject.Find(_spawnPoint); } }
+
+        private int numWaypoints;
         private List<string> enabledWaypoints;
+        private string waypointMsg;
+        private GUIStyle waypointMsgStyle;
 
         private float respawnDelay = 3f;
         
@@ -24,8 +30,14 @@ namespace onegam_1408 {
                 _spawnPoint = GameObject.FindGameObjectWithTag("InitialSpawn").name;
             }
             enabledWaypoints = new List<string>();
+            numWaypoints = GameObject.FindObjectsOfType<Waypoint>().Length;
+            Debug.Log("Found " + numWaypoints + " waypoints");
         }
-
+        public void Start() {
+            waypointMsgStyle = new GUIStyle(skin.label);
+            waypointMsgStyle.alignment = TextAnchor.MiddleCenter;
+            waypointMsgStyle.fontSize = (int)(waypointMsgStyle.fontSize * 1.5f);
+        }
         public void SetSpawnPoint(GameObject newSpawn) {
              _spawnPoint = newSpawn.name;
         }
@@ -44,6 +56,28 @@ namespace onegam_1408 {
         }
         public void WaypointEnabled(Waypoint waypoint) {
             enabledWaypoints.Add(waypoint.name);
+            StartCoroutine(ShowWaypointCount());
+        }
+        private IEnumerator ShowWaypointCount() {
+            waypointMsg = enabledWaypoints.Count + "/" + numWaypoints + " activated";
+            if(enabledWaypoints.Count == numWaypoints) {
+                waypointMsg += "\nAll Waypoints Activated!";
+                Player.Instance.DisableControl();
+            }
+            yield return new WaitForSeconds(2f);
+            if(enabledWaypoints.Count == numWaypoints) {
+                Application.LoadLevel("finished");
+            }
+            waypointMsg = null;
+       }
+
+        public void OnGUI() {
+            if(waypointMsg != null) {
+                ShadowAndOutline.DrawShadow(new Rect(0, 0, Screen.width, Screen.height),
+                    new GUIContent(waypointMsg), waypointMsgStyle,
+                    Color.green, Color.black, new Vector2(2, -2));
+
+            }
         }
     }
 }

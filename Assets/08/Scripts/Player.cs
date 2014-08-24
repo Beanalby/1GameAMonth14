@@ -25,7 +25,8 @@ namespace onegam_1408 {
         private bool isHealing = false;
         private CharacterController2D cc;
         private bool isDead = false;
-        public bool CanControl { get { return !isDead; } }
+        private bool canControl = true;
+        public bool CanControl { get { return canControl && !isDead; } }
 
         public void Awake() {
             if(_instance != null) {
@@ -105,7 +106,9 @@ namespace onegam_1408 {
             GameDriver.Instance.PlayerDied();
             SendMessage("PlayerDied");
         }
-
+        public void DisableControl() {
+            canControl = false;
+        }
         public void OnTriggerEnter2D(Collider2D other) {
             if(other.CompareTag("Respawn")) {
                 GameDriver.Instance.SetSpawnPoint(other.gameObject);
