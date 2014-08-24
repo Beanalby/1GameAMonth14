@@ -1,0 +1,55 @@
+
+playerSkeleton.png
+size: 159,22
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+armLower
+  rotate: false
+  xy: 97, 2
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+armUpper
+  rotate: false
+  xy: 113, 2
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+bodyLower
+  rotate: true
+  xy: 50, 2
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: -1
+bodyUpper
+  rotate: true
+  xy: 2, 2
+  size: 20, 46
+  orig: 20, 48
+  offset: 0, 2
+  index: -1
+head
+  rotate: false
+  xy: 75, 2
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+leg
+  rotate: false
+  xy: 129, 2
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+legLower
+  rotate: false
+  xy: 145, 2
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1

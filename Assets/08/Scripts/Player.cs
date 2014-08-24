@@ -41,7 +41,7 @@ namespace onegam_1408 {
             cc = GetComponent<CharacterController2D>();
             gravity = rigidbody2D.gravityScale * -9.8f;
             cam = GameObject.FindObjectOfType<StageCamera>();
-            transform.position = GameDriver.Instance.SpawnPoint.transform.position;
+            transform.position = GameDriver.Instance.SpawnPoint.transform.position + new Vector3(0, 2, 0);
         }
 
         public void Update() {
@@ -82,6 +82,7 @@ namespace onegam_1408 {
                 velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
                 //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
                 didJump = false;
+                SendMessage("PlayerJumped");
             }
 
             velocity.y += gravity * Time.fixedDeltaTime;
@@ -99,8 +100,6 @@ namespace onegam_1408 {
        }
         private void Die() {
             isDead = true;
-            playerMesh.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
-            playerMesh.transform.localPosition = new Vector3(0, .25f, 0);
             GameDriver.Instance.PlayerDied();
             SendMessage("PlayerDied");
         }

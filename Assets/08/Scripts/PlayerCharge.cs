@@ -47,12 +47,14 @@ namespace onegam_1408 {
                 return;
             }
             chargeTarget.StartCharge();
+            SendMessage("SetCharging", true);
         }
         private void StopCharge() {
             if(chargeTarget != null) {
                 chargeTarget.StopCharge();
             }
             chargeTarget = null;
+            SendMessage("SetCharging", false);
         }
 
         public void PlayerDied() {
