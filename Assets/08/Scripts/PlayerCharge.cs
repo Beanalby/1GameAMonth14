@@ -6,7 +6,7 @@ namespace onegam_1408 {
     public class PlayerCharge : MonoBehaviour {
 
         private CharacterController2D cc;
-        private GameObject chargeTarget;
+        private Chargable chargeTarget;
         Player player;
         
         public void Start() {
@@ -19,13 +19,13 @@ namespace onegam_1408 {
         }
 
         private void UpdateCharge() {
-            if(player.CanControl) {
-                if(chargeTarget == null && Input.GetAxisRaw("Vertical") < -.8f && cc.isGrounded) {
+            if(chargeTarget == null && player.CanControl) {
+                if(Input.GetAxisRaw("Vertical") < -.8f && cc.isGrounded) {
                     TryCharge();
-                } else {
-                    if(chargeTarget != null && Input.GetAxisRaw("Vertical") > -.8f) {
-                        StopCharge();
-                    }
+                }
+            } else {
+                if(chargeTarget != null && (chargeTarget.IsFullyCharged || Input.GetAxisRaw("Vertical") > -.8f)) {
+                    StopCharge();
                 }
             }
         }
@@ -41,12 +41,16 @@ namespace onegam_1408 {
         }
 
         private void StartCharge(GameObject obj) {
-            chargeTarget = obj;
-            chargeTarget.SendMessage("StartCharge");
+            chargeTarget = obj.GetComponent<Chargable>();
+            if(!chargeTarget.CanStartCharging) {
+                chargeTarget = null;
+                return;
+            }
+            chargeTarget.StartCharge();
         }
         private void StopCharge() {
             if(chargeTarget != null) {
-                chargeTarget.SendMessage("StopCharge");
+                chargeTarget.StopCharge();
             }
             chargeTarget = null;
         }
