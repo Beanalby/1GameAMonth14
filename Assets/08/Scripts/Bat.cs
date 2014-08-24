@@ -5,6 +5,7 @@ namespace onegam_1408 {
     [RequireComponent(typeof(Animator))]
     public class Bat : MonoBehaviour {
 
+        private int damage = 10;
         private float attackSpeed = 10f;
         private float resetSpeed = 3f;
         private Animator anim;
@@ -72,6 +73,7 @@ namespace onegam_1408 {
                 Attack(other.gameObject);
                 inRange = other.gameObject;
             } else if(other.gameObject.layer == layerPlayer) {
+                Player.Instance.GotHit(damage);
                 attackStart = -1;
                 isResetting = true;
                 anim.SetTrigger("attackStop");

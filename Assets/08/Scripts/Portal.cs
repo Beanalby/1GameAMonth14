@@ -8,9 +8,13 @@ namespace onegam_1408 {
         
         private float spinSpeed = 30f;
 
+        private int layerPlayer;
+
         public void Start() {
             transform.localScale = Vector3.zero;
+            layerPlayer = LayerMask.NameToLayer("Player");
         }
+
         public void Update() {
             if(Input.GetKeyDown(KeyCode.Z)) {
                 EnablePortal();
@@ -50,6 +54,17 @@ namespace onegam_1408 {
             scaleStart = Time.time;
             scaleFrom = 1f;
             scaleTo = 0;
+        }
+
+        public void OnTriggerEnter2D(Collider2D other) {
+            if(other.gameObject.layer == layerPlayer) {
+                Player.Instance.SendMessage("PortalEntered");
+            }
+        }
+        public void OnTriggerExit2D(Collider2D other) {
+            if(other.gameObject.layer == layerPlayer) {
+                Player.Instance.SendMessage("PortalExited");
+            }
         }
     }
 }

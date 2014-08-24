@@ -13,7 +13,6 @@ namespace onegam_1408 {
 
         public void Update() {
             if(chargeTarget == null && Input.GetAxisRaw("Vertical") < -.8f && cc.isGrounded) {
-                Debug.Log("+++ Trying to charge!");
                 TryCharge();
             } else {
                 if(chargeTarget != null && Input.GetAxisRaw("Vertical") > -.8f) {
@@ -25,7 +24,6 @@ namespace onegam_1408 {
         private void TryCharge() {
             // see if there's a charge nearby
             foreach(Collider2D obj in Physics2D.OverlapCircleAll(transform.position, .1f)) {
-                Debug.Log("+++ investigating " + obj.name);
                 if(obj.CompareTag("Chargable")) {
                     StartCharge(obj.gameObject);
                 }
