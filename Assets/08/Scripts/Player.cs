@@ -98,8 +98,9 @@ namespace onegam_1408 {
             if(health <= 0) {
                 Die();
             }
-       }
-        private void Die() {
+        }
+        public void Die() {
+            health = 0;
             isDead = true;
             GameDriver.Instance.PlayerDied();
             SendMessage("PlayerDied");
