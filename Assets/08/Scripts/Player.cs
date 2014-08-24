@@ -10,7 +10,7 @@ namespace onegam_1408 {
         public ParticleSystem healthParticles;
         public Transform playerMesh;
 
-        private float maxHealth = 40;
+        private float maxHealth = 100;
         private float jumpHeight = 3f;
         private float runSpeed = 4f;
         private float groundDamping = 20f; // how fast do we change direction? higher means faster
@@ -43,6 +43,7 @@ namespace onegam_1408 {
             gravity = rigidbody2D.gravityScale * -9.8f;
             cam = GameObject.FindObjectOfType<StageCamera>();
             transform.position = GameDriver.Instance.SpawnPoint.transform.position + new Vector3(0, 2, 0);
+            cam.transform.position = transform.position;
         }
 
         public void Update() {

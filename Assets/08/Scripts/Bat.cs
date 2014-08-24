@@ -9,7 +9,7 @@ namespace onegam_1408 {
 
         private int damage = 10;
         private float attackSpeed = 10f;
-        private float resetSpeed = 3f;
+        private float resetSpeed = 5f;
         private Animator anim;
 
         private Vector3 startPos;

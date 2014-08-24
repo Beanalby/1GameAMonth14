@@ -55,8 +55,10 @@ namespace onegam_1408 {
             return enabledWaypoints.Contains(name);
         }
         public void WaypointEnabled(Waypoint waypoint) {
-            enabledWaypoints.Add(waypoint.name);
-            StartCoroutine(ShowWaypointCount());
+            if(!enabledWaypoints.Contains(waypoint.name)) {
+                enabledWaypoints.Add(waypoint.name);
+                StartCoroutine(ShowWaypointCount());
+            }
         }
         private IEnumerator ShowWaypointCount() {
             waypointMsg = enabledWaypoints.Count + "/" + numWaypoints + " activated";

@@ -25,7 +25,7 @@ namespace onegam_1408 {
                     sc = ShowControls.CreateDocked(
                         new ControlItem("Hold down to charge beacons to your world.",
                             KeyCode.DownArrow));
-                    mainMsg = "Beacons heal you,\nbut need recharged after a time.";
+                    mainMsg = "Once charged, beacons heal you.\nBut they need recharged after a time.";
                     break;
                 case "scWaypoint":
                     sc = ShowControls.CreateDocked(
