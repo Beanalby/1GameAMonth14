@@ -5,6 +5,8 @@ namespace onegam_1408 {
     [RequireComponent(typeof(Animator))]
     public class Bat : MonoBehaviour {
 
+        public AudioClip attackSound;
+
         private int damage = 10;
         private float attackSpeed = 10f;
         private float resetSpeed = 3f;
@@ -65,6 +67,7 @@ namespace onegam_1408 {
             anim.SetTrigger("attackStart");
             target = newTarget;
             yield return new WaitForSeconds(.4f);
+            AudioSource.PlayClipAtPoint(attackSound, Camera.main.transform.position);
             attackStart = Time.time;
         }
 

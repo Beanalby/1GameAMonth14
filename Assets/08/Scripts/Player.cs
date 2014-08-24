@@ -94,6 +94,7 @@ namespace onegam_1408 {
                 return;
             }
             health = Mathf.Max(0, health - damage);
+            SendMessage("PlayerHit");
             if(health <= 0) {
                 Die();
             }
