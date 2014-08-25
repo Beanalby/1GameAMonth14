@@ -31,7 +31,6 @@ namespace onegam_1408 {
             }
             enabledWaypoints = new List<string>();
             numWaypoints = GameObject.FindObjectsOfType<Waypoint>().Length;
-            Debug.Log("Found " + numWaypoints + " waypoints");
         }
         public void Start() {
             waypointMsgStyle = new GUIStyle(skin.label);
