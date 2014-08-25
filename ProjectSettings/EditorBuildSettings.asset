@@ -56,6 +56,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/07/Scenes/stage2.unity
   - enabled: 1
+    path: Assets/08/Scenes/title.unity
+  - enabled: 1
     path: Assets/08/Scenes/game.unity
   - enabled: 1
     path: Assets/08/Scenes/finished.unity

@@ -16,8 +16,8 @@ public class PlayerAnim : MonoBehaviour {
 
     public void Update() {
         bool isGrounded = cc.isGrounded;
+        anim.SetBool("IsGrounded", isGrounded);
         if(!wasGrounded && isGrounded) {
-            anim.SetTrigger("Land");
             AudioSource.PlayClipAtPoint(landSound, Camera.main.transform.position);
         }
         wasGrounded = isGrounded;
