@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: playerSkeleton.mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: playerRoot
+    m_Weight: 1
+  - m_Path: playerRoot/body
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperL
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperL/armLowerL
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperL/armLowerL/slot [armLowerL]
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperL/slot [armUpperL]
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperR
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperR/armLowerR
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperR/armLowerR/slot [armLowerR]
+    m_Weight: 1
+  - m_Path: playerRoot/body/armUpperR/slot [armUpperR]
+    m_Weight: 1
+  - m_Path: playerRoot/body/head
+    m_Weight: 1
+  - m_Path: playerRoot/body/head/slot [head]
+    m_Weight: 1
+  - m_Path: playerRoot/body/slot [bodyUpper]
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperL
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperL/legLowerL
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperL/legLowerL/slot [legLowerL]
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperL/slot [legUpperL]
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperR
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperR/legLowerR
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperR/legLowerR/slot [legLowerR]
+    m_Weight: 1
+  - m_Path: playerRoot/legUpperR/slot [legUpperR]
+    m_Weight: 1
+  - m_Path: playerRoot/slot [bodyLower]
+    m_Weight: 1
