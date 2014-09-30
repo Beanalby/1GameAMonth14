@@ -31,6 +31,10 @@ namespace onegam_1409 {
                 AudioSource.PlayClipAtPoint(jumpSound, Camera.main.transform.position);
             }
         }
+        public void PlayerClimb() {
+            //anim.SetTrigger("Climb");
+            anim.Play("Climb");
+        }
         public void PlayerDied() {
             anim.SetTrigger("Die");
             if(dieSound) {

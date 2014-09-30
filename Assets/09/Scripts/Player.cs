@@ -18,6 +18,7 @@ namespace onegam_1409 {
 
         private float health;
         private bool didJump = false;
+        private bool useCC = true;
 
         private CharacterController2D cc;
         private bool isDead = false;
@@ -37,6 +38,7 @@ namespace onegam_1409 {
             health = maxHealth;
             cc = GetComponent<CharacterController2D>();
             gravity = rigidbody2D.gravityScale * -9.8f;
+            cc.velocity = new Vector3(0, 6.5f, 0);
         }
 
         public void Update() {
@@ -50,25 +52,27 @@ namespace onegam_1409 {
         }
 
         private void UpdateMovement() {
-            Vector3 velocity = cc.velocity;
-            float hSpeed = 0;
-            if(CanControl) {
-                hSpeed = Input.GetAxis("Horizontal");
-            }
-            if((hSpeed > 0 && playerMesh.localScale.x < 0f) || (hSpeed < 0 && playerMesh.localScale.x > 0f)) {
-                playerMesh.localScale = new Vector3(-playerMesh.localScale.x, playerMesh.localScale.y, playerMesh.localScale.z);
-            }
-            float smoothedMovementFactor = cc.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-            velocity.x = Mathf.Lerp(velocity.x, hSpeed * runSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
-            if (cc.isGrounded && didJump) {
-                velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
-                //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
-                didJump = false;
-                SendMessage("PlayerJumped");
-            }
+            if(useCC) {
+                Vector3 velocity = cc.velocity;
+                float hSpeed = 0;
+                if(CanControl) {
+                    hSpeed = Input.GetAxis("Horizontal");
+                }
+                if((hSpeed > 0 && playerMesh.localScale.x < 0f) || (hSpeed < 0 && playerMesh.localScale.x > 0f)) {
+                    playerMesh.localScale = new Vector3(-playerMesh.localScale.x, playerMesh.localScale.y, playerMesh.localScale.z);
+                }
+                float smoothedMovementFactor = cc.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+                velocity.x = Mathf.Lerp(velocity.x, hSpeed * runSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
+                if(cc.isGrounded && didJump) {
+                    velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+                    //AudioSource.PlayClipAtPoint(JumpSound, transform.position);
+                    didJump = false;
+                    SendMessage("PlayerJumped");
+                }
 
-            velocity.y += gravity * Time.fixedDeltaTime;
-            cc.move(velocity * Time.deltaTime);
+                velocity.y += gravity * Time.fixedDeltaTime;
+                cc.move(velocity * Time.deltaTime);
+            }
         }
 
         public void GotHit(int damage) {
@@ -90,7 +94,22 @@ namespace onegam_1409 {
         public void DisableControl() {
             canControl = false;
         }
-        public void OnTriggerEnter2D(Collider2D other) {
+
+        public void EdgeGrabbed(Vector3 edgePosition) {
+            StartCoroutine(_edgeGrabbed(edgePosition));
+        }
+
+        private IEnumerator _edgeGrabbed(Vector3 edgePosition) {
+            /// if our vertical velocity is over 6.5, we'll make it
+            /// over the ledge on our own
+            if(cc.velocity.y < 6.5f) {
+                cc.velocity = Vector3.zero;
+                transform.position = edgePosition;
+                useCC = false;
+                SendMessage("PlayerClimb");
+                yield return new WaitForSeconds(1.05f);
+                useCC = true;
+            }
         }
     }
 }
