@@ -38,7 +38,6 @@ namespace onegam_1409 {
             health = maxHealth;
             cc = GetComponent<CharacterController2D>();
             gravity = rigidbody2D.gravityScale * -9.8f;
-            cc.velocity = new Vector3(0, 6.5f, 0);
         }
 
         public void Update() {
