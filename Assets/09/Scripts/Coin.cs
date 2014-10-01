@@ -25,7 +25,7 @@ namespace onegam_1409 {
             coinMesh.localRotation = Quaternion.Euler(new Vector3(-90, spinSpeed * Time.time + offset, 0));
         }
         public void FixedUpdate() {
-            if(moveSpeed != 0) {
+            if(moveSpeed != 0 && GameDriver.Instance.IsRunning) {
                 // re-set our movespeed every frame to maintain speed
                 Vector3 v = rigidbody2D.velocity;
                 v.x = moveSpeed;

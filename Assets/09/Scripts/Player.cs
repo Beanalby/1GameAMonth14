@@ -23,7 +23,7 @@ namespace onegam_1409 {
         private CharacterController2D cc;
         private bool isDead = false;
         private bool canControl = true;
-        public bool CanControl { get { return canControl && !isDead; } }
+        public bool CanControl { get { return canControl && !isDead && GameDriver.Instance.IsRunning; } }
 
         public void Awake() {
             if(_instance != null) {
@@ -53,7 +53,9 @@ namespace onegam_1409 {
         private void UpdateMovement() {
             if(useCC) {
                 Vector3 velocity = cc.velocity;
+
                 float hSpeed = 0;
+                // only allow input if the game's running
                 if(CanControl) {
                     hSpeed = Input.GetAxis("Horizontal");
                 }

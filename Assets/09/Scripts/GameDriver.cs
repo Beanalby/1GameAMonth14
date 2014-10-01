@@ -9,7 +9,24 @@ namespace onegam_1409 {
 
         public GUISkin skin;
         public GameObject coinYellow, coinRed;
+        private float totalTime = 10;
 
+        public bool IsRunning {
+            get {
+                return timeStart != -1 && TimeLeft != 0;
+            }
+        }
+        
+        private float timeStart = -1;
+        public float TimeLeft {
+            get {
+                if(timeStart == -1) {
+                    return totalTime;
+                } else {
+                    return Mathf.Max(0, timeStart + totalTime - Time.time);
+                }
+            }
+        }
         private int score=0;
         private float redChance = .2f;
         public int Score {
@@ -20,6 +37,8 @@ namespace onegam_1409 {
         private Queue<CoinSpawn> lastSpawns;
         private static int simultaneousCoins = 4;
         private static int spawnHistory = 6;
+        private string msg;
+        private GUIStyle msgStyle;
 
         public void Awake() {
             if(_instance != null) {
@@ -32,20 +51,52 @@ namespace onegam_1409 {
 
         // Use this for initialization
         void Start() {
+            msgStyle = new GUIStyle(skin.label);
+            msgStyle.fontSize *= 2;
+            msgStyle.alignment = TextAnchor.UpperCenter;
+
             spawns = GameObject.FindObjectsOfType<CoinSpawn>();
             lastSpawns = new Queue<CoinSpawn>();
             while(lastSpawns.Count < simultaneousCoins) {
                 SpawnCoin(false);
             }
+            StartCoroutine(Intro());
         }
 
         public void OnGUI() {
             GUI.skin = skin;
             Rect scoreRect = new Rect(10, -10, 300, 100);
+            Rect timeRect = new Rect(Screen.width - 260, -10, 250, 100);
+            Rect msgRect = new Rect(0, 10, Screen.width, 200);
+            if(TimeLeft == 0) {
+                msg = "Game Over";
+                Rect retryButton = new Rect((Screen.width/2) - 200, Screen.height / 2, 400, 100);
+                if(GUI.Button(retryButton, "Play Again")) {
+                    Application.LoadLevel(Application.loadedLevel);
+                }
+            }
+
             ShadowAndOutline.DrawShadow(scoreRect, new GUIContent("Score: " + score),
                 skin.label, Color.white, Color.black, new Vector2(3, 3));
+            ShadowAndOutline.DrawShadow(timeRect, new GUIContent("Time: " + TimeLeft.ToString("F1")),
+                skin.label, Color.white, Color.black, new Vector2(3, 3));
+            if(msg != null) {
+                ShadowAndOutline.DrawShadow(msgRect, new GUIContent(msg),
+                    msgStyle, Color.white, Color.black, new Vector2(6, 6));
+            }
         }
 
+        private IEnumerator Intro() {
+            yield return new WaitForSeconds(1);
+            msg = "READY";
+            yield return new WaitForSeconds(1);
+            msg = "SET";
+            yield return new WaitForSeconds(1);
+            msg = "GO!";
+            timeStart = Time.time;
+            yield return new WaitForSeconds(1);
+            msg = null;
+        }
         private void SpawnCoin(bool allowRed=true) {
             CoinSpawn spawn = GetCoinSpawn();
             GameObject prefab;
