@@ -12,18 +12,18 @@ namespace onegam_1409 {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            if(other.gameObject.layer != playerLayer) {
-                return;
+            Transform t = other.transform;
+            if(other.gameObject.layer == playerLayer) {
+                /// we might have the triggerHelper rather than the real trigger,
+                /// grab the singleton just in case.
+                t = Player.Instance.transform;
             }
-            /// we might have the triggerHelper rather than the real trigger,
-            /// grab the singleton just in case.
-            Transform player = Player.Instance.transform;
 
             // pop him over to the other side
             int direction = 1;
             Vector3 offset;
             if(IsEastWest) {
-                offset = Vector3.right;
+                offset = Vector3.right * 1.5f;
                 if(transform.position.x < otherZone.transform.position.x) {
                     direction = -1;
                 }
@@ -39,15 +39,17 @@ namespace onegam_1409 {
             }
             offset *= direction;
             if(IsEastWest) {
-                player.position = new Vector3(
+                // move it up just a TINY bit to make sure it doesn't get
+                // stuck in the floor.
+                t.position = new Vector3(
                     otherZone.transform.position.x + offset.x,
-                    player.position.y,
-                    player.position.z);
+                    t.position.y + .1f,
+                    t.position.z);
             } else {
-                player.position = new Vector3(
-                    player.position.x,
+                t.position = new Vector3(
+                    t.position.x,
                     otherZone.transform.position.y + offset.y,
-                    player.position.z);
+                    t.position.z);
             }
         }
     }
