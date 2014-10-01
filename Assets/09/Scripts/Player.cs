@@ -10,7 +10,7 @@ namespace onegam_1409 {
         public Transform playerMesh;
 
         private float maxHealth = 100;
-        private float jumpHeight = 3f;
+        private float jumpHeight = 5.5f;
         private float runSpeed = 8f;
         private float groundDamping = 20f; // how fast do we change direction? higher means faster
         private float inAirDamping = 5f;
