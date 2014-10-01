@@ -61,6 +61,13 @@ namespace onegam_1409 {
                 SpawnCoin(false);
             }
             StartCoroutine(Intro());
+            ShowControls sc = ShowControls.CreateDocked(new ControlItem[] {
+                new ControlItem("Move left and right", new KeyCode[] { KeyCode.LeftArrow, KeyCode.RightArrow }),
+                new ControlItem("Jump", KeyCode.Space)
+            });
+            sc.showDuration = 4;
+            sc.position = ShowControlPosition.Bottom;
+            sc.Show();
         }
 
         public void OnGUI() {
