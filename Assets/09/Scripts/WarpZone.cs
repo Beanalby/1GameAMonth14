@@ -54,6 +54,7 @@ namespace onegam_1409 {
                     otherZone.transform.position.y + offset.y,
                     t.position.z);
             }
+            t.SendMessage("Warped", SendMessageOptions.DontRequireReceiver);
         }
     }
 }

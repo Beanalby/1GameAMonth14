@@ -21,6 +21,7 @@ namespace onegam_1409 {
         private bool useCC = true;
 
         private CharacterController2D cc;
+        private GameObject triggerHelper;
         private bool isDead = false;
         private bool canControl = true;
         public bool CanControl { get { return canControl && !isDead && GameDriver.Instance.IsRunning; } }
@@ -37,6 +38,8 @@ namespace onegam_1409 {
         public void Start() {
             health = maxHealth;
             cc = GetComponent<CharacterController2D>();
+            // manually create the triggerHelper so we can warp it with us
+            triggerHelper = cc.createTriggerHelper();
             gravity = rigidbody2D.gravityScale * -9.8f;
         }
 
@@ -112,6 +115,10 @@ namespace onegam_1409 {
                 yield return new WaitForSeconds(1.05f);
                 useCC = true;
             }
+        }
+        public void Warped() {
+            // snap the triggerHelper to us instead of letting it lerp across
+            triggerHelper.transform.position = transform.position;
         }
     }
 }

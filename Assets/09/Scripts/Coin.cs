@@ -6,6 +6,7 @@ namespace onegam_1409 {
 
         public float moveSpeed = 0;
         public AudioClip pickupSound;
+        public GameObject coinEffect;
         public Transform coinMesh;
 
         public int value = 1;
@@ -42,6 +43,7 @@ namespace onegam_1409 {
             if(other.gameObject.layer == playerLayer) {
                 GameDriver.Instance.CoinPicked(this);
                 AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position);
+                GameObject.Instantiate(coinEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

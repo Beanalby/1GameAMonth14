@@ -9,7 +9,7 @@ namespace onegam_1409 {
 
         public GUISkin skin;
         public GameObject coinYellow, coinRed;
-        private float totalTime = 10;
+        private float totalTime = 30;
 
         public bool IsRunning {
             get {
