@@ -567,7 +567,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.59231949, y: -2.02909827, z: 0}
+  m_LocalPosition: {x: 3.40768051, y: 1.97090173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400060}
@@ -958,7 +958,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.01795495, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -1063,7 +1063,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: .447730571, y: 2.04369617}
-  m_Center: {x: -.0234012157, y: 1.01795471}
+  m_Center: {x: -.0234012157, y: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -1091,8 +1091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9500000}
-  jumpSound: {fileID: 0}
-  landSound: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 916ccf00a67979d44b01e1962b72ec5d, type: 3}
+  landSound: {fileID: 8300000, guid: 243a8a83a3018ff4cab0111ec70371e8, type: 3}
   hitSound: {fileID: 0}
   dieSound: {fileID: 0}
 --- !u!114 &11400002
@@ -1149,7 +1149,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
+  createTriggerHelperGameObject: 1
   triggerHelperBoxColliderScale: .949999988
   transform: {fileID: 0}
   boxCollider: {fileID: 0}

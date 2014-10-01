@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4.5
+  pickupSound: {fileID: 8300000, guid: d703a45ce06c1464e80a090acd97d879, type: 3}
   coinMesh: {fileID: 400000}
   value: 3
 --- !u!1001 &100100000

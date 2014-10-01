@@ -5,6 +5,7 @@ namespace onegam_1409 {
     public class Coin : MonoBehaviour {
 
         public float moveSpeed = 0;
+        public AudioClip pickupSound;
         public Transform coinMesh;
 
         public int value = 1;
@@ -40,6 +41,7 @@ namespace onegam_1409 {
         public void OnTriggerEnter2D(Collider2D other) {
             if(other.gameObject.layer == playerLayer) {
                 GameDriver.Instance.CoinPicked(this);
+                AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position);
                 Destroy(gameObject);
             }
         }
