@@ -103,6 +103,7 @@ namespace onegam_1409 {
             /// over the ledge on our own
             if(cc.velocity.y < 6.5f) {
                 cc.velocity = Vector3.zero;
+                edgePosition.y += GetComponent<BoxCollider2D>().size.y / 2;
                 transform.position = edgePosition;
                 useCC = false;
                 SendMessage("PlayerClimb");

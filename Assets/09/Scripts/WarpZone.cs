@@ -17,6 +17,9 @@ namespace onegam_1409 {
                 /// we might have the triggerHelper rather than the real trigger,
                 /// grab the singleton just in case.
                 t = Player.Instance.transform;
+            } else if(other.gameObject.tag != "Pickup") {
+                // pickups are the only other things that warp
+                return;
             }
 
             // pop him over to the other side
