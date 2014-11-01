@@ -8,6 +8,8 @@ namespace onegam_1410 {
         public AudioClip hitSound;
         public GameObject deathEffect;
 
+        public int value = 1;
+
         private int layerPlayer, layerGround;
 
         private bool gotHit = false;
@@ -28,6 +30,7 @@ namespace onegam_1410 {
 
         private IEnumerator GotHit() {
             gotHit = true;
+            GameDriver.Instance.CubeHit(this);
             if(hitSound) {
                 AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
             }
