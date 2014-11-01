@@ -14,10 +14,11 @@ namespace onegam_1410 {
 
         private bool gotHit = false;
 
-        public void Start() {
+        public void Awake() {
             layerPlayer = LayerMask.NameToLayer("Player");
             layerGround = LayerMask.NameToLayer("Ground");
         }
+
         public void OnCollisionEnter(Collision col) {
             if(!gotHit && col.gameObject.layer == layerPlayer) {
                 // move us away from the car
