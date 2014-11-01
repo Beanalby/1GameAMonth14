@@ -23,7 +23,7 @@ namespace onegam_1410 {
 
         public bool IsRunning { get { return isRunning; } }
 
-        private float CubeSpawnDelay = 4f;
+        private float CubeSpawnDelay = 3f;
         private SpawnPoint[] SpawnPoints;
         private string msg = null;
         private GUIStyle msgStyle, timeStyle;
@@ -61,6 +61,9 @@ namespace onegam_1410 {
                 isRunning = false;
                 player.Immobilize();
                 player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            if(!isRunning && timeStart != -1 && Input.GetButtonDown("Jump")) {
+                Application.LoadLevel(Application.loadedLevel);
             }
         }
 

@@ -66,4 +66,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/09/Scenes/game.unity
   - enabled: 1
+    path: Assets/10/Scenes/title.unity
+  - enabled: 1
     path: Assets/10/Scenes/game.unity
