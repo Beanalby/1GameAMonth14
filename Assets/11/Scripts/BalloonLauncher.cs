@@ -12,10 +12,11 @@ namespace onegam_1411 {
         private int numRows = 4;
         private float launchDelay = .5f;
         private float xSpacer = 1.5f;
-        private float ySpacer = 1.5f;
+        private float ySpacer = 1.2f;
         private List<Balloon> balloons;
         private int nextBalloon = 0;
-
+        private Color[] colors = new Color[3] {
+            Color.red, Color.green, Color.blue };
         public void Start() {
             CreateBalloons();
             StartCoroutine(StartLaunching());
@@ -40,6 +41,7 @@ namespace onegam_1411 {
                 Balloon newBalloon = ((GameObject)Instantiate(balloonPrefab)).GetComponent<Balloon>();
                 newBalloon.transform.position = transform.position + new Vector3(xSpacer * (newColumn + xOffset), ySpacer * (numInColumn[newColumn] - (numRows-1)), 0);
                 newBalloon.gameObject.name = " Balloon " + i.ToString("D2");
+                newBalloon.color = colors[Random.Range(0, colors.Length)];
                 balloons.Add(newBalloon);
                 numInColumn[newColumn]++;
             }
