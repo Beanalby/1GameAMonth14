@@ -9,6 +9,10 @@ namespace onegam_1411 {
 
         private Vector2 puntVelocity = new Vector2(10, 30);
 
+        public bool IsFalling {
+            get { return !rigidbody2D.isKinematic; }
+        }
+
         public void Start() {
             // set our material's balloon color
             Material mat = GetComponentInChildren<MeshRenderer>().material;
@@ -49,5 +53,5 @@ namespace onegam_1411 {
                 }
             }
         }
-  }
+    }
 }

@@ -13,14 +13,27 @@ namespace onegam_1411 {
         private float moveStart = -1, moveDuration=.5f;
 
         private int pickupLayer;
+        private bool forcingPop=false;
+
+        public bool IsPopping {
+            get { return moveStart != -1; }
+        }
+
+        public bool HasBalloons {
+            get { return balloons.Count != 0; }
+        }
 
         public void Start() {
             balloons = new List<Balloon>();
             pickupLayer = LayerMask.NameToLayer("Pickup");
         }
+        public void Update() {
+            HandleForcePop();
+        }
         public void FixedUpdate() {
             HandleMovement();
         }
+
         public void OnTriggerEnter2D(Collider2D other) {
             if(other.gameObject.layer != pickupLayer) {
                 return;
@@ -54,6 +67,11 @@ namespace onegam_1411 {
             TryPop();
         }
 
+        // used at the end of the game where we MUST pop all balloons
+        public void ForcePop() {
+            forcingPop = true;
+        }
+
         private void HandleMovement() {
             // move ourselves if we're in the process
             if(moveStart == -1) {
@@ -70,6 +88,20 @@ namespace onegam_1411 {
             } else {
                 transform.localPosition = Vector3.Lerp(moveFrom, moveTo, percent);
             }
+        }
+
+        private void HandleForcePop() {
+            if(!forcingPop) {
+                return;
+            }
+            if(IsPopping) {
+                return;
+            }
+            if(balloons.Count == 0) {
+                forcingPop = false;
+                return;
+            }
+            Pop(balloons[0]);
         }
 
         private void TryPop() {

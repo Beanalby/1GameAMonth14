@@ -8,8 +8,8 @@ namespace onegam_1411 {
 
         public GameObject balloonPrefab;
 
-        private int numColumns = 5;
-        private int numRows = 4;
+        private int numColumns = 1;
+        private int numRows = 3;
         private float launchDelay = 3f;
         private float xSpacer = 1.5f;
         private float ySpacer = 1.2f;
@@ -53,6 +53,25 @@ namespace onegam_1411 {
                 balloons[nextBalloon].Launch();
                 nextBalloon++;
             }
-       }
+        }
+
+        public bool AreBalloonsDone() {
+            // if we still have balloons to launch, we're not done
+            if(balloons.Count - nextBalloon > 0) {
+                return false;
+            }
+            // all balloons have been launched.  If there are some that
+            // are still falling, we're not done.
+            for(int i = 0; i < balloons.Count; i++) {
+                if(balloons[i] != null) {
+                    Balloon b = balloons[i].GetComponent<Balloon>();
+                    if(b.IsFalling) {
+                        return false;
+                    }
+                }
+            }
+            // either there are no more balloons, or they've all been caught
+            return true;
+        }
     }
 }

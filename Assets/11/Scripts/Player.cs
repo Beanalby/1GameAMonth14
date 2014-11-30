@@ -7,15 +7,22 @@ namespace onegam_1411 {
         private float moveSpeed = 5f;
 
         private CharacterController2D cc;
+
+        public bool CanControl = false;
+
         public void Start() {
             cc = GetComponent<CharacterController2D>();
         }
 
         public void Update() {
-            cc.velocity = new Vector3(moveSpeed * Input.GetAxis("Horizontal"), 0, 0);
+            if(CanControl) {
+                cc.velocity = new Vector3(moveSpeed * Input.GetAxis("Horizontal"), 0, 0);
+            }
         }
         public void FixedUpdate() {
-            cc.move(cc.velocity * Time.deltaTime);
+            if(CanControl) {
+                cc.move(cc.velocity * Time.deltaTime);
+            }
         }
     }
 }
