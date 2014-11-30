@@ -16,5 +16,9 @@ namespace onegam_1411 {
         public void Launch() {
             rigidbody2D.isKinematic = false;
         }
+        public void Pop() {
+            // todo: do something fancy.
+            Destroy(gameObject);
+        }
     }
 }
