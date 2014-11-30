@@ -7,8 +7,6 @@ namespace onegam_1411 {
 
         public Color color;
 
-        private float maxFallSpeed = -5f;
-
         private Vector2 puntVelocity = new Vector2(10, 30);
 
         public void Start() {
@@ -34,5 +32,23 @@ namespace onegam_1411 {
             }
             rigidbody2D.velocity = v;
         }
-    }
+
+        public void OnCollisionEnter2D(Collision2D coll) {
+            // if we're falling, bounce off of anything we hit.
+            if(rigidbody2D.isKinematic) {
+                return;
+            }
+            Debug.Log(name + " collided with " + coll.gameObject.name + ", me=" + rigidbody2D.velocity + ", relative=" + coll.relativeVelocity);
+            // if it's a balloon on the stack, push ourselves away
+            if(coll.gameObject.layer == gameObject.layer) {
+                if(coll.gameObject.rigidbody2D.isKinematic == true) {
+                    Vector2 v = new Vector2(puntVelocity.x, rigidbody2D.velocity.y);
+                    if(coll.gameObject.transform.position.x > transform.position.x) {
+                        v.x = -v.x;
+                    }
+                    rigidbody2D.velocity = v;
+                }
+            }
+        }
+  }
 }

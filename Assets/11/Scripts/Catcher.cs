@@ -5,6 +5,8 @@ using System.Collections.Generic;
 namespace onegam_1411 {
     public class Catcher : MonoBehaviour {
 
+        private const int MAX_BALLOONS = 8;
+
         private List<Balloon> balloons;
 
         private Vector3 moveFrom=Vector3.zero, moveTo=Vector3.zero;
@@ -81,6 +83,12 @@ namespace onegam_1411 {
             if(moveFrom != Vector3.zero) {
                 return;
             }
+
+            // if we have too many balloons, force pop
+            if(balloons.Count >= MAX_BALLOONS) {
+                Pop(balloons[0]);
+                return;
+           }
 
             // if the bottom balloon is a different color than any of the
             // other balloons, we pop it!
