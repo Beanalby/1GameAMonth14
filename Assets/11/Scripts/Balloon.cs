@@ -9,16 +9,13 @@ namespace onegam_1411 {
 
         private float maxFallSpeed = -5f;
 
-        private Vector2 puntVelocity = new Vector2(5, 12);
+        private Vector2 puntVelocity = new Vector2(10, 30);
 
         public void Start() {
             // set our material's balloon color
             Material mat = GetComponentInChildren<MeshRenderer>().material;
             mat.SetColor("_Color", color);
             mat.SetColor("_Emission", color * .1f);
-        }
-        public void FixedUpdate() {
-            CapFallSpeed();
         }
 
         public void Launch() {
@@ -36,14 +33,6 @@ namespace onegam_1411 {
                 v.x = -v.x;
             }
             rigidbody2D.velocity = v;
-        }
-
-        private void CapFallSpeed() {
-            Vector3 v = rigidbody2D.velocity;
-            if(v.y < maxFallSpeed) {
-                v.y = maxFallSpeed;
-                rigidbody2D.velocity = v;
-            }
         }
     }
 }
