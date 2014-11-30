@@ -38,7 +38,6 @@ namespace onegam_1411 {
             if(rigidbody2D.isKinematic) {
                 return;
             }
-            Debug.Log(name + " collided with " + coll.gameObject.name + ", me=" + rigidbody2D.velocity + ", relative=" + coll.relativeVelocity);
             // if it's a balloon on the stack, push ourselves away
             if(coll.gameObject.layer == gameObject.layer) {
                 if(coll.gameObject.rigidbody2D.isKinematic == true) {
