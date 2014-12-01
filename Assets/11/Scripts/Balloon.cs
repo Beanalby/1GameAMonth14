@@ -5,6 +5,7 @@ namespace onegam_1411 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Balloon : MonoBehaviour {
 
+        public GameObject popEffect;
         public AudioClip launchSound, catchSound, goodSound, badSound;
         public Color color;
 
@@ -31,7 +32,10 @@ namespace onegam_1411 {
         }
 
         private void Pop() {
-            // todo: do something fancy.
+            GameObject obj = Instantiate(popEffect) as GameObject;
+            Vector3 pos = transform.position;
+            pos.y += .5f;
+            obj.transform.position = pos;
             Destroy(gameObject);
         }
         public void PopGood() {

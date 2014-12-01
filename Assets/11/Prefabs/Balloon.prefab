@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c872bbf1708ab8749b12a5fb390823c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popEffect: {fileID: 100000, guid: e26c2b4ac6e111e4babce851237047c0, type: 2}
   launchSound: {fileID: 8300000, guid: 1725512a3aafc0046aa857b959577a75, type: 3}
   catchSound: {fileID: 8300000, guid: 0791e561068edeb41a4f8f609611ca93, type: 3}
   goodSound: {fileID: 8300000, guid: 214fe193bb1109b4bb19ecf6ac964bef, type: 3}
