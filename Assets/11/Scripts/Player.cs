@@ -4,7 +4,7 @@ using System.Collections;
 namespace onegam_1411 {
     public class Player : MonoBehaviour {
 
-        private float moveSpeed = 5f;
+        private float moveSpeed = 8f;
 
         private CharacterController2D cc;
 
