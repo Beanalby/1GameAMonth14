@@ -4,12 +4,20 @@ using System.Collections;
 namespace onegam_1411 {
     public class GameDriver : MonoBehaviour {
 
+        public GUISkin skin;
+        public Texture2D missBox, missX;
+
         public static GameDriver Instance {
             get { return _instance; }
         }
         private static GameDriver _instance = null;
 
-        private const float gameDoneCheckDelay = .5f;
+        private const float stageFinishedCheckDelay = .5f;
+        private bool isGameOver = false;
+        private bool isStageFinished = false;
+
+        private int numMisses = 0, maxMisses = 3;
+        private int score = 0;
 
         public void Awake() {
             if(_instance != null) {
@@ -28,40 +36,56 @@ namespace onegam_1411 {
             launcher = GameObject.FindObjectOfType<BalloonLauncher>();
             player = GameObject.FindObjectOfType<Player>();
             catcher = GameObject.FindObjectOfType<Catcher>();
-            StartCoroutine(WatchForGameDone());
+            StartCoroutine(WatchForStageFinished());
 
             player.CanControl = true; // todo: countdown/intro
         }
 
         public void BalloonMissed() {
-            Debug.Log("BOOO, balloon missed!");
+            numMisses++;
+            if(numMisses >= maxMisses) {
+                GameOver();
+            }
         }
 
-        private void EndGame() {
-            Debug.Log("END GAME!");
+        private void GameOver() {
+            Debug.Log("Game over!");
+            // kill the balloons, and the player
+            foreach(Balloon balloon in GameObject.FindObjectsOfType<Balloon>()) {
+                Destroy(balloon.gameObject);
+            }
+            Destroy(launcher.gameObject);
+            Destroy(player.gameObject);
+            isGameOver = true;
         }
 
-        private IEnumerator WatchForGameDone() {
+        private void StageFinished() {
+            isStageFinished = true;
+        }
+
+        private IEnumerator WatchForStageFinished() {
             while(true) {
-                yield return new WaitForSeconds(gameDoneCheckDelay);
-                if(IsGameDone()) {
-                    EndGame();
+                yield return new WaitForSeconds(stageFinishedCheckDelay);
+                if(isGameOver) {
+                    yield break;
+                }
+                isStageFinished = CheckStageFinished();
+                if(isStageFinished) {
+                    StageFinished();
                     yield break;
                 }
             }
         }
 
-        private bool IsGameDone() {
+        private bool CheckStageFinished() {
             // easiest check - balloons to launch or still floating around?
             if(!launcher.AreBalloonsDone()) {
-                Debug.Log("Balloons aren't done!");
                 return false;
             }
 
             // no more balloons floating around, is the player still
             // processing normal pops?  Need to let him process for combo
             if(catcher.IsPopping) {
-                Debug.Log("Popping's going on!");
                 return false;
             }
 
@@ -73,8 +97,46 @@ namespace onegam_1411 {
             }
 
             // everything's done.
-            Debug.Log("All Done");
             return true;
+        }
+
+        public void OnGUI() {
+            int pad = 10;
+            GUI.skin = skin;
+            Rect scoreRect = new Rect(pad, pad, 300, 40);
+            Rect missLabelRect = new Rect(pad, 50, 100, 64);
+            Rect missRect = new Rect(0, 50, missBox.width, missBox.height);
+
+            string endMsg = null;
+            Rect endRect = new Rect(0, 280, Screen.width, 100);
+            GUIStyle endStyle = new GUIStyle(skin.label);
+            endStyle.alignment = TextAnchor.UpperCenter;
+            endStyle.fontSize *= 2;
+
+
+            GUIContent content = new GUIContent("Score: " + score);
+            ShadowAndOutline.DrawShadow(scoreRect, content, skin.label, Color.white, Color.black, new Vector2(-3, -3));
+
+            content = new GUIContent("Misses: ");
+            ShadowAndOutline.DrawShadow(missLabelRect, content, skin.label, Color.white, Color.black, new Vector2(-3, -3));
+
+            for(int i=0;i<maxMisses; i++) {
+                missRect.x = pad + missLabelRect.width + (i * 64);
+                GUI.DrawTexture(missRect, missBox);
+                if(i < numMisses) {
+                    GUI.DrawTexture(missRect, missX);
+                }
+            }
+
+            if(isGameOver) {
+                endMsg = "Game Over";
+            } else if(isStageFinished) {
+                endMsg = "Stage Finished";
+            }
+            if(endMsg != null) {
+                content = new GUIContent(endMsg);
+                ShadowAndOutline.DrawShadow(endRect, content, endStyle, Color.white, Color.black, new Vector2(-3, -3));
+            }
         }
     }
 }
