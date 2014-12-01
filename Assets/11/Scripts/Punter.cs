@@ -5,6 +5,7 @@ namespace onegam_1411 {
     public class Punter : MonoBehaviour {
 
         public AudioClip puntSound;
+        public ParticleSystem[] puntEffects;
 
         private int balloonMask;
 
@@ -25,6 +26,9 @@ namespace onegam_1411 {
                 PuntRay(ray.origin, ray.direction, box.size.x);
             }
             AudioSource.PlayClipAtPoint(puntSound, Camera.main.transform.position);
+            foreach(ParticleSystem ps in puntEffects) {
+                ps.Play();
+            }
        }
 
         private void PuntRay(Vector2 origin, Vector2 direction, float distance) {
