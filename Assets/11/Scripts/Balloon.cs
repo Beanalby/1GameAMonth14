@@ -5,6 +5,7 @@ namespace onegam_1411 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Balloon : MonoBehaviour {
 
+        public AudioClip launchSound, catchSound, goodSound, badSound;
         public Color color;
 
         private Vector2 puntVelocity = new Vector2(10, 30);
@@ -20,12 +21,26 @@ namespace onegam_1411 {
             mat.SetColor("_Emission", color * .1f);
         }
 
+        public void Caught() {
+            AudioSource.PlayClipAtPoint(catchSound, Camera.main.transform.position);
+        }
+
         public void Launch() {
             rigidbody2D.isKinematic = false;
+            AudioSource.PlayClipAtPoint(launchSound, Camera.main.transform.position);
         }
-        public void Pop() {
+
+        private void Pop() {
             // todo: do something fancy.
             Destroy(gameObject);
+        }
+        public void PopGood() {
+            AudioSource.PlayClipAtPoint(goodSound, Camera.main.transform.position);
+            Pop();
+        }
+        public void PopBad() {
+            AudioSource.PlayClipAtPoint(badSound, Camera.main.transform.position);
+            Pop();
         }
 
         public void Punt(Vector2 direction) {

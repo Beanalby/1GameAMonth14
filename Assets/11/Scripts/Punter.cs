@@ -4,6 +4,8 @@ using System.Collections;
 namespace onegam_1411 {
     public class Punter : MonoBehaviour {
 
+        public AudioClip puntSound;
+
         private int balloonMask;
 
         public void Start() {
@@ -22,7 +24,8 @@ namespace onegam_1411 {
             foreach(Ray2D ray in GetPuntRays()) {
                 PuntRay(ray.origin, ray.direction, box.size.x);
             }
-        }
+            AudioSource.PlayClipAtPoint(puntSound, Camera.main.transform.position);
+       }
 
         private void PuntRay(Vector2 origin, Vector2 direction, float distance) {
             foreach(RaycastHit2D hit in Physics2D.RaycastAll(origin, direction, distance, balloonMask)) {

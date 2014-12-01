@@ -57,6 +57,8 @@ namespace onegam_1411 {
             balloon.transform.parent = transform;
             balloon.transform.localPosition = new Vector3(0, -1, 0);
             balloons.Add(balloon.GetComponent<Balloon>());
+            balloon.Caught();
+
             // we move up
             pos = transform.localPosition;
             pos.y += 1;
@@ -146,7 +148,7 @@ namespace onegam_1411 {
             GameDriver.Instance.BalloonScored(balloon, currentCombo);
 
             balloons.Remove(balloon);
-            balloon.Pop();
+            balloon.PopGood();
 
            // move us downward
             moveFrom = transform.localPosition;

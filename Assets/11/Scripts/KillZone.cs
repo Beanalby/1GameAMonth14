@@ -13,7 +13,7 @@ namespace onegam_1411 {
                 return;
             }
             GameDriver.Instance.BalloonMissed();
-            b.Pop();
+            b.PopBad();
         }
     }
 }
