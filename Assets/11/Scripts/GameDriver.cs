@@ -119,6 +119,7 @@ namespace onegam_1411 {
 
             string endMsg = null;
             Rect endRect = new Rect(0, 180, Screen.width, 100);
+            Rect retryRect = new Rect(Screen.width / 2 - 100, 300, 200, 50);
             GUIStyle endStyle = new GUIStyle(skin.label);
             endStyle.alignment = TextAnchor.UpperCenter;
             endStyle.fontSize *= 2;
@@ -146,6 +147,9 @@ namespace onegam_1411 {
             if(endMsg != null) {
                 content = new GUIContent(endMsg);
                 ShadowAndOutline.DrawShadow(endRect, content, endStyle, Color.white, Color.black, new Vector2(-3, -3));
+                if(GUI.Button(retryRect, new GUIContent("Play Again"))) {
+                    Application.LoadLevel("11title");
+                }
             }
         }
     }
