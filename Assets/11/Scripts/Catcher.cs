@@ -15,6 +15,9 @@ namespace onegam_1411 {
         private int pickupLayer;
         private bool forcingPop=false;
 
+        private int currentCombo = 0;
+        private Color currentComboColor = Color.black;
+
         public bool IsPopping {
             get { return moveStart != -1; }
         }
@@ -135,9 +138,17 @@ namespace onegam_1411 {
         }
 
         private void Pop(Balloon balloon) {
+            if(balloon.color != currentComboColor) {
+                currentCombo = 0;
+                currentComboColor = balloon.color;
+            }
+            currentCombo++;
+            GameDriver.Instance.BalloonScored(balloon, currentCombo);
+
             balloons.Remove(balloon);
             balloon.Pop();
-            // move us downward
+
+           // move us downward
             moveFrom = transform.localPosition;
             moveTo = moveFrom;
             moveTo.y -= 1;

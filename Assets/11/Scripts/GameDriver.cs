@@ -6,6 +6,7 @@ namespace onegam_1411 {
 
         public GUISkin skin;
         public Texture2D missBox, missX;
+        public GameObject scoreEffectPrefab;
 
         public static GameDriver Instance {
             get { return _instance; }
@@ -17,7 +18,7 @@ namespace onegam_1411 {
         private bool isStageFinished = false;
 
         private int numMisses = 0, maxMisses = 3;
-        private int score = 0;
+        private int score = 0, balloonScoreValue=10;
 
         public void Awake() {
             if(_instance != null) {
@@ -46,6 +47,15 @@ namespace onegam_1411 {
             if(numMisses >= maxMisses) {
                 GameOver();
             }
+        }
+
+        public void BalloonScored(Balloon balloon, int combo) {
+            int amount = balloonScoreValue * combo;
+            ScoreEffect effect = ((GameObject)Instantiate(scoreEffectPrefab)).GetComponent<ScoreEffect>();
+            effect.Amount = amount;
+            effect.transform.position = balloon.transform.position;
+
+            score += amount;
         }
 
         private void GameOver() {
@@ -108,7 +118,7 @@ namespace onegam_1411 {
             Rect missRect = new Rect(0, 50, missBox.width, missBox.height);
 
             string endMsg = null;
-            Rect endRect = new Rect(0, 280, Screen.width, 100);
+            Rect endRect = new Rect(0, 180, Screen.width, 100);
             GUIStyle endStyle = new GUIStyle(skin.label);
             endStyle.alignment = TextAnchor.UpperCenter;
             endStyle.fontSize *= 2;
@@ -131,7 +141,7 @@ namespace onegam_1411 {
             if(isGameOver) {
                 endMsg = "Game Over";
             } else if(isStageFinished) {
-                endMsg = "Stage Finished";
+                endMsg = "Success!";
             }
             if(endMsg != null) {
                 content = new GUIContent(endMsg);

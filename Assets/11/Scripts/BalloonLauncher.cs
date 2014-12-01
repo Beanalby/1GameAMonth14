@@ -8,9 +8,9 @@ namespace onegam_1411 {
 
         public GameObject balloonPrefab;
 
-        private int numColumns = 1;
+        private int numColumns = 5;
         private int numRows = 4;
-        private float launchDelay = 1f;
+        private float launchDelay = 3f;
         private float xSpacer = 1.5f;
         private float ySpacer = 1.2f;
         private List<Balloon> balloons;

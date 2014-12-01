@@ -526,6 +526,7 @@ MonoBehaviour:
   skin: {fileID: 11400000, guid: d68e472d82e929a4c85be8e6698f3a96, type: 2}
   missBox: {fileID: 2800000, guid: da4840bcbf1501346b819ebddfdfcec0, type: 3}
   missX: {fileID: 2800000, guid: 03a13566aadda774d82ab2b3083d8439, type: 3}
+  scoreEffectPrefab: {fileID: 100000, guid: 08e2df3d242c85d4eb55a9c8cf9ccdc3, type: 2}
 --- !u!4 &996427297
 Transform:
   m_ObjectHideFlags: 0
@@ -659,6 +660,10 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: d68e472d82e929a4c85be8e6698f3a96,
         type: 2}
+    - target: {fileID: 11400000, guid: 9062190853439fa46ac3474354e8743f, type: 2}
+      propertyPath: scoreEffectPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 08e2df3d242c85d4eb55a9c8cf9ccdc3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9062190853439fa46ac3474354e8743f, type: 2}
   m_RootGameObject: {fileID: 996427295}
