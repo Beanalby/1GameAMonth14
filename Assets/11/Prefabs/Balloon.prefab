@@ -128,6 +128,7 @@ MonoBehaviour:
   launchSound: {fileID: 8300000, guid: 1725512a3aafc0046aa857b959577a75, type: 3}
   catchSound: {fileID: 8300000, guid: 0791e561068edeb41a4f8f609611ca93, type: 3}
   goodSound: {fileID: 8300000, guid: 214fe193bb1109b4bb19ecf6ac964bef, type: 3}
+  comboSound: {fileID: 8300000, guid: aa750f161e03af4429ac585115b189a2, type: 3}
   badSound: {fileID: 8300000, guid: 99b047ceabab5ea43bbdf310903e6843, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &100100000

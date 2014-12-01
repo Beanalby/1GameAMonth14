@@ -6,7 +6,7 @@ namespace onegam_1411 {
     public class Balloon : MonoBehaviour {
 
         public GameObject popEffect;
-        public AudioClip launchSound, catchSound, goodSound, badSound;
+        public AudioClip launchSound, catchSound, goodSound, comboSound, badSound;
         public Color color;
 
         private Vector2 puntVelocity = new Vector2(10, 30);
@@ -38,8 +38,14 @@ namespace onegam_1411 {
             obj.transform.position = pos;
             Destroy(gameObject);
         }
-        public void PopGood() {
-            AudioSource.PlayClipAtPoint(goodSound, Camera.main.transform.position);
+        public void PopGood(int combo) {
+            AudioClip clip;
+            if(combo > 1) {
+                clip = comboSound;
+            } else {
+                clip = goodSound;
+            }
+            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
             Pop();
         }
         public void PopBad() {

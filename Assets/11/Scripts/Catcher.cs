@@ -148,7 +148,7 @@ namespace onegam_1411 {
             GameDriver.Instance.BalloonScored(balloon, currentCombo);
 
             balloons.Remove(balloon);
-            balloon.PopGood();
+            balloon.PopGood(currentCombo);
 
            // move us downward
             moveFrom = transform.localPosition;
