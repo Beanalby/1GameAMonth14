@@ -9,6 +9,7 @@ namespace onegam_1412 {
         }
 
         private Puker puker;
+        public Transform pukeHolder;
 
         public void Awake() {
             if(_instance != null) {
@@ -36,7 +37,7 @@ namespace onegam_1412 {
         private float sickness = 0;
         private float sickDecay = -10f;
 
-        private float animToggle = 50f;
+        private float animToggle = .5f;
         private float moveSpeed = 75;
 
         private Rigidbody2D rb;
@@ -63,6 +64,7 @@ namespace onegam_1412 {
                 if(h > 0 && sprites.localScale.x < 0
                         || h < 0 && sprites.localScale.x > 0) {
                     sprites.localScale = new Vector3(-sprites.localScale.x, sprites.localScale.y, sprites.localScale.z);
+                    pukeHolder.localScale = new Vector3(-pukeHolder.localScale.x, pukeHolder.localScale.y, pukeHolder.localScale.z);
                     puker.direction = (int)Mathf.Sign(sprites.localScale.x);
                 }
             }
@@ -117,7 +119,6 @@ namespace onegam_1412 {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log(name + " collided with " + other.gameObject.name);
             if(other.gameObject.layer == LayerMask.NameToLayer("Pickup")) {
                 PickupFood(other.GetComponent<Food>());
             }
