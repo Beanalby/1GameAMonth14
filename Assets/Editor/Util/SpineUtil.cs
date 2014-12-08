@@ -135,7 +135,7 @@ namespace UnitySpineImporter{
 				importer.spritesheet = getSpriteMetadata(spineAtlas, atlasSize);
 				importer.textureType = TextureImporterType.Sprite;
 				importer.spriteImportMode = SpriteImportMode.Multiple;
-				importer.spritePixelsToUnits = pixelsPerUnit;
+				importer.spritePixelsPerUnit = pixelsPerUnit;
 				AssetDatabase.ImportAsset(imagePath, ImportAssetOptions.ForceUpdate);
 				AssetDatabase.SaveAssets();
 
