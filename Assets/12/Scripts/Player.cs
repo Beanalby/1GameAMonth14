@@ -7,6 +7,9 @@ namespace onegam_1412 {
         public static Player Instance {
             get { return _instance; }
         }
+
+        private Puker puker;
+
         public void Awake() {
             if(_instance != null) {
                 Debug.LogError("Can't have 2 players!");
@@ -33,7 +36,7 @@ namespace onegam_1412 {
         private float sickness = 0;
         private float sickDecay = -10f;
 
-        private float animToggle = .5f;
+        private float animToggle = 50f;
         private float moveSpeed = 75;
 
         private Rigidbody2D rb;
@@ -41,6 +44,8 @@ namespace onegam_1412 {
         public void Start() {
             moveStart = Time.time;
             rb = GetComponent<Rigidbody2D>();
+            puker = GetComponentInChildren<Puker>();
+            puker.gameObject.SetActive(false);
         }
 
         public void Update() {
@@ -58,6 +63,7 @@ namespace onegam_1412 {
                 if(h > 0 && sprites.localScale.x < 0
                         || h < 0 && sprites.localScale.x > 0) {
                     sprites.localScale = new Vector3(-sprites.localScale.x, sprites.localScale.y, sprites.localScale.z);
+                    puker.direction = (int)Mathf.Sign(sprites.localScale.x);
                 }
             }
         }
@@ -98,6 +104,7 @@ namespace onegam_1412 {
             }
             isSick = true;
             face.sprite = facePuke;
+            puker.gameObject.SetActive(true);
             // todo: start sickly things
         }
         void StopSickness() {
@@ -106,6 +113,7 @@ namespace onegam_1412 {
             }
             isSick = false;
             face.sprite = faceNormal;
+            puker.gameObject.SetActive(false);
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
