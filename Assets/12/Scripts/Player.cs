@@ -119,6 +119,10 @@ namespace onegam_1412 {
             puker.gameObject.SetActive(false);
         }
 
+        public void RemovePlayer() {
+            // used when game ends, just disappear
+            Destroy(gameObject);
+        }
         public void OnTriggerEnter2D(Collider2D other) {
             if(other.gameObject.layer == LayerMask.NameToLayer("Pickup")) {
                 PickupFood(other.GetComponent<Food>());

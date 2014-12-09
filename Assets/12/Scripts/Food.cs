@@ -45,6 +45,11 @@ namespace onegam_1412 {
             // maybe do something fancier later.
             Destroy(gameObject);
         }
+
+        public void RemoveFood() {
+            // used at game end
+            Destroy(gameObject);
+        }
     }
     
 }

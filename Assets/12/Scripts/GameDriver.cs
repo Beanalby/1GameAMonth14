@@ -22,8 +22,20 @@ namespace onegam_1412 {
         private int foodCount = 4, targetCount = 4;
         private Vector2 foodRange = new Vector2(3,2);
         private Vector2 targetRange = new Vector2(5, 4);
+        private bool isRunning = true;
 
-        private GUIStyle sickStyle, scoreStyle;
+        private float timeStart = -1, totalTime = 30f;
+        public float TimeLeft {
+            get {
+                if (timeStart == -1) {
+                    return timeStart;
+                } else {
+                    return Mathf.Max(0, totalTime - (Time.time - timeStart));
+                }
+            }
+        }
+
+        private GUIStyle sickStyle, scoreStyle, msgStyle;
         private int score = 0;
 
         private float foodSpawnDelay = 2f;
@@ -33,6 +45,8 @@ namespace onegam_1412 {
             sickStyle.alignment = TextAnchor.UpperLeft;
             scoreStyle = new GUIStyle(skin.label);
             scoreStyle.alignment = TextAnchor.UpperRight;
+            msgStyle = new GUIStyle(skin.label);
+            msgStyle.alignment = TextAnchor.UpperCenter;
 
             // load up the scene with starting food and people
             for (int i = 0; i < foodCount; i++) {
@@ -41,12 +55,22 @@ namespace onegam_1412 {
             for(int i=0; i < targetCount; i++) {
                 SpawnTarget();
             }
+            timeStart = Time.time;
+        }
+
+        public void Update() {
+            if (timeStart != -1 && isRunning && TimeLeft <= 0) {
+                GameOver();
+            }
         }
 
         public void OnGUI() {
             GUI.skin = skin;
             Rect sickRect = new Rect(10, 10, 200, 50);
             Rect scoreRect = new Rect(Screen.width - 210, 10, 200, 50);
+            Rect timeRect = new Rect(Screen.width - 210, 40, 200, 50);
+            Rect msgRect = new Rect(0, 300, Screen.width, 200);
+            Rect againRect = new Rect(Screen.width/2 - 100, 400, 200, 100);
             GUIContent content;
 
             content = new GUIContent("Sickness: " + Player.Instance.Sickness.ToString("N0"));
@@ -57,14 +81,43 @@ namespace onegam_1412 {
             ShadowAndOutline.DrawShadow(scoreRect, content, scoreStyle,
                 Color.white, Color.black, new Vector2(-3, -3));
 
+            content = new GUIContent("Time: " + TimeLeft.ToString("N1"));
+            ShadowAndOutline.DrawShadow(timeRect, content, scoreStyle,
+                Color.white, Color.black, new Vector2(-3, -3));
+
+            if (!isRunning) {
+                content = new GUIContent("Time up!  You successfully made " + score + " people miserable like you.");
+                ShadowAndOutline.DrawShadow(msgRect, content, msgStyle,
+                    Color.white, Color.black, new Vector2(-3, -3));
+                if (GUI.Button(againRect, "Play Again")) {
+                    Application.LoadLevel("title");
+                }
+            }
+        }
+
+        private void GameOver() {
+            //kill the player, food, and targets
+            isRunning = false;
+            Player.Instance.RemovePlayer();
+            foreach (Target t in GameObject.FindObjectsOfType<Target>()) {
+                t.RemoveTarget();
+            }
+            foreach (Food f in GameObject.FindObjectsOfType<Food>()) {
+                f.RemoveFood();
+            }
         }
 
         public void FoodEaten() {
-            StartCoroutine(SpawnFood(false));
+            if (isRunning) {
+                StartCoroutine(SpawnFood(false));
+            }
         }
         private IEnumerator SpawnFood(bool immediate) {
             if (!immediate) {
                 yield return new WaitForSeconds(foodSpawnDelay);
+            }
+            if (!isRunning) {
+                yield break;
             }
             Vector3 pos = new Vector3(
                 Random.Range((int)-foodRange.x, (int)foodRange.x),
@@ -118,7 +171,9 @@ namespace onegam_1412 {
             score++;
         }
         public void TargetRemoved() {
-            SpawnTarget();
+            if (isRunning) {
+                SpawnTarget();
+            }
         }
     }
 }
