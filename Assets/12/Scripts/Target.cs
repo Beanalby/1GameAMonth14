@@ -10,7 +10,7 @@ namespace onegam_1412 {
         public Sprite facePuked;
 
         private float animToggle = 1.25f;
-        private float runSpeed = 3;
+        private float walkSpeed = .75f, runSpeed = 3;
 
         private float moveStart = -1;
 
@@ -21,6 +21,7 @@ namespace onegam_1412 {
             float percent = Random.Range(0f, 1f);
             body.material.SetColor("_Color", Color.Lerp(skinMin, skinMax, percent));
             moveStart = Time.time;
+            rigidbody2D.velocity = walkSpeed * rigidbody2D.velocity.normalized;
         }
 
         public void Update() {
@@ -44,6 +45,11 @@ namespace onegam_1412 {
             face.sprite = facePuked;
             Vector3 runDir = (transform.position - player.transform.position).normalized;
             rigidbody2D.velocity = runSpeed * runDir;
+        }
+
+        public void RemoveTarget() {
+            GameDriver.Instance.TargetRemoved();
+            Destroy(gameObject);
         }
     }
 }

@@ -19,8 +19,9 @@ namespace onegam_1412 {
         public GUISkin skin;
         public GameObject foodPrefab, targetPrefab;
 
-        private int foodCount = 4;
+        private int foodCount = 4, targetCount = 4;
         private Vector2 foodRange = new Vector2(3,2);
+        private Vector2 targetRange = new Vector2(5, 4);
 
         private GUIStyle sickStyle, scoreStyle;
         private int score = 0;
@@ -33,9 +34,12 @@ namespace onegam_1412 {
             scoreStyle = new GUIStyle(skin.label);
             scoreStyle.alignment = TextAnchor.UpperRight;
 
-            // load up the scene with starting food
+            // load up the scene with starting food and people
             for (int i = 0; i < foodCount; i++) {
                 StartCoroutine(SpawnFood(true));
+            }
+            for(int i=0; i < targetCount; i++) {
+                SpawnTarget();
             }
         }
 
@@ -66,8 +70,53 @@ namespace onegam_1412 {
                 Random.Range((int)-foodRange.x, (int)foodRange.x),
                 Random.Range((int)-foodRange.y, (int)foodRange.y),
                 0);
-            Debug.Log("Spawning food @ " + pos);
             Instantiate(foodPrefab, pos, Quaternion.identity);
+        }
+
+        private void SpawnTarget() {
+            // spawn a target beyond the outside border
+            Vector3 pos, v;
+            float x, y;
+            switch (Random.Range(0,4)) {
+                case 0:
+                    // left side
+                    y = Random.Range(-targetRange.y / 2, targetRange.y / 2);
+                    pos = new Vector3(-targetRange.x, y, 0);
+                    v = new Vector2(targetRange.x / 2, 
+                        Random.Range(-targetRange.y / 4, targetRange.y / 4));
+                    break;
+                case 1:
+                    // right side
+                    y = Random.Range(-targetRange.y / 2, targetRange.y / 2);
+                    pos = new Vector3(targetRange.x, y, 0);
+                    v = new Vector2(-targetRange.x / 2, 
+                        Random.Range(-targetRange.y / 4, targetRange.y / 4));
+                    break;
+                case 2:
+                    // top side
+                    x = Random.Range(-targetRange.x / 2, targetRange.x / 2);
+                    pos = new Vector3(x, targetRange.y, 0);
+                    v = new Vector2(Random.Range(-targetRange.x / 4, targetRange.x / 4),
+                        -targetRange.y / 2);
+                    break;
+                case 3:
+                    // top side
+                    x = Random.Range(-targetRange.x / 2, targetRange.x / 2);
+                    pos = new Vector3(x, -targetRange.y, 0);
+                    v = new Vector2(Random.Range(-targetRange.x / 4, targetRange.x / 4),
+                        targetRange.y / 2);
+                    break;
+                default:
+                    Debug.LogError("WHAT!?!?!  Invalid random side.");
+                    return;
+            }
+            Debug.Log("Spawning target at " + pos + ", going " + v);
+            GameObject obj = (GameObject)Instantiate(targetPrefab, pos, Quaternion.identity);
+            obj.rigidbody2D.velocity = v;
+        }
+
+        public void TargetRemoved() {
+            SpawnTarget();
         }
     }
 }
