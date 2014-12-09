@@ -98,6 +98,7 @@ namespace onegam_1412 {
         void PickupFood(Food food) {
             IncreaseSickness(food.SickValue);
             food.PickedUp();
+            GameDriver.Instance.FoodEaten();
         }
 
         void StartSickness() {
