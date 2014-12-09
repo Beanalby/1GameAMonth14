@@ -110,11 +110,13 @@ namespace onegam_1412 {
                     Debug.LogError("WHAT!?!?!  Invalid random side.");
                     return;
             }
-            Debug.Log("Spawning target at " + pos + ", going " + v);
             GameObject obj = (GameObject)Instantiate(targetPrefab, pos, Quaternion.identity);
             obj.rigidbody2D.velocity = v;
         }
 
+        public void TargetPuked() {
+            score++;
+        }
         public void TargetRemoved() {
             SpawnTarget();
         }

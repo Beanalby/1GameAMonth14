@@ -45,6 +45,7 @@ namespace onegam_1412 {
             face.sprite = facePuked;
             Vector3 runDir = (transform.position - player.transform.position).normalized;
             rigidbody2D.velocity = runSpeed * runDir;
+            GameDriver.Instance.TargetPuked();
         }
 
         public void RemoveTarget() {
