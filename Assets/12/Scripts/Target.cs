@@ -10,7 +10,7 @@ namespace onegam_1412 {
         public Sprite facePuked;
 
         private float animToggle = 1.25f;
-        private float runSpeed = 4;
+        private float runSpeed = 3;
 
         private float moveStart = -1;
 
@@ -42,7 +42,7 @@ namespace onegam_1412 {
         public void GotPuked(Transform player) {
             // got puked on, run away!
             face.sprite = facePuked;
-            Vector3 runDir = (player.transform.position - transform.position).normalized;
+            Vector3 runDir = (transform.position - player.transform.position).normalized;
             rigidbody2D.velocity = runSpeed * runDir;
         }
     }

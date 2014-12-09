@@ -9,7 +9,9 @@ namespace onegam_1412 {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            SendMessageUpwards("PukeHit", other);
+            if (other.gameObject.layer == LayerMask.NameToLayer("Attackable")) {
+            SendMessageUpwards("PukeHit", other.GetComponent<Target>());
+            }
         }
     }
 }

@@ -30,8 +30,8 @@ namespace onegam_1412 {
             lr.SetPosition(1, pos);
         }
 
-        public void PukeHit(Collider2D other) {
-            Debug.Log(name + " collided with " + other.name);
+        public void PukeHit(Target target) {
+            target.GotPuked(transform);
         }
     }
 }
