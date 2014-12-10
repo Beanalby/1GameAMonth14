@@ -36,6 +36,7 @@ namespace onegam_1412 {
         bool isSick = false;
         private float sickness = 0;
         private float sickDecay = -10f;
+        Vector2 playerBounds = new Vector2(4, 3);
 
         private float animToggle = .5f;
         private float moveSpeed = 75;
@@ -55,6 +56,12 @@ namespace onegam_1412 {
         }
 
         public void FixedUpdate() {
+            // make sure we stay within the bounds
+            Vector3 pos = transform.position;
+            pos.x = Mathf.Max(-playerBounds.x, Mathf.Min(playerBounds.x, pos.x));
+            pos.y = Mathf.Max(-playerBounds.y, Mathf.Min(playerBounds.y, pos.y));
+            transform.position = pos;
+
             if(moveStart != -1) {
                 float h = Input.GetAxis("Horizontal");
                 float v = Input.GetAxis("Vertical");
