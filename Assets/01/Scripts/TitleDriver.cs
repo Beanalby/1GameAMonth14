@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class TitleDriver : MonoBehaviour {
@@ -7,7 +8,7 @@ public class TitleDriver : MonoBehaviour {
 
     public void Update() {
         if (Input.GetButtonDown("Jump")) {
-            Application.LoadLevel("Stage1");
+            SceneManager.LoadScene("Stage1");
         }
     }
     public void OnGUI() {

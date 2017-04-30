@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
@@ -15,14 +17,20 @@ public class FlippyMusic : MonoBehaviour {
         }
     }
 
-    public void OnLevelWasLoaded() {
-        audio.timeSamples = pos;
-        audio.Play();
+    public void OnEnable() {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+    public void OnDisable() {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+    public void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
+        GetComponent<AudioSource>().timeSamples = pos;
+        GetComponent<AudioSource>().Play();
     }
 
     public void PlayerDied() {
-        pos = audio.timeSamples;
-        audio.Stop();
+        pos = GetComponent<AudioSource>().timeSamples;
+        GetComponent<AudioSource>().Stop();
     }
     
 }

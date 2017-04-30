@@ -22,7 +22,7 @@ namespace onegam_1410 {
         public void OnCollisionEnter(Collision col) {
             if(!gotHit && col.gameObject.layer == layerPlayer) {
                 // move us away from the car
-                rigidbody.velocity = 3 * col.relativeVelocity;
+                GetComponent<Rigidbody>().velocity = 3 * col.relativeVelocity;
                 StartCoroutine(GotHit());
             } else if(!gotHit && col.gameObject.layer == layerGround) {
                 StartCoroutine(GotHit());

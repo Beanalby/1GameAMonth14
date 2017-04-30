@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1412 {
@@ -90,7 +91,7 @@ namespace onegam_1412 {
                 ShadowAndOutline.DrawShadow(msgRect, content, msgStyle,
                     Color.white, Color.black, new Vector2(-3, -3));
                 if (GUI.Button(againRect, "Play Again")) {
-                    Application.LoadLevel("title");
+                    SceneManager.LoadScene("title");
                 }
             }
         }
@@ -164,7 +165,7 @@ namespace onegam_1412 {
                     return;
             }
             GameObject obj = (GameObject)Instantiate(targetPrefab, pos, Quaternion.identity);
-            obj.rigidbody2D.velocity = v;
+            obj.GetComponent<Rigidbody2D>().velocity = v;
         }
 
         public void TargetPuked() {

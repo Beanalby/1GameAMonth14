@@ -43,25 +43,25 @@ namespace onegam_1411 {
             Vector2 origin = new Vector2();
 
             // shoot rays to the right, on top
-            origin.x = transform.position.x + box.center.x - box.size.x/2;
-            origin.y = transform.position.y + box.center.y + box.size.y/2;
+            origin.x = transform.position.x + box.offset.x - box.size.x/2;
+            origin.y = transform.position.y + box.offset.y + box.size.y/2;
             rays[0] = new Ray2D(origin, Vector2.right);
             // middle
-            origin.y = transform.position.y + box.center.y;
+            origin.y = transform.position.y + box.offset.y;
             rays[1] = new Ray2D(origin, Vector2.right);
             // bottom
-            origin.y = transform.position.y + box.center.y - box.size.y / 2;
+            origin.y = transform.position.y + box.offset.y - box.size.y / 2;
             rays[2] = new Ray2D(origin, Vector2.right);
             
             // also shoot rays on the left, starting with top
-            origin.x = transform.position.x - box.center.x + box.size.x / 2;
-            origin.y = transform.position.y + box.center.y + box.size.y/2;
+            origin.x = transform.position.x - box.offset.x + box.size.x / 2;
+            origin.y = transform.position.y + box.offset.y + box.size.y/2;
             rays[3] = new Ray2D(origin, -Vector2.right);
             // middle
-            origin.y = transform.position.y + box.center.y;
+            origin.y = transform.position.y + box.offset.y;
             rays[4] = new Ray2D(origin, -Vector2.right);
             // bottom
-            origin.y = transform.position.y + box.center.y - box.size.y / 2;
+            origin.y = transform.position.y + box.offset.y - box.size.y / 2;
             rays[5] = new Ray2D(origin, -Vector2.right);
             
             return rays;

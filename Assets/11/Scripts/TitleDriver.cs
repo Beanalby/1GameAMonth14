@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1411 {
@@ -7,7 +8,7 @@ namespace onegam_1411 {
 
         public void Update() {
             if(Input.GetButtonDown("Jump")) {
-                Application.LoadLevel("11game");
+                SceneManager.LoadScene("11game");
             }
         }
         public void OnGUI() {

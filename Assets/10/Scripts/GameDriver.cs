@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1410 {
@@ -63,7 +64,7 @@ namespace onegam_1410 {
                 player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             if(!isRunning && timeStart != -1 && Input.GetButtonDown("Jump")) {
-                Application.LoadLevel(Application.loadedLevel);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
 
@@ -126,7 +127,7 @@ namespace onegam_1410 {
                 msg = "Game Over";
                 Rect retryButton = new Rect((Screen.width / 2) - 200, Screen.height / 2, 400, 100);
                 if(GUI.Button(retryButton, "Play Again")) {
-                    Application.LoadLevel(Application.loadedLevel);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
             if(msg != null) {

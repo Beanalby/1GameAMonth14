@@ -75,14 +75,14 @@ public class SwayPlayerSwing : MonoBehaviour {
             // see if we'd hit anything by doing the lengthening
             Vector2 newPos = new Ray(jointBase, us - jointBase).GetPoint(newDistance);
             newPos += -joint.anchor;
-            Vector2 pos1 = box.center - box.size / 2 + newPos;
-            Vector2 pos2 = box.center + box.size / 2 + newPos;
+            Vector2 pos1 = box.offset - box.size / 2 + newPos;
+            Vector2 pos2 = box.offset + box.size / 2 + newPos;
             Collider2D obj = Physics2D.OverlapArea(pos1, pos2, allButPlayerMask);
             if(obj == null) {
                 joint.distance = newDistance;
                 // adjust our position manually if we're not moving,
                 // changing DistanceJoint2D doesn't move us if we're still
-                if(rigidbody2D.velocity.magnitude == 0) {
+                if(GetComponent<Rigidbody2D>().velocity.magnitude == 0) {
                     transform.position = newPos;
                 }
             }
@@ -91,7 +91,7 @@ public class SwayPlayerSwing : MonoBehaviour {
 
     private void HandleSwing() {
 
-        Vector2 delta = (swingAccel * Time.deltaTime) * rigidbody2D.velocity;
+        Vector2 delta = (swingAccel * Time.deltaTime) * GetComponent<Rigidbody2D>().velocity;
         if (delta.magnitude == 0) {
             delta = Vector2.right * minAccel;
         } else if (delta.magnitude < minAccel) {
@@ -101,20 +101,20 @@ public class SwayPlayerSwing : MonoBehaviour {
         // max speed scales upwards as the distance increases
         float maxVelocity = maxVelocityBase + maxVelocityScale * (joint.distance - minLen);
         if (Input.GetAxisRaw("Horizontal") == 1) {
-            if (rigidbody2D.velocity.x < 0) {
-                rigidbody2D.velocity -= delta;
+            if (GetComponent<Rigidbody2D>().velocity.x < 0) {
+                GetComponent<Rigidbody2D>().velocity -= delta;
             } else {
-                if(rigidbody2D.velocity.magnitude < maxVelocity) {
-                    rigidbody2D.velocity += delta;
+                if(GetComponent<Rigidbody2D>().velocity.magnitude < maxVelocity) {
+                    GetComponent<Rigidbody2D>().velocity += delta;
                 }
             }
         }
         if (Input.GetAxisRaw("Horizontal") == -1) {
-            if (rigidbody2D.velocity.x > 0) {
-                rigidbody2D.velocity -= delta;
+            if (GetComponent<Rigidbody2D>().velocity.x > 0) {
+                GetComponent<Rigidbody2D>().velocity -= delta;
             } else {
-                if (rigidbody2D.velocity.magnitude < maxVelocity) {
-                    rigidbody2D.velocity += delta;
+                if (GetComponent<Rigidbody2D>().velocity.magnitude < maxVelocity) {
+                    GetComponent<Rigidbody2D>().velocity += delta;
                 }
             }
         }
@@ -127,9 +127,9 @@ public class SwayPlayerSwing : MonoBehaviour {
         }
         joint.connectedBody = ropePoint;
         
-        rigidbody2D.velocity = cc.velocity;
+        GetComponent<Rigidbody2D>().velocity = cc.velocity;
         cc.enabled = false;
-        rigidbody2D.isKinematic = false;
+        GetComponent<Rigidbody2D>().isKinematic = false;
         box.enabled = true;
         joint.enabled = true;
         arm.StartSwing(ropePoint);
@@ -145,9 +145,9 @@ public class SwayPlayerSwing : MonoBehaviour {
     }
 
     public void EndSwing() {
-        cc.velocity = rigidbody2D.velocity;
+        cc.velocity = GetComponent<Rigidbody2D>().velocity;
         cc.enabled = true;
-        rigidbody2D.isKinematic = true;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         box.enabled = false;
         joint.enabled = false;
         joint.connectedBody = null;
@@ -200,7 +200,7 @@ public class SwayPlayerSwing : MonoBehaviour {
                 bestPoint = col;
             }
         }
-        return bestPoint ? bestPoint.rigidbody2D : null;
+        return bestPoint ? bestPoint.GetComponent<Rigidbody2D>() : null;
     }
 
     private static float GetMinDistance(Ray2D ray, Collider2D col) {

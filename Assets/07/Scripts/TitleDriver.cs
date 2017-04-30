@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1407 {
@@ -7,7 +8,7 @@ namespace onegam_1407 {
 
         public void Update() {
             if(Input.GetKeyDown(KeyCode.Space)) {
-                Application.LoadLevel("levelChooser");
+                SceneManager.LoadScene("levelChooser");
             }
         }
         public void OnGUI() {

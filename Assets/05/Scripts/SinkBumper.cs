@@ -31,7 +31,7 @@ public class SinkBumper : MonoBehaviour {
         hitStart = Time.time;
         mat.color = hitColor;
         //Debug.Log("ball v=" + ball.rigidbody.velocity.ToString(".000"));
-        ball.rigidbody.velocity = 1.1f * ball.rigidbody.velocity;
+        ball.GetComponent<Rigidbody>().velocity = 1.1f * ball.GetComponent<Rigidbody>().velocity;
         AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
     }
 }

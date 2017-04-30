@@ -13,7 +13,7 @@ public class SinkGuide : MonoBehaviour {
     public void Start() {
         sb = GetComponentInParent<SinkBall>();
         lr = GetComponent<LineRenderer>();
-        lr.SetVertexCount(2);
+        lr.positionCount = 2;
         lr.enabled = true;
         mat = lr.material;
     }

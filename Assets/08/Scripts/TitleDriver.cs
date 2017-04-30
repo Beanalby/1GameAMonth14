@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1408 {
@@ -9,7 +10,7 @@ namespace onegam_1408 {
             GUI.skin = skin;
             Rect buttonRect = new Rect(Screen.width / 2 - 200, Screen.height * .8f, 400, 50);
             if(GUI.Button(buttonRect, "Press Space to start") || Input.GetButtonDown("Jump")) {
-                Application.LoadLevel("Game");
+                SceneManager.LoadScene("Game");
             }
         }
     }

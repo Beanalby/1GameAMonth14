@@ -27,13 +27,13 @@ public class FlippyPlayer : MonoBehaviour {
     void Start () {
         bool debug = false;
         if(debug) {
-            collider2D.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
             xSpeed = 9;
             gravity = 0f;
         }
         cam = Camera.main;
-        rigidbody2D.gravityScale = gravity;
-        rigidbody2D.velocity = new Vector2(xSpeed, 0);
+        GetComponent<Rigidbody2D>().gravityScale = gravity;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
         music = GameObject.FindObjectOfType<FlippyMusic>();
         Jump();
@@ -46,7 +46,7 @@ public class FlippyPlayer : MonoBehaviour {
                 Jump();
             }
             // adjust the rotation based on velocity
-            float v = rigidbody2D.velocity.y;
+            float v = GetComponent<Rigidbody2D>().velocity.y;
             v += VELOCITY_MAX_ANGLE;
             float angle = Mathf.Lerp(360, 0, v / (VELOCITY_MAX_ANGLE * 2));
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -55,14 +55,14 @@ public class FlippyPlayer : MonoBehaviour {
 
     private void Jump() {
         AudioSource.PlayClipAtPoint(jumpSound, cam.transform.position);
-        rigidbody2D.velocity = new Vector2(xSpeed, jumpSpeed);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, jumpSpeed);
     }
 
     public void OnCollisionEnter2D(Collision2D col) {
         if(deathStart == -1) {
             deathStart = Time.time;
-            collider2D.enabled = false;
-            rigidbody2D.velocity = new Vector3(-4, 10, 0);
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().velocity = new Vector3(-4, 10, 0);
             AudioSource.PlayClipAtPoint(dieSound, cam.transform.position);
             music.PlayerDied();
         }

@@ -40,7 +40,7 @@ namespace onegam_1408 {
         public void Start() {
             health = maxHealth;
             cc = GetComponent<CharacterController2D>();
-            gravity = rigidbody2D.gravityScale * -9.8f;
+            gravity = GetComponent<Rigidbody2D>().gravityScale * -9.8f;
             cam = GameObject.FindObjectOfType<StageCamera>();
             transform.position = GameDriver.Instance.SpawnPoint.transform.position + new Vector3(0, 2, 0);
             cam.transform.position = transform.position;

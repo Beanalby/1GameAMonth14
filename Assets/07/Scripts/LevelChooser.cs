@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1407 {
@@ -17,9 +18,9 @@ namespace onegam_1407 {
             }
             if(Input.GetKeyDown(KeyCode.Space) && currentSelection != 0) {
                 if(currentSelection == -1) {
-                    Application.LoadLevel("stage1");
+                    SceneManager.LoadScene("stage1");
                 } else {
-                    Application.LoadLevel("stage2");
+                    SceneManager.LoadScene("stage2");
                 }
             }
         }

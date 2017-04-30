@@ -29,14 +29,14 @@ namespace onegam_1409 {
         public void FixedUpdate() {
             if(moveSpeed != 0 && GameDriver.Instance.IsRunning) {
                 // re-set our movespeed every frame to maintain speed
-                Vector3 v = rigidbody2D.velocity;
+                Vector3 v = GetComponent<Rigidbody2D>().velocity;
                 v.x = moveSpeed;
                 // if we're not moving vertically, push it up JUST a little
                 // to help it get over corners
                 if(v.y == 0) {
                     v.y = .1f;
                 }
-                rigidbody2D.velocity = v;
+                GetComponent<Rigidbody2D>().velocity = v;
             }
         }
         public void OnTriggerEnter2D(Collider2D other) {

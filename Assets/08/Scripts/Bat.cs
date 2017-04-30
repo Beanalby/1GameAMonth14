@@ -47,7 +47,7 @@ namespace onegam_1408 {
             }
             Vector3 dir = startPos - transform.position;
             if(dir.magnitude <= resetSpeed * Time.deltaTime) {
-                rigidbody2D.MovePosition(startPos);
+                GetComponent<Rigidbody2D>().MovePosition(startPos);
                 isResetting = false;
                 // if the target is still in range, hit 'em again
                 if(inRange != null) {
@@ -55,7 +55,7 @@ namespace onegam_1408 {
                 }
             } else {
                 dir.Normalize();
-                rigidbody2D.MovePosition(transform.position + dir * resetSpeed * Time.deltaTime);
+                GetComponent<Rigidbody2D>().MovePosition(transform.position + dir * resetSpeed * Time.deltaTime);
             }
         }
 

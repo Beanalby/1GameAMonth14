@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1411 {
@@ -148,7 +149,7 @@ namespace onegam_1411 {
                 content = new GUIContent(endMsg);
                 ShadowAndOutline.DrawShadow(endRect, content, endStyle, Color.white, Color.black, new Vector2(-3, -3));
                 if(GUI.Button(retryRect, new GUIContent("Play Again"))) {
-                    Application.LoadLevel("11title");
+                    SceneManager.LoadScene("11title");
                 }
             }
         }

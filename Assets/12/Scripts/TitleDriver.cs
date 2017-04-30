@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1412 {
@@ -30,7 +31,7 @@ namespace onegam_1412 {
             ShadowAndOutline.DrawShadow(msgRect, msgContent, msgStyle,
                 Color.white, Color.black, new Vector2(-3, -3));
             if (GUI.Button(startRect, "Click to Start")) {
-                Application.LoadLevel("game");
+                SceneManager.LoadScene("game");
             }
         }
     }

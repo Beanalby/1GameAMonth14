@@ -10,7 +10,7 @@ namespace onegam_1409 {
         }
         public void OnTriggerEnter2D(Collider2D other) {
             if(other.gameObject.layer == ropePointLayer) {
-                Vector3 ledgePoint = other.transform.position + (Vector3)other.GetComponent<CircleCollider2D>().center;
+                Vector3 ledgePoint = other.transform.position + (Vector3)other.GetComponent<CircleCollider2D>().offset;
                 SendMessageUpwards("EdgeGrabbed", ledgePoint);
             }
         }

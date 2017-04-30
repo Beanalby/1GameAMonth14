@@ -7,13 +7,13 @@ namespace onegam_1407 {
     public class TrainSound : MonoBehaviour {
 
         public void Update() {
-            if(GameDriver.Instance.IsRunning && !audio.isPlaying) {
+            if(GameDriver.Instance.IsRunning && !GetComponent<AudioSource>().isPlaying) {
                 // start the audio at a random position
-                audio.time = Random.Range(0, audio.clip.length);
-                audio.Play();
+                GetComponent<AudioSource>().time = Random.Range(0, GetComponent<AudioSource>().clip.length);
+                GetComponent<AudioSource>().Play();
             }
-            if(audio.isPlaying && !GameDriver.Instance.IsRunning) {
-                audio.Stop();
+            if(GetComponent<AudioSource>().isPlaying && !GameDriver.Instance.IsRunning) {
+                GetComponent<AudioSource>().Stop();
             }
         }
     }

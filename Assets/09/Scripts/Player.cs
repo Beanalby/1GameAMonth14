@@ -40,7 +40,7 @@ namespace onegam_1409 {
             cc = GetComponent<CharacterController2D>();
             // manually create the triggerHelper so we can warp it with us
             triggerHelper = cc.createTriggerHelper();
-            gravity = rigidbody2D.gravityScale * -9.8f;
+            gravity = GetComponent<Rigidbody2D>().gravityScale * -9.8f;
         }
 
         public void Update() {

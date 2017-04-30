@@ -34,7 +34,7 @@ public class SwayPlayer : MonoBehaviour {
     //private bool didTest1=false, didTest2=false;
 
     public void Start() {
-        gravity = rigidbody2D.gravityScale * -9.8f;
+        gravity = GetComponent<Rigidbody2D>().gravityScale * -9.8f;
         swing = GetComponent<SwayPlayerSwing>();
         cc = GetComponent<CharacterController2D>();
         cc.onControllerCollidedEvent += OnControllerCollided;

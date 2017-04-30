@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -47,7 +48,7 @@ namespace onegam_1408 {
 
         private IEnumerator _playerDied() {
             yield return new WaitForSeconds(respawnDelay);
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public bool IsWaypointEnabled(string name) {
@@ -67,7 +68,7 @@ namespace onegam_1408 {
             }
             yield return new WaitForSeconds(2f);
             if(enabledWaypoints.Count == numWaypoints) {
-                Application.LoadLevel("finished");
+                SceneManager.LoadScene("finished");
             }
             waypointMsg = null;
        }

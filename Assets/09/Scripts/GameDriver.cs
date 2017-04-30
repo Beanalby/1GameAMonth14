@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -79,7 +80,7 @@ namespace onegam_1409 {
                 msg = "Game Over";
                 Rect retryButton = new Rect((Screen.width/2) - 200, Screen.height / 2, 400, 100);
                 if(GUI.Button(retryButton, "Play Again")) {
-                    Application.LoadLevel(Application.loadedLevel);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
 

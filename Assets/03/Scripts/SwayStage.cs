@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class SwayStage : MonoBehaviour {
@@ -41,11 +42,11 @@ public class SwayStage : MonoBehaviour {
 
     private IEnumerator ReloadStage() {
         yield return new WaitForSeconds(2.5f);
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private IEnumerator StartNextStage() {
         yield return new WaitForSeconds(4);
-        Application.LoadLevel(NextStage);
+        SceneManager.LoadScene(NextStage);
     }
 
 }

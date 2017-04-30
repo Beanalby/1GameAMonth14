@@ -23,7 +23,7 @@ public class gbPlayer : MonoBehaviour {
     public bool CanControl = true;
 
     public void Start() {
-        gravity = -9.8f * rigidbody2D.gravityScale;
+        gravity = -9.8f * GetComponent<Rigidbody2D>().gravityScale;
         cc = GetComponent<CharacterController2D>();
         cc.onTriggerEnterEvent += OnTriggerEnter2D;
         cc.onTriggerExitEvent += OnTriggerExit2D;

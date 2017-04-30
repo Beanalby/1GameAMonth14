@@ -18,6 +18,6 @@ public class WallBouncer : MonoBehaviour {
         /// velocity, so we just need to flip Y
         Vector2 v = coll.relativeVelocity;
         v.y = -v.y;
-        coll.gameObject.rigidbody2D.velocity = v;
+        coll.gameObject.GetComponent<Rigidbody2D>().velocity = v;
     }
 }

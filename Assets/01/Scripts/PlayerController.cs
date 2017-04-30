@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         currentSpeed = 0;
         if (!canControl) {
             if (faceVelocity) {
-                rigidbody.MoveRotation(Quaternion.LookRotation(rigidbody.velocity));
+                GetComponent<Rigidbody>().MoveRotation(Quaternion.LookRotation(GetComponent<Rigidbody>().velocity));
             }
             return;
         }
@@ -52,19 +52,19 @@ public class PlayerController : MonoBehaviour {
                 return;
             }
         }
-        Vector3 rot = rigidbody.rotation.eulerAngles;
+        Vector3 rot = GetComponent<Rigidbody>().rotation.eulerAngles;
         float turnAmount = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
         if (state.world == GameWorld.race && Input.GetAxis("Vertical") < 0) {
             turnAmount = -turnAmount;
         }
         rot.y += turnAmount;
-        rigidbody.MoveRotation(Quaternion.Euler(rot));
+        GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(rot));
 
         if(Input.GetAxis("Vertical") != 0) {
             currentSpeed = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-            Vector3 pos = rigidbody.position;
+            Vector3 pos = GetComponent<Rigidbody>().position;
             pos += transform.TransformDirection(Vector3.forward) * Input.GetAxis("Vertical") * Time.deltaTime * speed;
-            rigidbody.MovePosition(pos);
+            GetComponent<Rigidbody>().MovePosition(pos);
         }
     }
 
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour {
         transform.position = pos;
 
         // apply our new velocity
-        rigidbody.velocity = direction;
+        GetComponent<Rigidbody>().velocity = direction;
         canControl = false;
         this.faceVelocity = face;
     }

@@ -6,7 +6,7 @@ namespace onegam_1411 {
     public class ParticleOneShot : MonoBehaviour {
         public void Start() {
             ParticleSystem ps = GetComponent<ParticleSystem>();
-            Destroy(gameObject, ps.duration + ps.startLifetime);
+            Destroy(gameObject, ps.main.duration + ps.main.startLifetime.constant);
         }
     }
 }

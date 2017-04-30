@@ -12,7 +12,7 @@ namespace onegam_1411 {
         private Vector2 puntVelocity = new Vector2(10, 30);
 
         public bool IsFalling {
-            get { return !rigidbody2D.isKinematic; }
+            get { return !GetComponent<Rigidbody2D>().isKinematic; }
         }
 
         public void Start() {
@@ -27,7 +27,7 @@ namespace onegam_1411 {
         }
 
         public void Launch() {
-            rigidbody2D.isKinematic = false;
+            GetComponent<Rigidbody2D>().isKinematic = false;
             AudioSource.PlayClipAtPoint(launchSound, Camera.main.transform.position);
         }
 
@@ -59,22 +59,22 @@ namespace onegam_1411 {
             if(direction.x < 0) {
                 v.x = -v.x;
             }
-            rigidbody2D.velocity = v;
+            GetComponent<Rigidbody2D>().velocity = v;
         }
 
         public void OnCollisionEnter2D(Collision2D coll) {
             // if we're falling, bounce off of anything we hit.
-            if(rigidbody2D.isKinematic) {
+            if(GetComponent<Rigidbody2D>().isKinematic) {
                 return;
             }
             // if it's a balloon on the stack, push ourselves away
             if(coll.gameObject.layer == gameObject.layer) {
-                if(coll.gameObject.rigidbody2D.isKinematic == true) {
-                    Vector2 v = new Vector2(puntVelocity.x, rigidbody2D.velocity.y);
+                if(coll.gameObject.GetComponent<Rigidbody2D>().isKinematic == true) {
+                    Vector2 v = new Vector2(puntVelocity.x, GetComponent<Rigidbody2D>().velocity.y);
                     if(coll.gameObject.transform.position.x > transform.position.x) {
                         v.x = -v.x;
                     }
-                    rigidbody2D.velocity = v;
+                    GetComponent<Rigidbody2D>().velocity = v;
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1406 {
@@ -109,7 +110,7 @@ namespace onegam_1406 {
                 Rect buttonRect = new Rect((Screen.width / 2) - (width/2), 
                     (Screen.height / 2) - (height/2), width, height);
                 if(GUI.Button(buttonRect, "Play Again")) {
-                    Application.LoadLevel(Application.loadedLevel);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
         }

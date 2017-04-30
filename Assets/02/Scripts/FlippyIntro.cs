@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class FlippyIntro : MonoBehaviour {
@@ -14,7 +15,7 @@ public class FlippyIntro : MonoBehaviour {
     }
     public void Update() {
         if(Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0)) {
-            Application.LoadLevel("game");
+            SceneManager.LoadScene("game");
         }
     }
 

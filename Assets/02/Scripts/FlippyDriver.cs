@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class FlippyDriver : MonoBehaviour {
@@ -64,7 +65,7 @@ public class FlippyDriver : MonoBehaviour {
         if(!player.IsPlaying
                 && (Time.time - player.DeathStart > restartDelay)
                 && Input.GetButtonDown("Jump")) {
-            Application.LoadLevel(Application.loadedLevel);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -118,7 +119,7 @@ public class FlippyDriver : MonoBehaviour {
                 }
                 GUI.DrawTexture(restartRect, tex);
                 if(GUI.Button(restartRect, "PLAY AGAIN", retryButton)) {
-                    Application.LoadLevel(Application.loadedLevel);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
         }

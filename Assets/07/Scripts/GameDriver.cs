@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1407 {
@@ -70,7 +71,7 @@ namespace onegam_1407 {
                 StartCoroutine(EndGame());
             }
             if(canRestart && Input.GetKeyDown(KeyCode.Space)) {
-                Application.LoadLevel("levelChooser");
+                SceneManager.LoadScene("levelChooser");
             }
         }
 

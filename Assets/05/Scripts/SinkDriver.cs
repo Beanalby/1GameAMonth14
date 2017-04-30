@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,7 +53,13 @@ public class SinkDriver : MonoBehaviour {
         InitHole();
     }
 
-    public void OnLevelWasLoaded(int level) {
+    public void OnEnable() {
+        SceneManager.sceneLoaded += OnLevelFinishedLoaded;
+    }
+    public void OnDisable() {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoaded;
+    }
+    void OnLevelFinishedLoaded(Scene scene, LoadSceneMode mode) {
         scores.Add(strokesThisHole);
         InitHole();
     }
@@ -60,14 +67,14 @@ public class SinkDriver : MonoBehaviour {
     private void InitHole() {
         strokesThisHole = 0;
         for (int i = 0; i < stages.Length; i++) {
-            if (stages[i].name == Application.loadedLevelName) {
+            if (stages[i].name == SceneManager.GetActiveScene().name) {
                 thisPar = stages[i].par;
             }
         }
     }
 
     public void OnGUI() {
-        if (Application.loadedLevelName == "summary") {
+        if (SceneManager.GetActiveScene().name == "summary") {
             return;
         }
         Vector3 shadowDir = new Vector3(-2, 2, 0);
@@ -76,8 +83,7 @@ public class SinkDriver : MonoBehaviour {
         Rect currentRect = new Rect(padding, Screen.height - (padding + textHeight), textWidth, textHeight);
         Rect totalRect = new Rect(Screen.width - (padding + textWidth), Screen.height - (padding + textHeight), textWidth, textHeight);
 
-        //GUI.Label(holeRect, Application.loadedLevelName + ", Par " + hole.par, labelHole);
-        content.text = Application.loadedLevelName + ", Par " + thisPar;
+        content.text = SceneManager.GetActiveScene().name + ", Par " + thisPar;
         ShadowAndOutline.DrawShadow(holeRect, content, labelHole, Color.white, Color.black, shadowDir);
         content.text = "Strokes: " + strokesThisHole;
         ShadowAndOutline.DrawShadow(currentRect, content, labelCurrent, Color.white, Color.black, shadowDir);
@@ -98,7 +104,7 @@ public class SinkDriver : MonoBehaviour {
         int index;
         bool found=false;
         for (index = 0; index < stages.Length; index++) {
-            if (stages[index].name == Application.loadedLevelName) {
+            if (stages[index].name == SceneManager.GetActiveScene().name) {
                 found = true;
                 break;
             }
@@ -110,7 +116,7 @@ public class SinkDriver : MonoBehaviour {
             nextStage = stages[index + 1].name;
         }
         yield return new WaitForSeconds(3);
-        Application.LoadLevel(nextStage);
+        SceneManager.LoadScene(nextStage);
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -45,7 +46,7 @@ public class SinkSummary : MonoBehaviour {
         Rect buttonRect = new Rect(Screen.width * .3f, Screen.height * .9f, Screen.width * .4f, Screen.height * .05f);
         if(GUI.Button(buttonRect, "Play Again")) {
             Destroy(driver.gameObject);
-            Application.LoadLevel("hole 1");
+            SceneManager.LoadScene("hole 1");
         }
 
     }

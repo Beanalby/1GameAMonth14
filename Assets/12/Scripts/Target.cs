@@ -21,7 +21,7 @@ namespace onegam_1412 {
             float percent = Random.Range(0f, 1f);
             body.material.SetColor("_Color", Color.Lerp(skinMin, skinMax, percent));
             moveStart = Time.time;
-            rigidbody2D.velocity = walkSpeed * rigidbody2D.velocity.normalized;
+            GetComponent<Rigidbody2D>().velocity = walkSpeed * GetComponent<Rigidbody2D>().velocity.normalized;
         }
 
         public void Update() {
@@ -44,7 +44,7 @@ namespace onegam_1412 {
             // got puked on, run away!
             face.sprite = facePuked;
             Vector3 runDir = (transform.position - player.transform.position).normalized;
-            rigidbody2D.velocity = runSpeed * runDir;
+            GetComponent<Rigidbody2D>().velocity = runSpeed * runDir;
             GameDriver.Instance.TargetPuked();
         }
 

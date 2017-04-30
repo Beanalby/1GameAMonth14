@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace onegam_1406 {
@@ -19,7 +20,7 @@ namespace onegam_1406 {
 
         public void Update() {
             if(Input.GetButtonDown("Fire1")) {
-                Application.LoadLevel("game");
+                SceneManager.LoadScene("game");
             }
         }
     }

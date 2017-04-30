@@ -6,7 +6,7 @@ namespace onegam_1410 {
     public class DestroyOnFinish : MonoBehaviour {
 
         public void Start() {
-            Destroy(gameObject, GetComponent<ParticleSystem>().duration);
+            Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
         }
     }
 }
