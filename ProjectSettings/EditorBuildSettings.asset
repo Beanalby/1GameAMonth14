@@ -7,73 +7,109 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/01/Scenes/Title.unity
+    guid: 8f3e18f32486a0544b3da8f037b2b8db
   - enabled: 0
     path: Assets/01/Scenes/Stage1.unity
+    guid: 29cb409fe8296794db13f0cbc11290d4
   - enabled: 0
     path: Assets/02/Scenes/intro.unity
+    guid: daf7029eaacbe9f479f337bd69ac49b0
   - enabled: 0
     path: Assets/02/Scenes/game.unity
+    guid: 9174cd388d720e440ada4804b18afe44
   - enabled: 0
     path: Assets/03/Scenes/title.unity
+    guid: f283733bd6361894c9764ae3d1d4c522
   - enabled: 0
     path: Assets/03/Scenes/stage1.unity
+    guid: a992b72d19d1537419b256afcda0ba93
   - enabled: 0
     path: Assets/03/Scenes/stage2.unity
+    guid: 187fad9ac6cd0b040ba3288130a07f63
   - enabled: 0
     path: Assets/03/Scenes/stage3.unity
+    guid: 64e564cd9e7b669459c3fea6f9f3090e
   - enabled: 0
     path: Assets/03/Scenes/cliffhanger.unity
+    guid: b51e1ebfb607b77458c3b89298ca9723
   - enabled: 0
     path: Assets/03/Scenes/stage4.unity
+    guid: 6469df6e407b5f048b23a4f9bec91c76
   - enabled: 0
     path: Assets/04/Scenes/test.unity
+    guid: ff0a2e2d3b5a3be4dab3f14bc87bce09
   - enabled: 0
     path: Assets/05/Scenes/title.unity
+    guid: 6a6d013217f499f43bcad73fe61d7045
   - enabled: 0
     path: Assets/05/Scenes/hole 1.unity
+    guid: 46e795be9c245c34e9b2056a7e09fa6b
   - enabled: 0
     path: Assets/05/Scenes/hole 2.unity
+    guid: 6c09b70fa5205814ba7315fb24f81cd0
   - enabled: 0
     path: Assets/05/Scenes/hole 3.unity
+    guid: 3dd39651ca5189348b8ac774ca3ff3b8
   - enabled: 0
     path: Assets/05/Scenes/hole 4.unity
+    guid: 29d1cbc11a074fe498a31b011a3d8952
   - enabled: 0
     path: Assets/05/Scenes/hole 5.unity
+    guid: fd8539a0065132e46b2c717b1caa7975
   - enabled: 0
     path: Assets/05/Scenes/hole 6.unity
+    guid: 2b74966bc2122f74aa622a3e8d8574ff
   - enabled: 0
     path: Assets/05/Scenes/summary.unity
+    guid: d1490a2d1f8696f40b92eaa46a8e2bef
   - enabled: 0
     path: Assets/06/Scenes/title.unity
+    guid: c3d44ccc0fb2ada41a515d13e295d96b
   - enabled: 0
     path: Assets/06/Scenes/game.unity
+    guid: 255bc11affe139d478267fe24220f3f0
   - enabled: 0
     path: Assets/07/Scenes/title.unity
+    guid: c5be98e069c38a14b8877f18c83629e9
   - enabled: 0
     path: Assets/07/Scenes/levelChooser.unity
+    guid: c4939900ab70a9e4390c427fa671835e
   - enabled: 0
     path: Assets/07/Scenes/stage1.unity
+    guid: 3f63cb2aa4f391a4799219a61712bdfb
   - enabled: 0
     path: Assets/07/Scenes/stage2.unity
+    guid: c6b621f473d48a940a47cf7ea74da5c4
   - enabled: 0
     path: Assets/08/Scenes/title.unity
+    guid: dd632fc020c314247809429f764a6fad
   - enabled: 0
     path: Assets/08/Scenes/game.unity
+    guid: a19871642d6950b438626fb62a0abbe4
   - enabled: 0
     path: Assets/08/Scenes/finished.unity
+    guid: 48404a9feaf0a1142b3aa17b2fc04fb1
   - enabled: 0
     path: Assets/09/Scenes/title.unity
+    guid: baea7824cf1719745886bac81aea6f10
   - enabled: 0
     path: Assets/09/Scenes/game.unity
+    guid: 02cea50c0c92eb84497eb09aaab50067
   - enabled: 0
     path: Assets/10/Scenes/title.unity
+    guid: 379855982cb90614d8589c5938f57899
   - enabled: 0
     path: Assets/10/Scenes/game.unity
-  - enabled: 0
+    guid: 281a9bf5b07b9f9419d8a21e29c6e4a7
+  - enabled: 1
     path: Assets/11/Scenes/11title.unity
-  - enabled: 0
+    guid: 89e2eaaec360785428c8c2f9b35ab717
+  - enabled: 1
     path: Assets/11/Scenes/11game.unity
-  - enabled: 1
+    guid: b702bc4a7acb32e45864a3c711c3fcf3
+  - enabled: 0
     path: Assets/12/Scenes/title.unity
-  - enabled: 1
+    guid: f28b42979f3de8c40bed1899893399d0
+  - enabled: 0
     path: Assets/12/Scenes/game.unity
+    guid: 6eab1bfa4326ae240b59c9d42cee7f7b

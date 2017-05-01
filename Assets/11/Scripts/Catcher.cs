@@ -54,6 +54,7 @@ namespace onegam_1411 {
             }
             // add the new balloon
             balloon.GetComponent<Rigidbody2D>().isKinematic = true;
+            balloon.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             balloon.transform.parent = transform;
             balloon.transform.localPosition = new Vector3(0, -1, 0);
             balloons.Add(balloon.GetComponent<Balloon>());

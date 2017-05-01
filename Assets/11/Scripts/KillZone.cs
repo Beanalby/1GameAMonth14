@@ -5,7 +5,6 @@ namespace onegam_1411 {
     public class KillZone : MonoBehaviour {
 
         public void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("Killing " + other.gameObject.name);
             // should only be balloons down here
             Balloon b = other.gameObject.GetComponent<Balloon>();
             if(b == null) {
