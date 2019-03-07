@@ -17,24 +17,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/02/Scenes/game.unity
     guid: 9174cd388d720e440ada4804b18afe44
-  - enabled: 0
+  - enabled: 1
     path: Assets/03/Scenes/title.unity
     guid: f283733bd6361894c9764ae3d1d4c522
-  - enabled: 0
+  - enabled: 1
     path: Assets/03/Scenes/stage1.unity
     guid: a992b72d19d1537419b256afcda0ba93
-  - enabled: 0
+  - enabled: 1
     path: Assets/03/Scenes/stage2.unity
     guid: 187fad9ac6cd0b040ba3288130a07f63
-  - enabled: 0
+  - enabled: 1
     path: Assets/03/Scenes/stage3.unity
     guid: 64e564cd9e7b669459c3fea6f9f3090e
-  - enabled: 0
-    path: Assets/03/Scenes/cliffhanger.unity
-    guid: b51e1ebfb607b77458c3b89298ca9723
-  - enabled: 0
+  - enabled: 1
     path: Assets/03/Scenes/stage4.unity
     guid: 6469df6e407b5f048b23a4f9bec91c76
+  - enabled: 1
+    path: Assets/03/Scenes/cliffhanger.unity
+    guid: b51e1ebfb607b77458c3b89298ca9723
   - enabled: 0
     path: Assets/04/Scenes/test.unity
     guid: ff0a2e2d3b5a3be4dab3f14bc87bce09
@@ -101,10 +101,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/10/Scenes/game.unity
     guid: 281a9bf5b07b9f9419d8a21e29c6e4a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/11/Scenes/11title.unity
     guid: 89e2eaaec360785428c8c2f9b35ab717
-  - enabled: 1
+  - enabled: 0
     path: Assets/11/Scenes/11game.unity
     guid: b702bc4a7acb32e45864a3c711c3fcf3
   - enabled: 0
@@ -113,3 +113,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/12/Scenes/game.unity
     guid: 6eab1bfa4326ae240b59c9d42cee7f7b
+  m_configObjects: {}
