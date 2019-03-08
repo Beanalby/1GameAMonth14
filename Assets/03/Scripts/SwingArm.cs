@@ -38,7 +38,7 @@ public class SwingArm : MonoBehaviour {
             float percent = distance / maxLength;
             transform.localScale = new Vector3(1, lengthScale * percent, 1);
             transform.localRotation = Quaternion.identity;
-            float deg = Mathf.Rad2Deg * Mathf.Atan2(player.FacingDir * (posBase.x - posTarget.x), (posTarget.y - posBase.y));
+            float deg = Mathf.Rad2Deg * Mathf.Atan2((posBase.x - posTarget.x), (posTarget.y - posBase.y));
             transform.Rotate(Vector3.forward, deg);
         }
     }
