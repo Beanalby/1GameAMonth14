@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace onegam_1408 {
     [RequireComponent(typeof(CharacterController2D))]
+    [DisallowMultipleComponent]
     public class Player : MonoBehaviour {
         private static Player _instance = null;
         public static Player Instance { get { return _instance; } }
@@ -110,16 +111,9 @@ namespace onegam_1408 {
         public void DisableControl() {
             canControl = false;
         }
-        public void OnCollisionEnter2D(Collision2D col) {
-            Debug.Log("+++ Player collided with " + col.otherCollider.name);
-        }
         public void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("+++ Player triggered with " + other.name);
             if (other.CompareTag("Respawn")) {
                 GameDriver.Instance.SetSpawnPoint(other.gameObject);
-            } else {
-                // it could be the player colliding with bat, let it know
-                //other.SendMessage("AttackPlayer", SendMessageOptions.DontRequireReceiver);
             }
         }
         // OnTriggerExit2D not working 

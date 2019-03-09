@@ -331,6 +331,7 @@ public class CharacterController2D : MonoBehaviour
         var joint = go.AddComponent<DistanceJoint2D>();
         joint.connectedBody = GetComponent<Rigidbody2D>();
         joint.distance = 0f;
+        joint.autoConfigureDistance = false;
 
         return go;
     }

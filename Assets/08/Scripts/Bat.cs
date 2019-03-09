@@ -72,18 +72,13 @@ namespace onegam_1408 {
         }
 
         public void AttackPlayer() {
-            Debug.Log("+++ attacked player!");
             Player.Instance.GotHit(damage);
             attackStart = -1;
             isResetting = true;
             anim.SetTrigger("attackStop");
         }
 
-        public void OnCollisionEnter2D(Collision2D col) {
-            Debug.Log("+++ bat collided with " + col.otherCollider.name);
-        }
         public void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("+++ bat triggered with " + other.name);
             if(other.gameObject.layer == layerAttackable && attackStart==-1f) {
                 Attack(other.gameObject);
                 inRange = other.gameObject;
